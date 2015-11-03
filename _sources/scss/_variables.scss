@@ -1,0 +1,28 @@
+$enable-rounded: false;
+
+$brand-primary: #D50000;
+
+$font-size-h1: 2rem;
+$font-size-h2: 1.5rem;
+$font-size-h3: 1.1rem;
+$font-size-h4: 1rem;
+$font-size-h5: 1rem;
+$font-size-h6: 1rem;
+
+$font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:          "Playfair Display", Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:           $font-family-sans-serif;
+
+//$headings-margin-bottom:     ($spacer / 2) !default;
+$headings-font-family:       $font-family-serif;
+$headings-font-weight:       100;
+$headings-line-height:       1.1;
+$headings-color:             inherit;
+
+$body-bg:                    #fff;
+$body-color:                 #222;
+
+$link-color:                 $brand-primary !default;
+$link-hover-color:           darken($link-color, 15%) !default;
+$link-hover-decoration:      none;

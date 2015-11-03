@@ -1,0 +1,144 @@
+$site-shadow-size: 1rem / 4;
+$site-shadow-color: fade-out(black, 0.9);
+$dark-bg: darken(#fff, 3%);
+$paragraph-width: map_get($container-max-widths, sm) - $grid-gutter-width;
+
+body {
+    overflow-y: scroll;
+    background-color: $dark-bg;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    color: darken($body-color, 10%);
+
+    a {
+        color: inherit;
+    }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+p {
+    max-width: $paragraph-width;
+
+    @supports (hyphens: auto) {
+        text-align: justify;
+        hyphens: auto;
+    }
+}
+
+code, pre, a, strong {
+    hyphens: manual;
+}
+
+code {
+    padding: .2rem .4rem;
+    font-size: $font-size-sm;
+    color: $code-color;
+    background-color: $code-bg;
+}
+
+.highlight {
+    $horizontal-padding: .7rem;
+
+    > pre {
+        display: block;
+        padding: .4rem $horizontal-padding;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        color: $pre-color;
+
+        // Account for some code outputs that place code tags in pre tags
+        code {
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+            background-color: transparent;
+        }
+    }
+
+    position: relative;
+    @include gradient-horizontal($code-bg, $body-bg);
+
+    &:before, &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    @mixin fade-size($fade-size) {
+        &:before {
+            left: 0;
+            width: $fade-size;
+            @include gradient-horizontal($code-bg, fade-out(mix($body-bg, $code-bg, $fade-size), 1));
+        }
+
+        &:after {
+            right: 0;
+            width: $fade-size;
+            @include gradient-horizontal(fade-out(mix($body-bg, $code-bg, 100% - $fade-size), 1), $body-bg);
+        }
+    }
+
+    @include media-breakpoint-down(xs) {
+        $border-size: $horizontal-padding + ($grid-gutter-width / 2);
+        @include fade-size(percentage($border-size / map_get($container-max-widths, sm)));
+    }
+
+    @each $breakpoint, $max-size in $container-max-widths {
+        @include media-breakpoint-only($breakpoint) {
+            $border-size: $horizontal-padding / 2;
+            @include fade-size(percentage($border-size / $max-size));
+        }
+    }
+
+    @include media-breakpoint-down(xs) {
+        margin-left: -$grid-gutter-width / 2;
+        margin-right: -$grid-gutter-width / 2;
+
+        > pre {
+            padding-left: $grid-gutter-width / 2 + .4rem;
+            padding-right: $grid-gutter-width / 2 + .4rem;
+        }
+    }
+}
+
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.site-content {
+    min-height: 20rem;
+    background-color: $body-bg;
+}
+
+.site-header,
+.site-footer {
+    background-color: $dark-bg;
+}
+
+.site-header {
+    box-shadow: 0 (-$site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
+}
+
+.site-footer {
+    padding-top: $spacer-y * 2;
+    min-height: 10rem;
+    box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
+}

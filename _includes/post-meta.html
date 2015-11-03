@@ -1,0 +1,17 @@
+<div class="post-meta">
+    {% if include.post.author %}
+    von
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">{{ include.post.author }}</span>
+    </span>
+    {% endif %}
+    {% if include.post.date %}
+    am
+    <time class="post-date" itemprop="datePublished" datetime="{{ include.post.date | date_to_xmlschema }}">
+        {{ include.post.date | date_to_long_string }}
+    </time>
+    {% endif %}
+    {% if include.post.lastmod %}
+    <meta itemprop="dateModified" content="{{ include.post.lastmod | date_to_long_string }}">
+    {% endif %}
+</div>

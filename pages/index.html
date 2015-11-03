@@ -1,0 +1,48 @@
+---
+layout:     page
+title:      Blog Einträge
+hidetitle:  true
+permalink:  /
+sitemap:
+    changefreq: hourly
+    priority: 1
+---
+<div class="post-list" itemprop="mainEntity" itemscope itemtype="http://schema.org/Blog">
+
+    {% for post in site.posts %}
+    <article class="post-list-item" itemprop="blogPost"
+             itemscope itemtype="http://schema.org/BlogPosting"
+             itemid="{{ post.url | prepend: site.baseurl }}">
+
+        {% if post.image %}
+        <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
+            <img src="/images/thumbnail/{{post.image}}" alt="" itemprop="image">
+        </a>
+        {% endif %}
+
+        <header class="post-list-header">
+            <h1 class="post-list-title" itemprop="headline">
+                <a href="{{ post.url | prepend: site.baseurl }}">
+                    {{ post.title }}
+                </a>
+            </h1>
+        </header>
+
+        {% if post.excerpt %}
+        <p class="post-description" itemprop="description">
+            {{ post.excerpt }}
+        </p>
+        {% endif %}
+
+        <footer class="post-list-footer">
+            {% include post-meta.html post=post %}
+        </footer>
+
+    </article>
+    {% endfor %}
+
+</div>
+
+<p class="rss-subscribe">
+    subscribe <a href="{{ '/feed.xml' | prepend: site.baseurl }}">via RSS</a>
+</p>

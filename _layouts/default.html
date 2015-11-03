@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    {% include head.html %}
+
+    <body itemscope itemtype="{% if page.schema %}{{page.schema}}{% else %}http://schema.org/WebPage{% endif %}">
+
+        {% include header.html %}
+
+        <div class="site-content">
+            {{ content }}
+        </div>
+
+        {% include footer.html %}
+
+    </body>
+
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "marco-zone",
+  "dependencies": {
+    "bootstrap": "^4.0",
+    "jquery": "^2.1"
+  }
+}

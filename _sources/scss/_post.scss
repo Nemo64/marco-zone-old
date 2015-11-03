@@ -1,0 +1,88 @@
+$list-item-height: 8rem;
+$list-item-padding: .5rem;
+$list-item-headline-size: $font-size-h2;
+$list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height) + ($font-size-base * $line-height) + $headings-margin-bottom;
+
+.post {
+    padding-top: $spacer-y;
+    padding-bottom: $spacer-y;
+}
+
+.post-meta {
+    font-size: $font-size-xs;
+}
+
+.post-image {
+
+    > img {
+        @include image-contain;
+    }
+
+    @include media-breakpoint-up(lg) {
+        float: right;
+        text-align: right;
+        width: floor(map_get($container-max-widths, lg) - $paragraph-width - $grid-gutter-width * 2);
+    }
+
+    @include media-breakpoint-up(xl) {
+        width: floor(map_get($container-max-widths, xl) - $paragraph-width - $grid-gutter-width * 2);
+    }
+
+    @include media-breakpoint-down(md) {
+        max-width: $paragraph-width;
+    }
+}
+
+.post-list-item {
+    position: relative;
+    height: $list-item-height;
+    overflow: hidden;
+
+    h1 {
+        font-size: $list-item-headline-size;
+    }
+}
+
+.post-list-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: $body-bg;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -$line-height * $font-size-base * 2;
+        height: $line-height * $font-size-base * 2;
+        width: 100%;
+        @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
+        pointer-events: none;
+    }
+
+    @include media-breakpoint-up(sm) {
+        padding-left: $list-item-height + $list-item-padding;
+    }
+}
+
+.post-list-image {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: $list-item-mobile-image-size;
+    height: $list-item-mobile-image-size;
+    margin-right: $list-item-padding;
+    float: left;
+    background-color: $dark-bg;
+    box-shadow: 0 0 $site-shadow-size $site-shadow-color inset;
+    overflow: hidden;
+
+    @include image-box($list-item-mobile-image-size);
+
+    @include media-breakpoint-up(sm) {
+        width: $list-item-height;
+        height: $list-item-height;
+
+        @include image-box($list-item-height);
+    }
+}

@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<article class="post" itemprop="mainEntity"
+     itemscope itemtype="http://schema.org/BlogPosting"
+     itemid="{{ page.url | prepend: site.baseurl }}">
+    <div class="container">
+
+        <div class="post-inner">
+
+            {% if page.image %}
+            <div class="post-image">
+                <img src="/images/{{page.image}}" alt="" itemprop="image">
+            </div>
+            {% endif %}
+
+            <header class="post-header">
+                <h1 class="post-title" itemprop="headline">
+                    <a href="{{ page.url | prepend: site.baseurl }}">
+                        {{ page.title }}
+                    </a>
+                </h1>
+            </header>
+
+            <p class="lead" itemprop="description">
+                {{ page.excerpt }}
+            </p>
+
+            <div class="post-content" itemprop="articleBody">
+                {{ content }}
+            </div>
+
+            <footer class="post-footer">
+                {% include post-meta.html post=page %}
+            </footer>
+
+        </div>
+    </div>
+
+</article>
