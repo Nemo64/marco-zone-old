@@ -10,7 +10,7 @@ github_username:  Nemo64
 # Build settings
 timezone: Europe/Berlin
 markdown: kramdown
-destination: _site
+destination: web
 permalink: /:title.html
 
 exclude:
@@ -18,6 +18,8 @@ exclude:
   - bower.json
   - node_modules
   - package.json
+  - Gemfile
+  - Gemfile.lock
   - gulpfile.js
   - _sources
   - images

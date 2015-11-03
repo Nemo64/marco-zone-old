@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var del = require('del');
 var browserSync = require('browser-sync').create();
 
-var deployPath = '_site';
+var deployPath = 'web';
 var sourceFiles = {
     scss: '_sources/*.scss'
 };
@@ -18,7 +18,9 @@ gulp.task('clean', function () {
 gulp.task('jekyll', function (gulpCallBack) {
     var spawn = require('child_process').spawn;
     var jekyll = spawn('jekyll', [
-        'build', '--no-watch',
+        'build',
+        '--no-watch',
+        //'--incremental',
         '--destination', deployPath
     ], {stdio: 'inherit'});
 
