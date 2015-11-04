@@ -39,6 +39,10 @@ $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height 
     }
 }
 
+.post-footer {
+    margin-bottom: 1rem;
+}
+
 .post-list-item {
     position: relative;
     height: $list-item-height;
