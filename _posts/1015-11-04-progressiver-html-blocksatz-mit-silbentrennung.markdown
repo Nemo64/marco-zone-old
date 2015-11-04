@@ -83,11 +83,11 @@ Eine Lösung, bereits jetzt plattformübergreifend Silbentrennung zu bieten, ist
 
 Für den Browser gibt es den JavaScript-Polyfill [Hyphenator.js], welcher mit etwas Konfiguration ganz gut funktioniert. Was mir nur nicht gefällt ist, dass der Text kurzzeitig nicht sichtbar ist bis die Bibliothek die `&shy;`s eingebaut hat. Man ist außerdem an bestimmte CSS-Klassen gebunden, da der Hyphenator die CSS-Regeln nicht interpretiert.
 
-Eine weitere Möglichkeit ist [phpHyphenator] welche scheinbar eine Portierung von [Hyphenator.js] ist. Ich hab diese allerdings bisher nicht ausprobiert und das fehlen einer Dokumentation sowie die Tatsache das die Bibliothek Funktionen global definiert werden mich wahrscheinlich auch in Zukunft davon abhalten. Generell sollte jedes php Projekt zumindest mit [composer] Kompatibel sein, was dieses Projekt ebenfalls nicht ist.
+Eine weitere Möglichkeit ist [phpHyphenator] welche scheinbar eine Portierung von [Hyphenator.js] ist. Ich hab diese allerdings bisher nicht ausprobiert und das fehlen einer Dokumentation sowie die Tatsache, dass die Bibliothek Funktionen global definiert, werden mich wahrscheinlich auch in Zukunft davon abhalten. Generell sollte jedes php Projekt zumindest mit [composer] Kompatibel sein, was dieses Projekt ebenfalls nicht ist.
 
 ## Schlusswort
 
-Silbentrennung ist eine nette Spielerei, aber noch nicht ganz bereit für den Einsatz. Es Fehlen noch dinge, wie die Angabe wie viele Zeichen vor und nach dem Bindestich auftauchen sollen. Diese Features sind zwar im [CSS Text Module Level 4 vom 28 October 2015] geplant und auch zum teil im Safari mit `-webkit-hyphenate-limit-before/after` unterstützt, aber dann haben wir schon so viele Möglichkeiten wie die Seite aussehen kann, dass es vermutlich den Aufwand nicht wert ist. Natürlich könnte man in der @support Regel alle diese Eigenschaften als Bedingung rein kippen, aber dann gibt es das Feature aktuell nur für iPads und Safari. 
+Silbentrennung ist eine nette Spielerei, aber noch nicht ganz bereit für den Einsatz. Es Fehlen noch Dinge wie die Angabe wie viele Zeichen vor und nach dem Bindestich auftauchen sollen. Diese Features sind zwar im [CSS Text Module Level 4 vom 28 October 2015] geplant und auch zum Teil im Safari mit `-webkit-hyphenate-limit-before/after` unterstützt, aber dann haben wir schon so viele Möglichkeiten wie die Seite aussehen kann, dass es vermutlich den Aufwand nicht wert ist. Natürlich könnte man in der @support Regel alle diese Eigenschaften als Bedingung rein kippen, aber dann gibt es das Feature aktuell nur für iPads und Safari. 
 
 [@supports CSS at-rule]: https://developer.mozilla.org/en-US/docs/Web/CSS/@supports
 [Browser-Unterstützung für @supports]: http://caniuse.com/#feat=css-featurequeries
