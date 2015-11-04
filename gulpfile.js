@@ -22,6 +22,7 @@ gulp.task('jekyll', function (gulpCallBack) {
     var jekyll = spawn('jekyll', [
         'build',
         '--no-watch',
+        '--quiet',
         '--future',
         //'--incremental',
         '--destination', deployPath
