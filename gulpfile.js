@@ -59,7 +59,12 @@ gulp.task('sass', function () {
     gulp.src(sourceFiles.scss)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(autoprefixer({ browsers: ['> 1% in DE', 'last 2 versions', 'Firefox ESR'] }))
+        .pipe(autoprefixer({browsers: [
+            '> 0.2% in DE',
+            'last 2 versions',
+            'Firefox ESR',
+            'not IE <= 8'
+        ]}))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(targetDirectories.assets))
         .pipe(browserSync.stream())
