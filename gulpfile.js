@@ -6,7 +6,7 @@ var deployPath = 'web';
 var sourceFiles = {
     scss: '_sources/*.scss',
     images: 'images/*',
-    inlineImages: 'iamges/**/*'
+    inlineImages: 'images/**/*'
 };
 var targetDirectories = {
     assets: deployPath + '/assets',
