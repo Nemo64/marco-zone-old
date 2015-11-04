@@ -30,7 +30,7 @@ sitemap:
 
         {% if post.excerpt %}
         <p class="post-description" itemprop="description">
-            {{ post.excerpt }}
+            {{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}
         </p>
         {% endif %}
 
