@@ -26,3 +26,5 @@ $body-color:                 #222;
 $link-color:                 $brand-primary !default;
 $link-hover-color:           darken($link-color, 15%) !default;
 $link-hover-decoration:      none;
+
+$text-muted: fade-out($body-color, 0.6);

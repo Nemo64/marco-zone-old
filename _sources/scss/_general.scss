@@ -91,7 +91,7 @@ blockquote {
         bottom: -.2rem;
         display: block;
         font-size: $font-size-xs;
-        color: fade-out($body-color, .6);
+        color: $text-muted;
         @include text-truncate;
 
         a {
