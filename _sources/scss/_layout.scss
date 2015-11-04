@@ -1,16 +1,22 @@
+$site-shadow-size: 1rem / 4;
+$site-shadow-color: fade-out(black, 0.9);
+$dark-bg: darken(#fff, 3%);
+
+// workaround until bootstrap has a working container
 .navbar-container {
     padding-left: 0;
     padding-right: 0;
 }
 
-.site-content {
-    min-height: 20rem;
-    background-color: $body-bg;
-}
-
+body,
 .site-header,
 .site-footer {
     background-color: $dark-bg;
+}
+
+.site-content {
+    min-height: 20rem;
+    background-color: $body-bg;
 }
 
 .site-header {
@@ -21,4 +27,9 @@
     padding-top: $spacer-y * 2;
     min-height: 10rem;
     box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
+    font-size: 95%;
+
+    a {
+        color: inherit;
+    }
 }

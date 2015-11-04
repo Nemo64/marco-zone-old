@@ -1,11 +1,7 @@
-$site-shadow-size: 1rem / 4;
-$site-shadow-color: fade-out(black, 0.9);
-$dark-bg: darken(#fff, 3%);
 $paragraph-width: map_get($container-max-widths, md) - $grid-gutter-width;
 
 body {
     overflow-y: scroll;
-    background-color: $dark-bg;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
