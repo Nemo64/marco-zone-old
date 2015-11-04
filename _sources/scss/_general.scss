@@ -13,10 +13,6 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
     color: darken($body-color, 10%);
-
-    a {
-        color: inherit;
-    }
 }
 
 h1, .h1,
@@ -28,6 +24,12 @@ h6, .h6,
 p,
 blockquote {
     max-width: $paragraph-width;
+}
+
+header, footer {
+    a {
+        color: inherit;
+    }
 }
 
 @supports (hyphens: auto) {
