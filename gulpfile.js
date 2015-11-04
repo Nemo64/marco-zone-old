@@ -67,7 +67,7 @@ gulp.task('sass', function () {
         ]}))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(targetDirectories.assets))
-        .pipe(browserSync.stream())
+        .pipe(browserSync.stream());
 });
 
 gulp.task('css', ['sass']);
@@ -85,12 +85,16 @@ gulp.task('images-thumbnail', function () {
             width: 128,
             height: 128,
             quality: 0.85,
+            crop: true,
+            upscale: true,
+            gravity: 'East',
             imageMagick: true
         }), os.cpus().length))
         .pipe(rename(function (path) {
             path.dirname += '/thumbnail'
         }))
-        .pipe(gulp.dest(targetDirectories.images));
+        .pipe(gulp.dest(targetDirectories.images))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('images-banner', function () {
@@ -107,7 +111,8 @@ gulp.task('images-banner', function () {
             quality: 0.85,
             imageMagick: true
         }), os.cpus().length))
-        .pipe(gulp.dest(targetDirectories.images));
+        .pipe(gulp.dest(targetDirectories.images))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('images-inline', function () {
@@ -124,7 +129,8 @@ gulp.task('images-inline', function () {
             quality: 0.85,
             imageMagick: true
         }), os.cpus().length))
-        .pipe(gulp.dest(targetDirectories.images));
+        .pipe(gulp.dest(targetDirectories.images))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('images', ['images-thumbnail', 'images-banner', 'images-inline']);
