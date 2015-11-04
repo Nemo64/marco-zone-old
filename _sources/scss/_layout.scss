@@ -24,12 +24,11 @@ body,
 }
 
 .site-footer {
-    padding-top: $spacer-y * 2;
     min-height: 10rem;
     box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
     font-size: 95%;
+}
 
-    a {
-        color: inherit;
-    }
+.footer-segment {
+    margin-top: $spacer-y * 2;
 }
