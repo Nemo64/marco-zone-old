@@ -1,0 +1,24 @@
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.site-content {
+    min-height: 20rem;
+    background-color: $body-bg;
+}
+
+.site-header,
+.site-footer {
+    background-color: $dark-bg;
+}
+
+.site-header {
+    box-shadow: 0 (-$site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
+}
+
+.site-footer {
+    padding-top: $spacer-y * 2;
+    min-height: 10rem;
+    box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
+}
