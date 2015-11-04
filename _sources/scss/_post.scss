@@ -1,6 +1,6 @@
 $list-item-height: 8rem;
 $list-item-padding: .5rem;
-$list-item-headline-size: $font-size-h2;
+$list-item-headline-size: $font-size-h3;
 $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height) + ($font-size-base * $line-height) + $headings-margin-bottom;
 
 .post {
@@ -37,6 +37,7 @@ $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height)
     position: relative;
     height: $list-item-height;
     overflow: hidden;
+    margin-bottom: $grid-gutter-width / 2;
 
     h1 {
         font-size: $list-item-headline-size;
@@ -50,15 +51,15 @@ $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height)
     width: 100%;
     background-color: $body-bg;
 
-    &:before {
-        content: "";
-        position: absolute;
-        top: -$line-height * $font-size-base * 2;
-        height: $line-height * $font-size-base * 2;
-        width: 100%;
-        @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
-        pointer-events: none;
-    }
+    //&:before {
+    //    content: "";
+    //    position: absolute;
+    //    top: -$line-height * $font-size-base * 2;
+    //    height: $line-height * $font-size-base * 2;
+    //    width: 100%;
+    //    @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
+    //    pointer-events: none;
+    //}
 
     @include media-breakpoint-up(sm) {
         padding-left: $list-item-height + $list-item-padding;
@@ -79,7 +80,7 @@ $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height)
 
     @include image-box($list-item-mobile-image-size);
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
         width: $list-item-height;
         height: $list-item-height;
 
