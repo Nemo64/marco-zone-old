@@ -10,7 +10,7 @@ layout: default
 
             {% if page.image %}
             <div class="post-image">
-                <img src="/images/{{page.image}}" alt="" itemprop="image">
+                {% include image.html src=page.image attr='itemprop="image"' %}
             </div>
             {% endif %}
 

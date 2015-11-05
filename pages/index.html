@@ -16,7 +16,8 @@ sitemap:
 
         {% if post.image %}
         <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
-            <img src="/images/thumbnail/{{post.image}}" alt="" itemprop="image">
+            {% include image.html src=post.image variant='/thumbnail' attr='itemprop="image"' %}
+            <!--<img src="{{ post.image | prepend: '/thumbnail' | prepend: site.image_url }}" alt="" itemprop="image">-->
         </a>
         {% endif %}
 
