@@ -23,6 +23,10 @@ body,
     box-shadow: 0 (-$site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
 }
 
+.main-page-nav {
+    @include pull-right;
+}
+
 .site-footer {
     min-height: 10rem;
     box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
