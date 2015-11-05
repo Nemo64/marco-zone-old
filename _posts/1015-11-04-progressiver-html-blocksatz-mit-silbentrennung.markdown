@@ -10,7 +10,7 @@ categories:
 author:     Marco Pfeiffer
 ---
 
-Schon mal eine Zeitung gesehen und danach eine News-Seite? as Schriftbild von Zeitungen ist meistens deutlich schöner als das von Webseiten. Woran liegt das? Mir fallen 3 Gründe ein. Einmal die meist recht hübsche Serif-Schriftart welche auf einem low-DPI Monitor allerdings furchtbar aussieht. Dann allgemein die recht niedrige Auflösung auf modernen Desktop-PC's. und zuletzt der Blocksatz, welche den Text schön gleichmäßig aussehen lässt.
+Schon mal eine Zeitung gesehen und danach eine News-Seite? Das Schriftbild von Zeitungen ist meistens deutlich schöner als das von Webseiten. Woran liegt das? Mir fallen 3 Gründe ein. Einmal die meist recht hübsche Serif-Schriftart welche auf einem low-DPI Monitor allerdings furchtbar aussieht. Dann allgemein die recht niedrige Auflösung auf modernen Desktop-PC's. und zuletzt der Blocksatz, welche den Text schön gleichmäßig aussehen lässt.
 
 *"Blocksatz können wir im Web auch!"* wird nun der eine oder andere sagen und es stimmt, `text-align: justify` erlaubt auch uns Blocksatz zu verwenden. Das Ergebnis sieht dann so aus:
 
