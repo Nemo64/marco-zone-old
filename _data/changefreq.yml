@@ -1,9 +1,9 @@
 always:
-  revisit_after: 30 minutes
+  revisit_after: 10 minutes
 hourly:
-  revisit_after: 30 minutes
+  revisit_after: 15 minutes
 daily:
-  revisit_after: 12 hours
+  revisit_after: 6 hours
 weekly:
   revisit_after: 2 days
 monthly:
