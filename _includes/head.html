@@ -6,7 +6,7 @@
 
     <!-- title and description -->
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-    {% if page.excerpt %}<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
+    {% if page.description %}<meta name="description" content="{{ page.description | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
 
     <!-- external resources -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">

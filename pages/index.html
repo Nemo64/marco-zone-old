@@ -28,9 +28,9 @@ sitemap:
             </h1>
         </header>
 
-        {% if post.excerpt %}
+        {% if post.description %}
         <p class="post-description" itemprop="description">
-            {{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}
+            {{ post.description | strip_html | strip_newlines | truncate: 160 }}
         </p>
         {% endif %}
 

@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Entstehung dieses Blogs
-excerpt:    Wie es zu diesem Blog kam und warum er mit Jekyll gebaut ist.
+description:    Wie es zu diesem Blog kam und warum er mit Jekyll gebaut ist.
 image:      html.jpeg
 date:       2015-10-22 20:00:00
 categories: Webseite
