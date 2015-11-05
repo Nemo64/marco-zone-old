@@ -1,0 +1,10 @@
+# this file defines headers for netlify hosting
+
+# basic headers we want everywhere
+/*
+    X-Frame-Options: DENY
+    X-XSS-Protection: 1; mode=block
+
+# i don't know if this works because the final urls don't have .html at the end
+/*.html
+    Cache-Control: public, max-age=300

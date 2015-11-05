@@ -156,9 +156,24 @@ gulp.task('watch', ['default'], function () {
 });
 
 gulp.task('serve', ['watch'], function () {
+    var modRewrite = require('connect-modrewrite');
+    var header = require('connect-header');
+
     browserSync.init({
+        open: false,
         server: {
-            baseDir: deployPath
+            baseDir: deployPath,
+            middleware: [
+                modRewrite([
+                    // rewrite eg. "index" to "index.html"
+                    '^(.*)/([^\.\/]+)$ $1/$2.html'
+                ]),
+                header({
+                    // these should be the same in the _headers file
+                    'X-Frame-Options': 'DENY',
+                    'X-XSS-Protection': '1; mode=block'
+                })
+            ]
         }
     });
 });

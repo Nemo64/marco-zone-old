@@ -11,6 +11,8 @@
   "devDependencies": {
     "browser-sync": "^2.9.11",
     "concurrent-transform": "^1.0.0",
+    "connect-header": "0.0.5",
+    "connect-modrewrite": "^0.8.2",
     "del": "~2.0.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",

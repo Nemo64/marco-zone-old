@@ -1,7 +1,6 @@
 ---
-layout:     page
 title:      Impressum
-permalink:  /impressum.html
+permalink:  /impressum
 footernav:  true
 noindex:    true
 ---

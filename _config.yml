@@ -13,7 +13,7 @@ github_username:  Nemo64
 timezone: Europe/Berlin
 markdown: kramdown
 destination: web
-permalink: /:title.html
+permalink: /:title
 defaults:
   -
     scope:
@@ -43,6 +43,10 @@ exclude:
   - gulpfile.js
   - _sources
   - images
+
+include:
+  - _headers
+  - _redirects
 
 keep_files:
   - assets

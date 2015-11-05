@@ -1,7 +1,6 @@
 ---
-layout:     page
 title:      Datenschutzerklärung
-permalink:  /datenschutzerklaerung.html
+permalink:  /datenschutzerklaerung
 footernav:  true
 noindex:    true
 ---
