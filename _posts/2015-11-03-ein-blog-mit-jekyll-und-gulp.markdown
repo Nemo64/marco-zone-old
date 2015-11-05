@@ -1,9 +1,9 @@
 ---
-layout:     post
-title:      Ein Blog mit Jekyll und Gulp
-description:    Beste Webentwicklungsumgebung die ich je auf die Beine gestellt hab, doch war das Einrichten (mit meinen Ansprüchen) nicht so einfach wie ich dachte.
-image:      jekyll.png
-date:       2015-11-03 20:00:00 +0100
+layout:      post
+title:       Ein Blog mit Jekyll und Gulp
+description: Beste Webentwicklungsumgebung die ich je auf die Beine gestellt hab, doch war das Einrichten (mit meinen Ansprüchen) nicht so einfach wie ich dachte.
+image:       jekyll.png
+date:        2015-11-03 20:00:00 +0100
 categories:
     - Webseite
     - Gulp

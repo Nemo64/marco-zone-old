@@ -1,9 +1,9 @@
 ---
-layout:     post
-title:      Progressiver HTML Blocksatz mit Silbentrennung
-description:    Einige Browser unterstützen Silbentrennung über CSS. Hier ein Trick für Blocksatz wenn Silbentrennung vorhanden ist.
-image:      text.jpeg
-date:       2015-11-04 20:00:00 +0100
+layout:      post
+title:       Progressiver HTML Blocksatz mit Silbentrennung
+description: Einige Browser unterstützen Silbentrennung über CSS. Hier ein Trick für Blocksatz wenn Silbentrennung vorhanden ist.
+image:       text.jpeg
+date:        2015-11-04 20:00:00 +0100
 categories:
     - Webseite
     - CSS
