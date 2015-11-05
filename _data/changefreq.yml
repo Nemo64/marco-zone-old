@@ -1,14 +1,21 @@
 always:
   revisit_after: 10 minutes
+  max_age: 30 # i always like to cache at least a very short time so that traffic spikes aren't as hard
 hourly:
   revisit_after: 15 minutes
+  max_age: 300 # 5 minutes
 daily:
   revisit_after: 6 hours
+  max_age: 600 # 10 minutes
 weekly:
-  revisit_after: 2 days
+  revisit_after: 1 day
+  max_age: 3600 # 1 hour
 monthly:
-  revisit_after: 7 days
+  revisit_after: 1 day
+  max_age: 7200 # 2 hour
 yearly:
-  revisit_after: 1 month
+  revisit_after: 1 day
+  max_age: 7200 # 2 hour
 never:
-  revisit_after: ~
+  revisit_after: 7 days # even though no change is expected... still look for some
+  max_age: 86400 # 1 day

@@ -1,10 +1,37 @@
+---
+layout:      none
+is_internal: true
+---
 # this file defines headers for netlify hosting
 
-# basic headers we want everywhere
 /*
     X-Frame-Options: DENY
     X-XSS-Protection: 1; mode=block
 
+#########
+# pages #
+#########
+
 # i don't know if this works because the final urls don't have .html at the end
+# consider this a fallback if the html-less urls don't work
 /*.html
-    Cache-Control: public, max-age=300
+    Cache-Control: public, max-age={{ site.data.changefreq.weekly.max_age }}
+
+{% for page in site.pages %}{% unless page.is_internal %}
+{{ page.url }}
+    # this site may change {{ page.changefreq }}
+    Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}
+{% endunless %}{% endfor %}
+
+#########
+# posts #
+#########
+
+/posts/*
+    Cache-Control: public, max-age={{ site.data.changefreq.monthly.max_age }}
+
+{% for post in site.posts %}{% unless post.changefreq == 'monthly' %}
+{{ post.url }}
+    # this post changes {{ page.changefreq }}
+    Cache-Control: public, max-age={{ site.data.changefreq[post.changefreq].max_age }}
+{% endunless %}{% endfor %}

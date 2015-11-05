@@ -13,7 +13,7 @@ github_username:  Nemo64
 timezone: Europe/Berlin
 markdown: kramdown
 destination: web
-permalink: /:title
+permalink: /post/:title
 defaults:
   -
     scope:
@@ -22,7 +22,7 @@ defaults:
       layout:     page
       author:     Marco Pfeiffer
       language:   de
-      changefreq: weekly
+      changefreq: monthly # this value is dublicated in _headers
       priority:   0.5
   -
     scope:
@@ -30,7 +30,7 @@ defaults:
       type: "posts"
     values:
       layout:     post
-      changefreq: monthly
+      changefreq: monthly # this value is dublicated in _headers
       priority:   0.75
 
 exclude:
@@ -45,8 +45,8 @@ exclude:
   - images
 
 include:
-  - _headers
   - _redirects
+  - _headers
 
 keep_files:
   - assets
