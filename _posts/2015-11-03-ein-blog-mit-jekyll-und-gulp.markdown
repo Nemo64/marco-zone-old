@@ -1,5 +1,4 @@
 ---
-layout:      post
 title:       Ein Blog mit Jekyll und Gulp
 description: Beste Webentwicklungsumgebung die ich je auf die Beine gestellt hab, doch war das Einrichten (mit meinen Ansprüchen) nicht so einfach wie ich dachte.
 image:       /jekyll.png
@@ -8,7 +7,6 @@ categories:
     - Webseite
     - Gulp
     - Jekyll
-author:     Marco Pfeiffer
 ---
 
 ## Der ursprüngliche Plan

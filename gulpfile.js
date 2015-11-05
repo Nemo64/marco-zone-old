@@ -39,7 +39,7 @@ gulp.task('html', ['jekyll'], function () {
 
     gulp.src([path.join(deployPath, '*.html'), path.join(deployPath, '**/*.html')])
         .pipe(htmlmin({
-            removeComments: true,
+            removeComments: false,
             collapseWhitespace: true,
             collapseBooleanAttributes: true,
             removeAttributeQuotes: false,

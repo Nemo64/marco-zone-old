@@ -14,6 +14,24 @@ timezone: Europe/Berlin
 markdown: kramdown
 destination: web
 permalink: /:title.html
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout:     page
+      author:     Marco Pfeiffer
+      language:   de
+      changefreq: weekly
+      priority:   0.5
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout:     post
+      changefreq: monthly
+      priority:   0.75
 
 exclude:
   - bower_components

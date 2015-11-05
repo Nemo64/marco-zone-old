@@ -1,0 +1,14 @@
+always:
+  revisit_after: 30 minutes
+hourly:
+  revisit_after: 30 minutes
+daily:
+  revisit_after: 12 hours
+weekly:
+  revisit_after: 2 days
+monthly:
+  revisit_after: 7 days
+yearly:
+  revisit_after: 1 month
+never:
+  revisit_after: ~
