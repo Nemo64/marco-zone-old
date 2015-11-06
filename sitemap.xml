@@ -4,26 +4,25 @@ changefreq: daily
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- posts -->
     {% for post in site.posts %}
     <url>
         <loc>{{ post.url | prepend: site.baseurl | prepend: site.url }}</loc>
-        {% if post.date %}
-        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
-        {% else %}{% if post.lastmod %}
-        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
-        {% endif %}{% endif %}
+        {% if post.lastmod %}<lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
+        {% elsif post.date %}<lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+        {% endif %}
         <changefreq>{{ post.changefreq }}</changefreq>
         <priority>{{ post.priority }}</priority>
     </url>
     {% endfor %}
+    <!-- pages -->
     {% for page in site.pages %}{% if page.noindex == null and page.title %}
     <url>
         <loc>{{ page.url | prepend: site.baseurl | prepend: site.url }}</loc>
-        {% if page.date %}
-        <lastmod>{{ page.date | date_to_xmlschema }}</lastmod>
-        {% else %}{% if page.lastmod %}
-        <lastmod>{{ page.lastmod | date_to_xmlschema }}</lastmod>
-        {% endif %}{% endif %}
+        {% if page.lastmod %}<lastmod>{{ page.lastmod }}</lastmod>
+        {% elsif page.date %}<lastmod>{{ page.date }}</lastmod>
+        {% endif %}
         <changefreq>{{ page.changefreq }}</changefreq>
         <priority>{{ page.priority }}</priority>
     </url>
