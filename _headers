@@ -2,18 +2,20 @@
 layout:      none
 is_internal: true
 ---
-# this file defines headers for netlify hosting
+{% assign default_changefreq = 'monthly' %}
 
 /*
     X-Frame-Options: DENY
+    # default change frequency is {{ default_changefreq }}
+    Cache-Control: public, max-age={{ site.data.changefreq[default_changefreq].max_age }}
 
 #########
 # pages #
 #########
 
-{% for page in site.pages %}{% unless page.is_internal %}
+{% for page in site.pages %}{% unless page.is_internal or page.changefreq == default_changefreq %}
 {{ page.url }}
-    # this site may change {{ page.changefreq }}
+    # this page may change {{ page.changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}
 {% endunless %}{% endfor %}
 
@@ -21,10 +23,7 @@ is_internal: true
 # posts #
 #########
 
-/post/*
-    Cache-Control: public, max-age={{ site.data.changefreq.monthly.max_age }}
-
-{% for post in site.posts %}{% unless post.changefreq == 'monthly' %}
+{% for post in site.posts %}{% unless post.changefreq == default_changefreq %}
 {{ post.url }}
     # this post may change {{ page.changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[post.changefreq].max_age }}

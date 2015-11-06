@@ -1,0 +1,7 @@
+---
+layout:      null
+is_internal: true
+---
+
+/post/:slug     /:slug
+/posts/:slug    /:slug
