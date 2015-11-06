@@ -1,14 +1,14 @@
 <header class="site-header">
 
-    <nav class="navbar navbar-light navbar-container">
+    <nav class="navbar navbar-light navbar-container" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="container">
-            <a class="navbar-brand" href="{{ site.baseurl }}/">
+            <a class="navbar-brand" href="{{ site.baseurl }}/" itemprop="url">
                 {{ site.title }}
             </a>
             <ul class="nav navbar-nav main-page-nav">
                 {% for page in site.pages %}{% if page.mainnav %}
                 <li class="nav-item">
-                    {% include internal-link.html page=page class='nav-link' %}
+                    {% include internal-link.html page=page class='nav-link' attributes='itemprop="url"' %}
                 </li>
                 {% endif %}{% endfor %}
             </ul>
