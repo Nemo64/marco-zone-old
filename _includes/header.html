@@ -6,15 +6,11 @@
                 {{ site.title }}
             </a>
             <ul class="nav navbar-nav main-page-nav">
-                {% for page in site.pages %}
-                {% if page.title and page.mainnav %}
+                {% for page in site.pages %}{% if page.mainnav %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ page.url | prepend: site.baseurl }}">
-                        {{ page.title }}
-                    </a>
+                    {% include internal-link.html page=page class='nav-link' %}
                 </li>
-                {% endif %}
-                {% endfor %}
+                {% endif %}{% endfor %}
             </ul>
         </div>
     </nav>

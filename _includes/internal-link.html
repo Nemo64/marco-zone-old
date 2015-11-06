@@ -1,0 +1,5 @@
+<a class="internal-link {{ include.class }}"
+   href="{{ include.page.url | prepend: site.baseurl }}"
+   {% if include.page.noindex %}rel="nofollow"{% endif %}>
+    {{ page.title }}
+</a>
