@@ -4,7 +4,7 @@ $list-item-headline-size: $font-size-h3;
 $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height * 2) + $headings-margin-bottom;
 $list-item-desktop-breakpoint: md;
 
-.post {
+.post-inner {
     padding-top: $spacer-y;
     padding-bottom: $spacer-y;
 }

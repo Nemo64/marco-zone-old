@@ -75,20 +75,16 @@ gulp.task('css', ['sass']);
 
 gulp.task('images', function () {
     var imageResize = require('gulp-image-resize');
-    var parallel = require('concurrent-transform');
-    var os = require('os');
     var changed = require("gulp-changed");
     var merge = require('merge');
 
-    var highQuality = 0.8;
-    var lowQuality = 0.5;
     var masterStream = require('merge-stream')();
 
     var resizePipe = function (images, variant, options) {
         var stream = images
             .pipe(changed(targetDirectories.images + '/' + variant, {extension: '.jpeg'}))
             .pipe(imageResize(merge({
-                quality: highQuality,
+                quality: 0.85,
                 format: 'jpeg',
                 imageMagick: true
             }, options)))
@@ -102,26 +98,30 @@ gulp.task('images', function () {
     var topicImages = gulp.src(sourceFiles.topicImages);
     topicImages.setMaxListeners(100);
 
+    var sizeOptions = [
+        {name: '1x', thumbQuality: 0.6, bannerQuality: 0.5, sizeFactor: 1},
+        {name: '2x', thumbQuality: 0.4, bannerQuality: 0.3, sizeFactor: 2}
+    ];
+    sizeOptions.forEach(function (def) {
+        var baseOptions = {upscale: true};
+        var wf = def.sizeFactor;
+        var hf = def.sizeFactor * 9 / 21;
+
+        var thumbOptions = merge(baseOptions, {quality: def.thumbQuality});
+        resizePipe(topicImages, 'thumbnail/sm-' + def.name, merge(thumbOptions, {width: 54 * wf}));
+        resizePipe(topicImages, 'thumbnail/xl-' + def.name, merge(thumbOptions, {width: 128 * wf}));
+
+        var bannerOptions = merge(baseOptions, {quality: def.bannerQuality, crop: true});
+        var sm = 34 * 16, md = 48 * 16, lg = 62 * 16, xl = 75 * 16;
+        resizePipe(topicImages, 'banner/xs-' + def.name, merge(bannerOptions, {width: sm * wf, height: sm * hf}));
+        resizePipe(topicImages, 'banner/sm-' + def.name, merge(bannerOptions, {width: md * wf, height: md * hf}));
+        resizePipe(topicImages, 'banner/md-' + def.name, merge(bannerOptions, {width: lg * wf, height: lg * hf}));
+        resizePipe(topicImages, 'banner/lg-' + def.name, merge(bannerOptions, {width: xl * wf, height: xl * hf}));
+        resizePipe(topicImages, 'banner/xl-' + def.name, merge(bannerOptions, {width: 1920 * wf, height: 1920 * hf}));
+    });
+
     resizePipe(inlineImages, 'inline/sm-1x', {width: 480 - 30});
     resizePipe(inlineImages, 'inline/xl-1x', {width: 720 - 30});
-
-    var sizeOptions = [
-        {name: '1x', quality: highQuality, sizeFactor: 1},
-        {name: '2x', quality: lowQuality, sizeFactor: 2}
-    ];
-    sizeOptions.forEach(function (o) {
-        var baseOptions = {quality: o.quality, upscale: true};
-        var wf = o.sizeFactor;
-        var hf = o.sizeFactor * 9 / 21;
-
-        resizePipe(topicImages, 'thumbnail/sm-' + o.name, merge(baseOptions, {width: 54 * wf}));
-        resizePipe(topicImages, 'thumbnail/xl-' + o.name, merge(baseOptions, {width: 128 * wf}));
-
-        resizePipe(topicImages, 'banner/sm-' + o.name, merge(baseOptions, {width: 480 * wf, height: 480 * hf, crop: true}));
-        resizePipe(topicImages, 'banner/md-' + o.name, merge(baseOptions, {width: 720 * wf, height: 720 * hf, crop: true}));
-        resizePipe(topicImages, 'banner/lg-' + o.name, merge(baseOptions, {width: 960 * wf, height: 960 * hf, crop: true}));
-        resizePipe(topicImages, 'banner/xl-' + o.name, merge(baseOptions, {width: 1156 * wf, height: 1156 * hf, crop: true}));
-    });
 
     return masterStream;
 });
