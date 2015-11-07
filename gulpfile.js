@@ -5,8 +5,8 @@ var browserSync = require('browser-sync').create();
 var deployPath = 'web';
 var sourceFiles = {
     scss: '_sources/*.scss',
-    images: 'images/*',
-    inlineImages: 'images/**/*'
+    topicImages: ['images/topics/*.png', 'images/topics/*.jpeg'],
+    inlineImages: ['images/inline/**/*.png', 'images/inline/**/*.jpeg']
 };
 var targetDirectories = {
     assets: deployPath + '/assets',
@@ -37,7 +37,7 @@ gulp.task('html', ['jekyll'], function () {
     var htmlmin = require('gulp-htmlmin');
     var path = require('path');
 
-    gulp.src([path.join(deployPath, '*.html'), path.join(deployPath, '**/*.html')])
+    return gulp.src([path.join(deployPath, '*.html'), path.join(deployPath, '**/*.html')])
         .pipe(htmlmin({
             removeComments: false,
             collapseWhitespace: true,
@@ -57,7 +57,7 @@ gulp.task('sass', function () {
     var autoprefixer = require('gulp-autoprefixer');
     var sourcemaps = require('gulp-sourcemaps');
 
-    gulp.src(sourceFiles.scss)
+    return gulp.src(sourceFiles.scss)
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(autoprefixer({browsers: [
@@ -73,68 +73,58 @@ gulp.task('sass', function () {
 
 gulp.task('css', ['sass']);
 
-gulp.task('images-thumbnail', function () {
+gulp.task('images', function () {
     var imageResize = require('gulp-image-resize');
     var parallel = require('concurrent-transform');
     var os = require('os');
     var changed = require("gulp-changed");
-    var rename = require("gulp-rename");
+    var merge = require('merge');
 
-    return gulp.src(sourceFiles.images)
-        .pipe(changed(targetDirectories.images))
-        .pipe(parallel(imageResize({
-            width: 128,
-            height: 128,
-            quality: 0.85,
-            crop: true,
-            upscale: true,
-            gravity: 'East',
-            imageMagick: true
-        }), os.cpus().length))
-        .pipe(rename(function (path) {
-            path.dirname += '/thumbnail'
-        }))
-        .pipe(gulp.dest(targetDirectories.images))
-        .pipe(browserSync.stream());
+    var highQuality = 0.8;
+    var lowQuality = 0.5;
+    var masterStream = require('merge-stream')();
+
+    var resizePipe = function (images, variant, options) {
+        var stream = images
+            .pipe(changed(targetDirectories.images + '/' + variant, {extension: '.jpeg'}))
+            .pipe(imageResize(merge({
+                quality: highQuality,
+                format: 'jpeg',
+                imageMagick: true
+            }, options)))
+            .pipe(gulp.dest(targetDirectories.images + '/' + variant))
+            .pipe(browserSync.stream());
+
+        masterStream.add(stream);
+    };
+
+    var inlineImages = gulp.src(sourceFiles.inlineImages);
+    var topicImages = gulp.src(sourceFiles.topicImages);
+    topicImages.setMaxListeners(100);
+
+    resizePipe(inlineImages, 'inline/sm-1x', {width: 480 - 30});
+    resizePipe(inlineImages, 'inline/xl-1x', {width: 720 - 30});
+
+    var sizeOptions = [
+        {name: '1x', quality: highQuality, sizeFactor: 1},
+        {name: '2x', quality: lowQuality, sizeFactor: 2}
+    ];
+    sizeOptions.forEach(function (o) {
+        var baseOptions = {quality: o.quality, upscale: true};
+        var wf = o.sizeFactor;
+        var hf = o.sizeFactor * 9 / 21;
+
+        resizePipe(topicImages, 'thumbnail/sm-' + o.name, merge(baseOptions, {width: 54 * wf}));
+        resizePipe(topicImages, 'thumbnail/xl-' + o.name, merge(baseOptions, {width: 128 * wf}));
+
+        resizePipe(topicImages, 'banner/sm-' + o.name, merge(baseOptions, {width: 480 * wf, height: 480 * hf, crop: true}));
+        resizePipe(topicImages, 'banner/md-' + o.name, merge(baseOptions, {width: 720 * wf, height: 720 * hf, crop: true}));
+        resizePipe(topicImages, 'banner/lg-' + o.name, merge(baseOptions, {width: 960 * wf, height: 960 * hf, crop: true}));
+        resizePipe(topicImages, 'banner/xl-' + o.name, merge(baseOptions, {width: 1156 * wf, height: 1156 * hf, crop: true}));
+    });
+
+    return masterStream;
 });
-
-gulp.task('images-banner', function () {
-    var imageResize = require('gulp-image-resize');
-    var parallel = require('concurrent-transform');
-    var os = require('os');
-    var changed = require("gulp-changed");
-
-    gulp.src(sourceFiles.images)
-        .pipe(changed(targetDirectories.images))
-        .pipe(parallel(imageResize({
-            width: 512,
-            height: 512,
-            quality: 0.85,
-            imageMagick: true
-        }), os.cpus().length))
-        .pipe(gulp.dest(targetDirectories.images))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('images-inline', function () {
-    var imageResize = require('gulp-image-resize');
-    var parallel = require('concurrent-transform');
-    var os = require('os');
-    var changed = require("gulp-changed");
-
-    gulp.src(sourceFiles.inlineImages)
-        .pipe(changed(targetDirectories.images))
-        .pipe(parallel(imageResize({
-            width: 690,
-            height: 690 / 4 * 3,
-            quality: 0.85,
-            imageMagick: true
-        }), os.cpus().length))
-        .pipe(gulp.dest(targetDirectories.images))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('images', ['images-thumbnail', 'images-banner', 'images-inline']);
 
 gulp.task('default', ['clean', 'html', 'css', 'images']);
 

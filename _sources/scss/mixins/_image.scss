@@ -5,12 +5,23 @@
     height: auto;
 }
 
-@mixin image-box ($height) {
-    line-height: $height;
+@mixin image-container($height) {
     text-align: center;
 
-    > img {
+    img {
         display: inline-block;
-        @include image-contain;
+        vertical-align: middle;
     }
+
+    &:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: $height;
+    }
+}
+
+@mixin image-square-container($size) {
+    @include square($size);
+    @include image-container($size);
 }

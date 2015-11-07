@@ -1,1 +1,38 @@
-<img src="{{ include.src | prepend: include.variant | prepend: site.image_baseurl }}" alt="{{ include.alt }}" {{ include.attr }}>
+<picture {{ include.cattr }}>
+    {% case include.variant %}
+
+    {% when 'thumbnail' %}
+    {% assign basepath = '/thumbnail' | prepend: site.image_baseurl %}
+    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+    {% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
+    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+    {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+    <source srcset="{{ sm1x }} 1x, {{ sm2x }} 2x" media="(max-width: 47.9em)">
+    <source srcset="{{ xl1x }} 1x, {{ xl2x }} 2x" media="(min-width: 48em)">
+    <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
+
+    {% when 'banner' %}
+    {% assign basepath = '/banner' | prepend: site.image_baseurl %}
+    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+    {% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
+    {% assign md1x = include.image | prepend: '/md-1x/' | prepend: basepath %}
+    {% assign md2x = include.image | prepend: '/md-2x/' | prepend: basepath %}
+    {% assign lg1x = include.image | prepend: '/lg-1x/' | prepend: basepath %}
+    {% assign lg2x = include.image | prepend: '/lg-2x/' | prepend: basepath %}
+    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+    {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+    <source srcset="{{ sm1x }} 1x, {{ sm2x }} 2x" media="(max-width: 47.9em)">
+    <source srcset="{{ md1x }} 1x, {{ md2x }} 2x" media="((min-width: 48em) and (max-width: 61.9em))">
+    <source srcset="{{ lg1x }} 1x, {{ lg2x }} 2x" media="((min-width: 62em) and (max-width: 74.9em))">
+    <source srcset="{{ xl1x }} 1x, {{ xl2x }} 2x" media="(min-width: 75em)">
+    <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
+
+    {% else %}
+    {% assign basepath = '/inline' | prepend: site.image_baseurl %}
+    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+    <source src="{{ sm1x }}" media="(max-width: 47.9em)">
+    <source src="{{ xl1x }}" media="(min-width: 48em)">
+    <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
+    {% endcase %}
+</picture>

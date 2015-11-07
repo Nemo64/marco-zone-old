@@ -10,7 +10,7 @@ layout: default
 
             {% if page.image %}
             <div class="post-image">
-                {% include image.html src=page.image attr='itemprop="image"' %}
+                {% include image.html image=page.image variant='banner' attr='itemprop="image"' %}
             </div>
             {% endif %}
 

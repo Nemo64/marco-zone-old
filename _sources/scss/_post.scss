@@ -15,28 +15,11 @@ $list-item-desktop-breakpoint: md;
 }
 
 .post-image {
+    margin-bottom: 1rem;
 
-    > img {
-        @include image-contain;
-    }
-
-    @include media-breakpoint-up(lg) {
-        float: right;
-        text-align: right;
-        width: floor(map_get($container-max-widths, lg) - $paragraph-width - $grid-gutter-width * 2);
-    }
-
-    @include media-breakpoint-up(xl) {
-        width: floor(map_get($container-max-widths, xl) - $paragraph-width - $grid-gutter-width * 2);
-    }
-
-    @include media-breakpoint-down(md) {
-        max-width: $paragraph-width;
-        margin-bottom: 1rem;
-
-        > img {
-            width: 100%;
-        }
+    img {
+        display: block;
+        width: 100%;
     }
 }
 
@@ -81,20 +64,35 @@ $list-item-desktop-breakpoint: md;
     display: block;
     position: relative;
     z-index: 1;
-    width: $list-item-mobile-image-size;
-    height: $list-item-mobile-image-size;
     margin-right: $list-item-padding;
     float: left;
-    background-color: $dark-bg;
-    box-shadow: 0 0 $site-shadow-size $site-shadow-color inset;
+    background-color: mix($brand-primary, $body-bg, 100%);
     overflow: hidden;
 
-    @include image-box($list-item-mobile-image-size);
-
+    @include image-square-container($list-item-mobile-image-size);
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
-        width: $list-item-height;
-        height: $list-item-height;
+        @include image-square-container($list-item-height);
+    }
 
-        @include image-box($list-item-height);
+    .main-image img {
+        position: relative;
+        z-index: 1;
+        @include image-contain;
+    }
+
+    .backdrop-image img {
+        $overscale: 60%;
+        position: absolute;
+        top: -$overscale;
+        right: -$overscale;
+        min-width: 100% + $overscale * 2;
+        min-height: 100% + $overscale * 2;
+        opacity: .1;
+
+        $filter: contrast(3) saturate(2) blur(2rem);
+        @supports (filter: $filter) {
+            filter: $filter;
+            opacity: .7;
+        }
     }
 }
