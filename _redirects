@@ -3,5 +3,10 @@ layout:      null
 is_internal: true
 ---
 
+# old permalink styles
 /post/:slug     /:slug
 /posts/:slug    /:slug
+
+# redirect attempts for mobile pages
+/mobile/*       /:splat
+/m/*            /:splat
