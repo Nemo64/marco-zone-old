@@ -3,7 +3,7 @@ title:       Ein Blog mit Jekyll und Gulp
 description: Beste Webentwicklungsumgebung die ich je auf die Beine gestellt hab, doch war das Einrichten (mit meinen Ansprüchen) nicht so einfach wie ich dachte.
 image:       jekyll.jpeg
 date:        2015-11-03 20:00:00 +0100
-lastmod:     2015-11-07 20:00:00 +0100
+lastmod:     2015-11-08 20:00:00 +0100
 categories:
     - Webseite
     - Gulp
@@ -13,7 +13,7 @@ categories:
 ## Der ursprüngliche Plan
 Eigentlich wollte ich nur einen Server aufsetzen um kleinere Witz-Seiten wie [is it friday yet] zu erstellen, da ich so kleine php Seite ziemlich gerne mal zusammen hacke wenn mir die Idee dafür kommt. Da ich bereits eine nicht genutzte VM bei [DigitalOcean] hatte, dachte ich mir das ich diese einfach mal auf vordermann bringe. Ich hätte zwar auch einen Shared-Hoster nehmen können aber wo wäre da der Spaß gewesen. ;)
 
-Da ich nginx lange nicht mehr verwendet hab, hab ich diesen mal schnell installiert. Bevor ich aber php-fpm installiert hab, kam mir der gedanke mal zu forschen, welche Möglichkeiten man hat statische Seiten zu generieren. Dabei stieß ich schnell über [StaticGen] auf [Jekyll]. Das Build-System ist mir schon mal unter die Augen gekommen, da es von GitHub verwendet wird, aber nun war ich interessiert.
+Da ich nginx lange nicht mehr verwendet hab, hab ich diesen mal schnell installiert. Bevor ich aber php-fpm installiert hab, kam mir der gedanke mal zu forschen, welche Möglichkeiten man hat statische Seiten zu generieren. Dabei stieß ich schnell über [StaticGen] auf [Jekyll]. Das Build-System ist mir schon mal unter die Augen gekommen, da es von GitHub Pages verwendet wird, daher war ich nun interessiert.
 
 ## Erste Einrichtung
 
