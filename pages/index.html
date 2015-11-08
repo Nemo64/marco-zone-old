@@ -13,7 +13,7 @@ priority:   1
              itemscope itemtype="http://schema.org/BlogPosting"
              itemid="{{ post.url | prepend: site.baseurl }}">
         <a href="{{ post.url | prepend: site.baseurl }}" tabindex="-1">
-            {% include image.html image=post.image variant='banner' attr='class="banner-image"' %}
+            {% include image.html image=post.image variant='banner' attr='class="banner-image" itemprop="image"' %}
         </a>
         <div class="container banner-overlay">
             <div class="post-banner-item">
