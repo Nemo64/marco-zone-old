@@ -8,7 +8,7 @@
 {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
 <picture {{ include.cattr }}>
     <source srcset="{{ xl1x }} 128w, {{ xl2x }} 256w" sizes="8rem" media="(min-width: 48em)">
-    <source srcset="{{ sm1x }} 54w, {{ sm2x }} 108w" sizes="3.36rem">
+    <source srcset="{{ sm1x }} 48w, {{ sm2x }} 96w" sizes="3rem">
     <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
 </picture>
 

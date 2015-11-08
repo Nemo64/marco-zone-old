@@ -109,7 +109,7 @@ gulp.task('images', function () {
         var hf = def.sizeFactor * 9 / 21;
 
         var thumbOptions = merge(baseOptions, {quality: def.thumbQuality});
-        resizePipe(topicImages, 'thumbnail/sm-' + def.name, merge(thumbOptions, {width: 54 * wf}));
+        resizePipe(topicImages, 'thumbnail/sm-' + def.name, merge(thumbOptions, {width: 48 * wf}));
         resizePipe(topicImages, 'thumbnail/xl-' + def.name, merge(thumbOptions, {width: 128 * wf}));
 
         var bannerOptions = merge(baseOptions, {quality: def.bannerQuality, crop: true});

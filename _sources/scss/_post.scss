@@ -1,7 +1,7 @@
 $list-item-height: 8rem;
 $list-item-padding: 1rem;
 $list-item-headline-size: $font-size-h3;
-$list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height * 2) + $headings-margin-bottom;
+$list-item-mobile-image-size: floor(($list-item-headline-size * $headings-line-height * 2) + $headings-margin-bottom);
 $list-item-desktop-breakpoint: md;
 
 .post-inner {
