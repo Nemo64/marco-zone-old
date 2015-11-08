@@ -28,18 +28,15 @@ $list-item-desktop-breakpoint: md;
 
 .post-list-item {
     position: relative;
-    overflow: hidden;
+    min-height: $list-item-height;
     margin-bottom: $list-item-padding;
-
-    h1 {
-        font-size: $list-item-headline-size;
-    }
-
-    @include media-breakpoint-up(md) {
-        height: $list-item-height;
-    }
 }
 
+.post-list-title {
+    font-size: $list-item-headline-size;
+}
+
+.post-banner-image,
 .post-list-image {
     display: block;
     position: relative;
@@ -77,11 +74,21 @@ $list-item-desktop-breakpoint: md;
     }
 }
 
+.post-banner-description,
+.post-list-description {
+    margin-bottom: 0;
+}
+
+.post-list-description {
+    height: $line-height * $font-size-base * 3;
+}
+
 .post-list-footer {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
+    padding-top: $font-size-base * ($line-height - 1) * 0.5;
     background-color: $body-bg;
 
     //&:before {
@@ -94,6 +101,14 @@ $list-item-desktop-breakpoint: md;
     //    pointer-events: none;
     //}
 
+    @include media-breakpoint-up($list-item-desktop-breakpoint) {
+        padding-left: $list-item-height + $list-item-padding;
+    }
+}
+
+.post-banner-header,
+.post-banner-description,
+.post-banner-footer {
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         padding-left: $list-item-height + $list-item-padding;
     }

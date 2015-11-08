@@ -7,33 +7,40 @@ priority:   1
 {% include header.html class='navbar-dark navbar-cover' %}
 
 <div class="post-list" itemprop="mainEntity" itemscope itemtype="http://schema.org/Blog">
-    <div class="site-content">
 
-        {% for post in site.posts limit: 1 %}
-        <article class="banner cover-banner" itemprop="blogPost"
-                 itemscope itemtype="http://schema.org/BlogPosting"
-                 itemid="{{ post.url | prepend: site.baseurl }}">
-            {% include image.html image=post.image variant='banner' %}
-            <a href="{{ post.url | prepend: site.baseurl }}">
-                <div class="container banner-overlay">
-                    <header class="post-banner-header">
-                        <h1 class="post-banner-title" itemprop="headline">
+    {% for post in site.posts limit: 1 %}
+    <article class="banner cover-banner" itemprop="blogPost"
+             itemscope itemtype="http://schema.org/BlogPosting"
+             itemid="{{ post.url | prepend: site.baseurl }}">
+        <a href="{{ post.url | prepend: site.baseurl }}" tabindex="-1">
+            {% include image.html image=post.image variant='banner' attr='class="banner-image"' %}
+        </a>
+        <div class="container banner-overlay">
+            <div class="post-banner-item">
+
+                <header class="post-banner-header">
+                    <h1 class="post-banner-title" itemprop="headline">
+                        <a href="{{ post.url | prepend: site.baseurl }}">
                             {{ post.title }}
-                        </h1>
-                    </header>
-                    {% if post.description %}
-                    <p class="post-banner-description" itemprop="description">
-                        {{ post.description | strip_html | strip_newlines | truncate: 160 }}
-                    </p>
-                    {% endif %}
+                        </a>
+                    </h1>
+                </header>
 
-                    <footer class="post-banner-footer">
-                        {% include post-meta.html post=post %}
-                    </footer>
-                </div>
-            </a>
-        </article>
-        {% endfor %}
+                {% if post.description %}
+                <p class="post-banner-description" itemprop="description">
+                    {{ post.description | strip_html | strip_newlines | truncate: 160 }}
+                </p>
+                {% endif %}
+
+                <footer class="post-banner-footer">
+                    {% include post-meta.html post=post %}
+                </footer>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+
+    <div class="site-content">
 
         <div class="container">
             <div class="post-list-inner">

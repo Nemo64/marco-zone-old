@@ -10,30 +10,30 @@
         vertical-align: middle;
     }
 
-    .banner-overlay {
-        display: inline-block;
-        vertical-align: middle;
-        text-align: left;
-        width: 100%;
-        padding-top: $line-height * $font-size-base + 2rem;
-        padding-bottom: 1rem;
-        position: relative;
-    }
-
-    img {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        margin-left: -50%;
-        margin-right: -50%;
-        height: 100%;
-    }
-
     &:after {
         content: "";
         display: block;
         clear: both;
     }
+}
+
+.banner-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -50%;
+    margin-right: -50%;
+    height: 100%;
+}
+
+.banner-overlay {
+    display: inline-block;
+    vertical-align: bottom;
+    text-align: left;
+    width: 100%;
+    padding-top: $line-height * $font-size-base + 2rem;
+    padding-bottom: 1rem;
+    position: relative;
 }
 
 .cover-banner {
@@ -52,7 +52,7 @@
         color: inherit;
     }
 
-    img {
+    .banner-image {
         opacity: .1;
     }
 }
