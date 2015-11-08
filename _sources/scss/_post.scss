@@ -1,5 +1,5 @@
 $list-item-height: 8rem;
-$list-item-padding: .5rem;
+$list-item-padding: 1rem;
 $list-item-headline-size: $font-size-h3;
 $list-item-mobile-image-size: ($list-item-headline-size * $headings-line-height * 2) + $headings-margin-bottom;
 $list-item-desktop-breakpoint: md;
@@ -28,13 +28,15 @@ $list-item-desktop-breakpoint: md;
 
 .post-list-item {
     position: relative;
-    height: $list-item-height;
     overflow: hidden;
-    padding-top: $list-item-padding;
-    padding-bottom: $list-item-padding;
+    margin-bottom: $list-item-padding;
 
     h1 {
         font-size: $list-item-headline-size;
+    }
+
+    @include media-breakpoint-up(md) {
+        height: $list-item-height;
     }
 }
 
@@ -43,8 +45,6 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     z-index: 1;
     margin-right: $list-item-padding;
-    margin-top: -$list-item-padding;
-    margin-bottom: -$list-item-padding;
     float: left;
     background-color: mix($brand-primary, $body-bg, 100%);
     overflow: hidden;
@@ -80,7 +80,7 @@ $list-item-desktop-breakpoint: md;
 .post-list-footer {
     position: absolute;
     left: 0;
-    bottom: $list-item-padding;
+    bottom: 0;
     width: 100%;
     background-color: $body-bg;
 
