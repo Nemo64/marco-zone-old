@@ -84,8 +84,9 @@ gulp.task('images', function () {
         var stream = images
             .pipe(changed(targetDirectories.images + '/' + variant, {extension: '.jpeg'}))
             .pipe(imageResize(merge({
-                quality: 0.85,
+                quality: 0.9,
                 format: 'jpeg',
+                filter: 'Catrom',
                 imageMagick: true
             }, options)))
             .pipe(gulp.dest(targetDirectories.images + '/' + variant))
@@ -99,8 +100,8 @@ gulp.task('images', function () {
     topicImages.setMaxListeners(100);
 
     var sizeOptions = [
-        {name: '1x', thumbQuality: 0.7, bannerQuality: 0.7, sizeFactor: 1},
-        {name: '2x', thumbQuality: 0.5, bannerQuality: 0.5, sizeFactor: 2}
+        {name: '1x', thumbQuality: 0.9, bannerQuality: 0.85, sizeFactor: 1},
+        {name: '2x', thumbQuality: 0.7, bannerQuality: 0.6, sizeFactor: 2}
     ];
     sizeOptions.forEach(function (def) {
         var baseOptions = {upscale: true};
@@ -112,12 +113,12 @@ gulp.task('images', function () {
         resizePipe(topicImages, 'thumbnail/xl-' + def.name, merge(thumbOptions, {width: 128 * wf}));
 
         var bannerOptions = merge(baseOptions, {quality: def.bannerQuality, crop: true});
-        var sm = 34 * 16, md = 48 * 16, lg = 62 * 16, xl = 75 * 16;
+        var sm = 34 * 16, md = 48 * 16, lg = 62 * 16, xl = 75 * 16, max = 1600;
         resizePipe(topicImages, 'banner/xs-' + def.name, merge(bannerOptions, {width: sm * wf, height: sm * hf}));
         resizePipe(topicImages, 'banner/sm-' + def.name, merge(bannerOptions, {width: md * wf, height: md * hf}));
         resizePipe(topicImages, 'banner/md-' + def.name, merge(bannerOptions, {width: lg * wf, height: lg * hf}));
         resizePipe(topicImages, 'banner/lg-' + def.name, merge(bannerOptions, {width: xl * wf, height: xl * hf}));
-        resizePipe(topicImages, 'banner/xl-' + def.name, merge(bannerOptions, {width: 1920 * wf, height: 1920 * hf}));
+        resizePipe(topicImages, 'banner/xl-' + def.name, merge(bannerOptions, {width: max * wf, height: max * hf}));
     });
 
     resizePipe(inlineImages, 'inline/sm-1x', {width: 480 - 30});

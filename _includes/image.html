@@ -7,8 +7,8 @@
     {% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
     {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
     {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
-    <source srcset="{{ xl1x }} 1x, {{ xl2x }} 2x" media="(min-width: 48em)">
-    <source srcset="{{ sm1x }} 1x, {{ sm2x }} 2x">
+    <source srcset="{{ xl1x }} 128w, {{ xl2x }} 256w" sizes="8rem" media="(min-width: 48em)">
+    <source srcset="{{ sm1x }} 54w, {{ sm2x }} 108w" sizes="3.36rem">
     <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
 
     {% when 'banner' %}
@@ -23,11 +23,11 @@
     {% assign lg2x = include.image | prepend: '/lg-2x/' | prepend: basepath %}
     {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
     {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
-    <source srcset="{{ xl1x }} 1x, {{ xl2x }} 2x" media="(min-width: 75em)">
-    <source srcset="{{ lg1x }} 1x, {{ lg2x }} 2x" media="(min-width: 62em)">
-    <source srcset="{{ md1x }} 1x, {{ md2x }} 2x" media="(min-width: 48em)">
-    <source srcset="{{ sm1x }} 1x, {{ sm2x }} 2x" media="(min-width: 34em)">
-    <source srcset="{{ xs1x }} 1x, {{ xs2x }} 2x">
+    <source srcset="{{ xl1x }} 1600w, {{ xl2x }} 3200w" sizes="100vw" media="(min-width: 75em)">
+    <source srcset="{{ lg1x }} 1200w, {{ lg2x }} 2400w" sizes="100vw" media="(min-width: 62em)">
+    <source srcset="{{ md1x }} 992w, {{ md2x }} 1984w" sizes="100vw" media="(min-width: 48em)">
+    <source srcset="{{ sm1x }} 768w, {{ sm2x }} 1536w" sizes="100vw" media="(min-width: 34em)">
+    <source srcset="{{ xs1x }} 544w, {{ xs2x }} 1088w">
     <img src="{{ lg1x }}" alt="{{ include.alt }}" {{ include.attr }}>
 
     {% else %}
