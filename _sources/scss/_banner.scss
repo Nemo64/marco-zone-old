@@ -38,7 +38,7 @@
 
 .cover-banner {
     background-color: $brand-primary;
-    @include gradient-directional($brand-primary, darken($brand-primary, 20%), 160deg);
+    @include gradient-directional(darken($brand-primary, 20%), $brand-primary, -10deg);
     text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
     color: white;
 
@@ -61,9 +61,20 @@
     position: absolute;
     z-index: 2;
     width: 100%;
+    text-shadow: 0 0 2rem black;
 }
 
 .navbar-cover-bg {
-    background-color: rgba(0, 0, 0, .5);
-    text-shadow: 0 0 1rem black;
+    @include gradient-vertical(rgba(0, 0, 0, .5), rgba(0, 0, 0, .25));
+
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: - $line-height * $font-size-base;
+        width: 100%;
+        height: $line-height * $font-size-base;
+        @include gradient-vertical(rgba(0, 0, 0, .25), rgba(0, 0, 0, 0));
+        pointer-events: none;
+    }
 }
