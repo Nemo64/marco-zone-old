@@ -32,13 +32,6 @@ header, footer {
     }
 }
 
-img, picture {
-    + p, + h1, + h2, + h3, + h4, + h5, + h6,
-    + .h1, + .h2, + .h3, + .h4, + .h5, + .h6 {
-        margin-top: 1rem;
-    }
-}
-
 @supports (hyphens: auto) {
     //noinspection CssUnknownProperty, CssInvalidPropertyValue
     [lang^=de] p {

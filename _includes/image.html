@@ -1,41 +1,47 @@
-<picture {{ include.cattr }}>
-    {% case include.variant %}
+{% case include.variant %}
 
-    {% when 'thumbnail' %}
-    {% assign basepath = '/thumbnail' | prepend: site.image_baseurl %}
-    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
-    {% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
-    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
-    {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+{% when 'thumbnail' %}
+{% assign basepath = '/thumbnail' | prepend: site.image_baseurl %}
+{% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+{% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
+{% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+{% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+<picture {{ include.cattr }}>
     <source srcset="{{ xl1x }} 128w, {{ xl2x }} 256w" sizes="8rem" media="(min-width: 48em)">
     <source srcset="{{ sm1x }} 54w, {{ sm2x }} 108w" sizes="3.36rem">
     <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
+</picture>
 
-    {% when 'banner' %}
-    {% assign basepath = '/banner' | prepend: site.image_baseurl %}
-    {% assign xs1x = include.image | prepend: '/xs-1x/' | prepend: basepath %}
-    {% assign xs2x = include.image | prepend: '/xs-2x/' | prepend: basepath %}
-    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
-    {% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
-    {% assign md1x = include.image | prepend: '/md-1x/' | prepend: basepath %}
-    {% assign md2x = include.image | prepend: '/md-2x/' | prepend: basepath %}
-    {% assign lg1x = include.image | prepend: '/lg-1x/' | prepend: basepath %}
-    {% assign lg2x = include.image | prepend: '/lg-2x/' | prepend: basepath %}
-    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
-    {% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+{% when 'banner' %}
+{% assign basepath = '/banner' | prepend: site.image_baseurl %}
+{% assign xs1x = include.image | prepend: '/xs-1x/' | prepend: basepath %}
+{% assign xs2x = include.image | prepend: '/xs-2x/' | prepend: basepath %}
+{% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+{% assign sm2x = include.image | prepend: '/sm-2x/' | prepend: basepath %}
+{% assign md1x = include.image | prepend: '/md-1x/' | prepend: basepath %}
+{% assign md2x = include.image | prepend: '/md-2x/' | prepend: basepath %}
+{% assign lg1x = include.image | prepend: '/lg-1x/' | prepend: basepath %}
+{% assign lg2x = include.image | prepend: '/lg-2x/' | prepend: basepath %}
+{% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+{% assign xl2x = include.image | prepend: '/xl-2x/' | prepend: basepath %}
+<picture {{ include.cattr }}>
     <source srcset="{{ xl1x }} 1600w, {{ xl2x }} 3200w" sizes="100vw" media="(min-width: 75em)">
     <source srcset="{{ lg1x }} 1200w, {{ lg2x }} 2400w" sizes="100vw" media="(min-width: 62em)">
     <source srcset="{{ md1x }} 992w, {{ md2x }} 1984w" sizes="100vw" media="(min-width: 48em)">
     <source srcset="{{ sm1x }} 768w, {{ sm2x }} 1536w" sizes="100vw" media="(min-width: 34em)">
     <source srcset="{{ xs1x }} 544w, {{ xs2x }} 1088w">
     <img src="{{ lg1x }}" alt="{{ include.alt }}" {{ include.attr }}>
-
-    {% else %}
-    {% assign basepath = '/inline' | prepend: site.image_baseurl %}
-    {% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
-    {% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
-    <source src="{{ xl1x }}" media="(min-width: 48em)">
-    <source src="{{ sm1x }}">
-    <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
-    {% endcase %}
 </picture>
+
+{% else %}
+{% assign basepath = '/inline' | prepend: site.image_baseurl %}
+{% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
+{% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+<p class="image-paragraph">
+    <picture {{ include.cattr }}>
+        <source src="{{ xl1x }}" media="(min-width: 48em)">
+        <source src="{{ sm1x }}">
+        <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
+    </picture>
+</p>
+{% endcase %}
