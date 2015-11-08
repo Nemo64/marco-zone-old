@@ -1,6 +1,7 @@
 .banner {
     position: relative;
     text-align: center;
+    overflow: hidden;
 
     &:before {
         content: "";
@@ -21,8 +22,10 @@
 
     img {
         position: absolute;
-        left: 0;
         top: 0;
+        left: 50%;
+        margin-left: -50%;
+        margin-right: -50%;
         height: 100%;
     }
 
@@ -37,15 +40,16 @@
     background-color: $brand-primary;
     @include gradient-directional($brand-primary, darken($brand-primary, 20%), 160deg);
     text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
+    color: white;
 
-    &, a,
+    a,
     h1, .h1,
     h2, .h2,
     h3, .h3,
     h4, .h4,
     h5, .h5,
     h6, .h6 {
-        color: white;
+        color: inherit;
     }
 
     img {
