@@ -1,0 +1,65 @@
+.banner {
+    position: relative;
+    text-align: center;
+
+    &:before {
+        content: "";
+        padding-bottom: percentage(9 / 21);
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .banner-overlay {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left;
+        width: 100%;
+        padding-top: $line-height * $font-size-base + 2rem;
+        padding-bottom: $line-height * $font-size-base + 2rem;
+        position: relative;
+    }
+
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+.cover-banner {
+    background-color: $brand-primary;
+    @include gradient-directional($brand-primary, darken($brand-primary, 20%), 160deg);
+    text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
+
+    &, a,
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+        color: white;
+    }
+
+    img {
+        opacity: .1;
+    }
+}
+
+.navbar-cover {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+
+.navbar-cover-bg {
+    background-color: rgba(0, 0, 0, .5);
+    text-shadow: 0 0 1rem black;
+}

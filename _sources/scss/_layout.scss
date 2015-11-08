@@ -15,12 +15,11 @@ body,
 }
 
 .site-content {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 $site-shadow-size $site-shadow-color;
     min-height: 20rem;
     background-color: $body-bg;
-}
-
-.site-header {
-    box-shadow: 0 (-$site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
 }
 
 .main-page-nav {
@@ -29,7 +28,6 @@ body,
 
 .site-footer {
     min-height: 10rem;
-    box-shadow: 0 ($site-shadow-size) ($site-shadow-size) (-$site-shadow-size) $site-shadow-color inset;
     font-size: 95%;
 }
 

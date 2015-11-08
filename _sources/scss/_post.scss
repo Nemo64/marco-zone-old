@@ -16,47 +16,25 @@ $list-item-desktop-breakpoint: md;
 
 .post-image {
     margin-bottom: 1rem;
-
-    img {
-        display: block;
-        width: 100%;
-    }
 }
 
 .post-footer {
     margin-bottom: 1rem;
 }
 
+.post-list-inner {
+    padding-top: 1rem;
+}
+
 .post-list-item {
     position: relative;
     height: $list-item-height;
     overflow: hidden;
-    margin-bottom: $grid-gutter-width / 2;
+    padding-top: $list-item-padding;
+    padding-bottom: $list-item-padding;
 
     h1 {
         font-size: $list-item-headline-size;
-    }
-}
-
-.post-list-footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: $body-bg;
-
-    //&:before {
-    //    content: "";
-    //    position: absolute;
-    //    top: -$line-height * $font-size-base * 2;
-    //    height: $line-height * $font-size-base * 2;
-    //    width: 100%;
-    //    @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
-    //    pointer-events: none;
-    //}
-
-    @include media-breakpoint-up($list-item-desktop-breakpoint) {
-        padding-left: $list-item-height + $list-item-padding;
     }
 }
 
@@ -65,6 +43,8 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     z-index: 1;
     margin-right: $list-item-padding;
+    margin-top: -$list-item-padding;
+    margin-bottom: -$list-item-padding;
     float: left;
     background-color: mix($brand-primary, $body-bg, 100%);
     overflow: hidden;
@@ -94,5 +74,27 @@ $list-item-desktop-breakpoint: md;
             filter: $filter;
             opacity: .7;
         }
+    }
+}
+
+.post-list-footer {
+    position: absolute;
+    left: 0;
+    bottom: $list-item-padding;
+    width: 100%;
+    background-color: $body-bg;
+
+    //&:before {
+    //    content: "";
+    //    position: absolute;
+    //    top: -$line-height * $font-size-base * 2;
+    //    height: $line-height * $font-size-base * 2;
+    //    width: 100%;
+    //    @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
+    //    pointer-events: none;
+    //}
+
+    @include media-breakpoint-up($list-item-desktop-breakpoint) {
+        padding-left: $list-item-height + $list-item-padding;
     }
 }

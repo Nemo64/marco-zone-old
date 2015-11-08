@@ -1,48 +1,82 @@
 ---
-layout:     page
-title:      Blog Einträge
-hidetitle:  true
+layout:     bare
 permalink:  /
 changefreq: daily
 priority:   1
 ---
+{% include header.html class='navbar-dark navbar-cover' %}
+
 <div class="post-list" itemprop="mainEntity" itemscope itemtype="http://schema.org/Blog">
+    <div class="site-content">
 
-    {% for post in site.posts %}
-    <article class="post-list-item" itemprop="blogPost"
-             itemscope itemtype="http://schema.org/BlogPosting"
-             itemid="{{ post.url | prepend: site.baseurl }}">
+        {% for post in site.posts limit: 1 %}
+        <article class="banner cover-banner" itemprop="blogPost"
+                 itemscope itemtype="http://schema.org/BlogPosting"
+                 itemid="{{ post.url | prepend: site.baseurl }}">
+            {% include image.html image=post.image variant='banner' %}
+            <a href="{{ post.url | prepend: site.baseurl }}">
+                <div class="container banner-overlay">
+                    <header class="post-banner-header">
+                        <h1 class="post-banner-title" itemprop="headline">
+                            {{ post.title }}
+                        </h1>
+                    </header>
+                    {% if post.description %}
+                    <p class="post-banner-description" itemprop="description">
+                        {{ post.description | strip_html | strip_newlines | truncate: 160 }}
+                    </p>
+                    {% endif %}
 
-        {% if post.image %}
-        <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
-            {% include image.html image=post.image variant='thumbnail' cattr='class="backdrop-image"' %}
-            {% include image.html image=post.image variant='thumbnail' cattr='class="main-image"' attr='itemprop="image"' %}
-        </a>
-        {% endif %}
+                    <footer class="post-banner-footer">
+                        {% include post-meta.html post=post %}
+                    </footer>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
 
-        <header class="post-list-header">
-            <h1 class="post-list-title" itemprop="headline">
-                <a href="{{ post.url | prepend: site.baseurl }}">
-                    {{ post.title }}
-                </a>
-            </h1>
-        </header>
+        <div class="container">
+            <div class="post-list-inner">
+                {% for post in site.posts offset: 1 %}
+                <article class="post-list-item" itemprop="blogPost"
+                         itemscope itemtype="http://schema.org/BlogPosting"
+                         itemid="{{ post.url | prepend: site.baseurl }}">
 
-        {% if post.description %}
-        <p class="post-description" itemprop="description">
-            {{ post.description | strip_html | strip_newlines | truncate: 160 }}
-        </p>
-        {% endif %}
+                    {% if post.image %}
+                    <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
+                        {% include image.html image=post.image variant='thumbnail' cattr='class="backdrop-image"' %}
+                        {% include image.html image=post.image variant='thumbnail' cattr='class="main-image"' attr='itemprop="image"' %}
+                    </a>
+                    {% endif %}
 
-        <footer class="post-list-footer">
-            {% include post-meta.html post=post %}
-        </footer>
+                    <header class="post-list-header">
+                        <h1 class="post-list-title" itemprop="headline">
+                            <a href="{{ post.url | prepend: site.baseurl }}">
+                                {{ post.title }}
+                            </a>
+                        </h1>
+                    </header>
 
-    </article>
-    {% endfor %}
+                    {% if post.description %}
+                    <p class="post-list-description" itemprop="description">
+                        {{ post.description | strip_html | strip_newlines | truncate: 160 }}
+                    </p>
+                    {% endif %}
 
+                    <footer class="post-list-footer">
+                        {% include post-meta.html post=post %}
+                    </footer>
+
+                </article>
+                {% endfor %}
+
+                <p class="rss-subscribe">
+                    subscribe <a href="{{ '/feed.xml' | prepend: site.baseurl }}">via RSS</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<p class="rss-subscribe">
-    subscribe <a href="{{ '/feed.xml' | prepend: site.baseurl }}">via RSS</a>
-</p>
+{% include footer.html %}

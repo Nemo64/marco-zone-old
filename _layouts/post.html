@@ -1,61 +1,68 @@
 ---
-layout: default
+layout: bare
 ---
-<article class="post" itemprop="mainEntity"
-         itemscope itemtype="http://schema.org/BlogPosting"
-         itemid="{{ page.url | prepend: site.baseurl }}">
 
-    {% if page.image %}
-    <div class="post-image banner">
-        {% include image.html image=page.image variant='banner' attr='itemprop="image"' %}
-    </div>
-    {% endif %}
+{% include header.html class='navbar-dark navbar-cover navbar-cover-bg' %}
 
-    <div class="container">
+<div class="site-content">
+    <article class="post" itemprop="mainEntity"
+             itemscope itemtype="http://schema.org/BlogPosting"
+             itemid="{{ page.url | prepend: site.baseurl }}">
 
-        <div class="post-inner">
-
-            <header class="post-header">
-                <h1 class="post-title" itemprop="headline">
-                    <a href="{{ page.url | prepend: site.baseurl }}">
-                        {{ page.title }}
-                    </a>
-                </h1>
-            </header>
-
-            <p class="lead" itemprop="description">
-                {{ page.description }}
-            </p>
-
-            <div class="post-content" itemprop="articleBody">
-                {{ content }}
-            </div>
-
-            <footer class="post-footer">
-                {% include post-meta.html post=page %}
-            </footer>
-
-            <div id="disqus_thread"></div>
-            <script>
-                var disqus_config = function () {
-                    this.page.url = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}";
-                    this.page.identifier = "{{ page.url | replace:'index.html','' }}";
-                };
-                (function () {  // DON'T EDIT BELOW THIS LINE
-                    var d = document, s = d.createElement('script');
-
-                    s.src = '//marco-zone.disqus.com/embed.js';
-
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-            <noscript>
-                Please enable JavaScript to view the
-                <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-            </noscript>
-
+        {% if page.image %}
+        <div class="post-image banner">
+            {% include image.html image=page.image variant='banner' attr='itemprop="image"' %}
         </div>
-    </div>
+        {% endif %}
 
-</article>
+        <div class="container">
+
+            <div class="post-inner">
+
+                <header class="post-header">
+                    <h1 class="post-title" itemprop="headline">
+                        <a href="{{ page.url | prepend: site.baseurl }}">
+                            {{ page.title }}
+                        </a>
+                    </h1>
+                </header>
+
+                <p class="lead" itemprop="description">
+                    {{ page.description }}
+                </p>
+
+                <div class="post-content" itemprop="articleBody">
+                    {{ content }}
+                </div>
+
+                <footer class="post-footer">
+                    {% include post-meta.html post=page %}
+                </footer>
+
+                <div id="disqus_thread"></div>
+                <script>
+                    var disqus_config = function () {
+                        this.page.url = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}";
+                        this.page.identifier = "{{ page.url | replace:'index.html','' }}";
+                    };
+                    (function () {  // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+
+                        s.src = '//marco-zone.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>
+                    Please enable JavaScript to view the
+                    <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+                </noscript>
+
+            </div>
+        </div>
+
+    </article>
+</div>
+
+{% include footer.html %}

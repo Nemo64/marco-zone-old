@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
+
+    {% include head.html %}
+
+    <body itemscope itemtype="{% if page.schema %}{{page.schema}}{% else %}http://schema.org/WebPage{% endif %}">
+
+        {{ content }}
+
+    </body>
+
+</html>

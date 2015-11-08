@@ -1,6 +1,7 @@
 <header class="site-header">
 
-    <nav class="navbar navbar-light navbar-container" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <nav class="navbar {{ include.class }} navbar-container"
+         itemscope itemtype="http://schema.org/SiteNavigationElement">
         <div class="container">
             <a class="navbar-brand" href="{{ site.baseurl }}/" itemprop="url">
                 {{ site.title }}

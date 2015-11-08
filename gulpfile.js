@@ -99,8 +99,8 @@ gulp.task('images', function () {
     topicImages.setMaxListeners(100);
 
     var sizeOptions = [
-        {name: '1x', thumbQuality: 0.6, bannerQuality: 0.5, sizeFactor: 1},
-        {name: '2x', thumbQuality: 0.4, bannerQuality: 0.3, sizeFactor: 2}
+        {name: '1x', thumbQuality: 0.7, bannerQuality: 0.7, sizeFactor: 1},
+        {name: '2x', thumbQuality: 0.5, bannerQuality: 0.5, sizeFactor: 2}
     ];
     sizeOptions.forEach(function (def) {
         var baseOptions = {upscale: true};
