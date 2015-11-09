@@ -121,8 +121,7 @@ gulp.task('images', function () {
         resizePipe(topicImages, 'banner/xl-' + def.name, merge(bannerOptions, {width: max * wf, height: max * hf}));
     });
 
-    resizePipe(inlineImages, 'inline/sm-1x', {width: 480 - 30});
-    resizePipe(inlineImages, 'inline/xl-1x', {width: 720 - 30});
+    resizePipe(inlineImages, 'inline', {width: 45 * 16 - 30});
 
     return masterStream;
 });

@@ -35,13 +35,8 @@
 
 {% else %}
 {% assign basepath = '/inline' | prepend: site.image_baseurl %}
-{% assign sm1x = include.image | prepend: '/sm-1x/' | prepend: basepath %}
-{% assign xl1x = include.image | prepend: '/xl-1x/' | prepend: basepath %}
+{% assign xl1x = include.image | prepend: '/' | prepend: basepath %}
 <p class="image-paragraph">
-    <picture {{ include.cattr }}>
-        <source src="{{ xl1x }}" media="(min-width: 48em)">
-        <source src="{{ sm1x }}">
-        <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
-    </picture>
+    <img src="{{ xl1x }}" alt="{{ include.alt }}" {{ include.attr }}>
 </p>
 {% endcase %}
