@@ -20,13 +20,16 @@
     {% endif %}
 
     <!-- other meta -->
-    <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    <meta name="author" content="{{ page.author }}">
-    {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ',' }}">{% endif %}
-    {% if page.noindex %}<meta name="robots" content="no-index, nofollow">{% endif %}
-    <meta name="revisit-after" content="{{ site.data.changefreq[page.changefreq].revisit_after }}">
+    {% if page.noindex %}
+        <meta name="robots" content="no-index, nofollow">
+    {% else %}
+        <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+        <meta name="author" content="{{ page.author }}">
+        {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
+        <meta name="revisit-after" content="{{ site.data.changefreq[page.changefreq].revisit_after }}">
+    {% endif %}
     <meta name="generator" content="Jekyll v{{ jekyll.version }}">
-    <meta name="date" content="{% if page.date %}{{ page.date | date_to_rfc822 }}{% else %}{{ site.time | date_to_rfc822 }}{% endif %}">
+    <meta name="date" content="{{ site.time | date_to_rfc822 }}">
 
     <!-- injected scripts -->
 </head>
