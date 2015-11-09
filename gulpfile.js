@@ -84,7 +84,7 @@ gulp.task('images', function () {
         var stream = images
             .pipe(changed(targetDirectories.images + '/' + variant, {extension: '.jpeg'}))
             .pipe(imageResize(merge({
-                quality: 0.9,
+                quality: 0.85,
                 format: 'jpeg',
                 filter: 'Catrom',
                 imageMagick: true
@@ -99,29 +99,15 @@ gulp.task('images', function () {
     var topicImages = gulp.src(sourceFiles.topicImages);
     topicImages.setMaxListeners(100);
 
-    var sizeOptions = [
-        {name: '1x', thumbQuality: 0.9, bannerQuality: 0.85, sizeFactor: 1},
-        {name: '2x', thumbQuality: 0.7, bannerQuality: 0.6, sizeFactor: 2}
-    ];
-    sizeOptions.forEach(function (def) {
-        var baseOptions = {upscale: true};
-        var wf = def.sizeFactor;
-        var hf = def.sizeFactor * 9 / 21;
-
-        var thumbOptions = merge(baseOptions, {quality: def.thumbQuality});
-        resizePipe(topicImages, 'thumbnail/sm-' + def.name, merge(thumbOptions, {width: 48 * wf}));
-        resizePipe(topicImages, 'thumbnail/xl-' + def.name, merge(thumbOptions, {width: 128 * wf}));
-
-        var bannerOptions = merge(baseOptions, {quality: def.bannerQuality, crop: true});
-        var sm = 34 * 16, md = 48 * 16, lg = 62 * 16, xl = 75 * 16, max = 1600;
-        resizePipe(topicImages, 'banner/xs-' + def.name, merge(bannerOptions, {width: sm * wf, height: sm * hf}));
-        resizePipe(topicImages, 'banner/sm-' + def.name, merge(bannerOptions, {width: md * wf, height: md * hf}));
-        resizePipe(topicImages, 'banner/md-' + def.name, merge(bannerOptions, {width: lg * wf, height: lg * hf}));
-        resizePipe(topicImages, 'banner/lg-' + def.name, merge(bannerOptions, {width: xl * wf, height: xl * hf}));
-        resizePipe(topicImages, 'banner/xl-' + def.name, merge(bannerOptions, {width: max * wf, height: max * hf}));
+    [48, 96, 144, 288].forEach(function (size) {
+        resizePipe(topicImages, 'thumbnail/' + size, {width: size});
     });
 
-    resizePipe(inlineImages, 'inline', {width: 45 * 16 - 30});
+    [720, 1080, 1440, 1920, 2560].forEach(function (size) {
+        resizePipe(topicImages, 'banner/' + size, {width: size, height: size / 21 * 9, crop: true});
+    });
+
+    resizePipe(inlineImages, 'inline', {width: 690});
 
     return masterStream;
 });

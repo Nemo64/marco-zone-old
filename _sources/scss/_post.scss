@@ -1,7 +1,7 @@
-$list-item-height: 8rem;
 $list-item-padding: 1rem;
 $list-item-headline-size: $font-size-h3;
-$list-item-mobile-image-size: floor(($list-item-headline-size * $headings-line-height * 2) + $headings-margin-bottom);
+$list-item-mobile-image-size: 3rem;
+$list-item-height: 9rem;
 $list-item-desktop-breakpoint: md;
 
 .post-inner {
@@ -51,13 +51,13 @@ $list-item-desktop-breakpoint: md;
         @include image-square-container($list-item-height);
     }
 
-    .main-image img {
+    .main-image {
         position: relative;
         z-index: 1;
         @include image-contain;
     }
 
-    .backdrop-image img {
+    .backdrop-image {
         $overscale: 60%;
         position: absolute;
         top: -$overscale;
@@ -80,7 +80,7 @@ $list-item-desktop-breakpoint: md;
 }
 
 .post-list-description {
-    height: $line-height * $font-size-base * 3;
+    min-height: $line-height * $font-size-base * 3;
 }
 
 .post-list-footer {

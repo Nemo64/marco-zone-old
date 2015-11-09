@@ -51,8 +51,8 @@ priority:   1
 
                     {% if post.image %}
                     <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
-                        {% include image.html image=post.image variant='thumbnail' cattr='class="backdrop-image"' %}
-                        {% include image.html image=post.image variant='thumbnail' cattr='class="main-image"' attr='itemprop="image"' %}
+                        {% include image.html image=post.image variant='thumbnail' attr='class="backdrop-image"' %}
+                        {% include image.html image=post.image variant='thumbnail' attr='class="main-image" itemprop="image"' %}
                     </a>
                     {% endif %}
 
