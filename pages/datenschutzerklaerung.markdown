@@ -3,6 +3,8 @@ title:      Datenschutzerklärung
 permalink:  /datenschutzerklaerung
 footernav:  true
 noindex:    true
+include:
+    noga: true
 ---
 
 ## Datenschutz
@@ -23,7 +25,7 @@ Im Falle der Aktivierung der IP-Anonymisierung auf dieser Webseite wird Ihre IP-
 
 Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können. Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: [http://tools.google.com/dlpage/gaoptout?hl=de](http://tools.google.com/dlpage/gaoptout?hl=de)
 
-Es ist ebenfalls möglich das Tracking durch Google Analytics mithilfe eines Opt-Out-Cookies zu deaktivieren. Klicken Sie dazu auf folgenden Link: [Google Analytics Opt-Out-Cookie setzen](Javascript: void((document.cookie='ga-disable-UA-60388424-1=true;expires=Thu, 31 Dec 2099 23:59:59 UTC;path=/')&&alert('Cookie wurde gesetzt'))).
+Es ist ebenfalls möglich das Tracking durch Google Analytics mithilfe eines Opt-Out-Cookies zu deaktivieren. Klicken Sie dazu auf folgenden Link: [Google Analytics Opt-Out-Cookie setzen](Javascript: void noga()).
 
 
 ## Server-Log-Files
