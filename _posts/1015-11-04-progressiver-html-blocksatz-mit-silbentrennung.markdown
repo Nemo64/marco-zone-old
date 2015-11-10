@@ -3,7 +3,7 @@ title:          Progressiver HTML Blocksatz mit Silbentrennung
 description:    Einige Browser unterstützen Silbentrennung über CSS. Hier ein Trick für Blocksatz wenn Silbentrennung vorhanden ist.
 image:          text.jpeg
 date:           2015-11-04 20:00:00 +0100
-lastmod:        2015-11-07 20:00:00 +0100
+lastmod:        2015-11-10 12:00:00 +0100
 categories:
     - Webseite
     - CSS
@@ -11,19 +11,23 @@ categories:
 
 Schon mal eine Zeitung gesehen und danach eine News-Seite? Das Schriftbild von Zeitungen ist meistens deutlich schöner als das von Webseiten. Woran liegt das? Mir fallen 3 Gründe ein. Einmal die meist recht hübsche Serif-Schriftart welche auf einem low-DPI Monitor allerdings furchtbar aussieht. Dann allgemein die recht niedrige Auflösung auf modernen Desktop-PC's. und zuletzt der Blocksatz, welche den Text schön gleichmäßig aussehen lässt.
 
-*"Blocksatz können wir im Web auch!"* wird nun der eine oder andere sagen und es stimmt, `text-align: justify` erlaubt auch uns Blocksatz zu verwenden. Das Ergebnis sieht dann so aus:
+## Text mit Blocksatz
+
+*"Blocksatz können wir im Web auch!"* wird nun der eine oder andere sagen und es stimmt, `text-align: justify` erlaubt auch uns Blocksatz zu verwenden.
+
+Das Ergebnis sieht dann so aus:
 
 {% include image.html alt='Blocksatz' image='progressiver-html-blocksatz-mit-silbentrennung/hyphans-manual.jpeg' %}
 
 Sieht gut aus, doch wenn man anfängt den Text zu lesen, sollten die großen Abstände zwischen den Wörtern auffallen. Besonders in der deutschen Sprache haben wir zum Teil sehr lange Wörter. Der Browser darf aber nur an Leerstellen und anderen Sonderzeichen umbrechen. Damit der Blocksatz dann noch funktioniert, müssen sehr große Abstände im Text eingefügt werden.
 
-Es gibt dafür aber eine einfache Lösung: Silbentrennung. Hier der Text mit Silbentrennung:
+## Text mit Blocksatz und Silbentrennung
 
 {% include image.html alt='Blocksatz mit Silbentrennung' image='progressiver-html-blocksatz-mit-silbentrennung/hyphans-auto.jpeg' %}
 
-Direkt viel besser oder? Das beste daran ist, dass es mit der css Eigenschaft [hyphens] auch mühelos in den Text eingefügt werden kann... wenn es vom Browser unterstützt wird, denn die [Browser-Unterstützung für hyphens] ist nicht sonderlich gut und wenn wir uns darauf verlassen werden einige unserer Besucher den Lückenhaften Blocksatz von oben sehen.
+Direkt viel besser als ohne Silbentrennung! Das beste daran ist, dass es mit der css Eigenschaft [hyphens] auch mühelos in den Text eingefügt werden kann... wenn es vom Browser unterstützt wird, denn die [Browser-Unterstützung für hyphens] ist nicht sonderlich gut und wenn wir uns darauf verlassen werden einige unserer Besucher den Lückenhaften Blocksatz von oben sehen.
 
-## Die einfachste lückenlose Implementierung
+## Die einfachste garantiert lückenlose Implementierung
 
 Eine neues Feature in css, das ich bisher selten gesehen hab, ist die [@supports CSS at-rule]. Das hängt vermutlich mit der [Browser-Unterstützung für @supports] zusammenhängen und dem Fakt das alle Browser, die es unterstützen, auch meistens alles können was man braucht. Desweiteren gibt es ja auch [Modernizr], welches von allen relevanten Browsern unterstützt wird.
 
