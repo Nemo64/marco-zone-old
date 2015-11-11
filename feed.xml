@@ -18,7 +18,7 @@ changefreq: daily
         <item>
             <title>{{ post.title | xml_escape }}</title>
             <description>
-                {% capture post_image_html %}{% include image.html src=post.image %}{% endcapture %}
+                {% capture post_image_html %}{% include image.html image=post.image variant='banner' %}{% endcapture %}
                 {{ post_image_html | xml_escape }}
                 {% if post.description %}
                 {{ post.description | prepend: '<p><i>' | append: '</i></p>' | xml_escape }}
