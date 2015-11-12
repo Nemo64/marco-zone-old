@@ -2,41 +2,36 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <div class="footer-segment">
-                    {{ site.description }}
-                </div>
+            <div class="footer-segment">
+                {{ site.description }}
             </div>
-            <div class="col-sm-4">
-                <div class="footer-segment">
-                    <h2 class="h3">Erreichbar unter</h2>
-                    <ul class="nav">
-                        {% if site.github_username %}
-                        <li class="nav-item">
-                            <a href="https://github.com/{{ site.github_username }}">
-                                <span class="username">{{ site.github_username }}</span> auf GitHub
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if site.twitter_username %}
-                        <li class="nav-item">
-                            <a href="https://twitter.com/{{ site.twitter_username }}">
-                                <span class="username">@{{ site.twitter_username }}</span> auf Twitter
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if site.email %}
-                        <li class="nav-item">
-                            <a href="mailto:{{ site.email }}">
-                                {{ site.email }} per E-Mail
-                            </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
+            <div class="footer-segment">
+                <h2 class="h3">Erreichbar unter</h2>
+                <ul class="nav">
+                    {% if site.github_username %}
+                    <li class="nav-item">
+                        <a href="https://github.com/{{ site.github_username }}">
+                            <span class="username">{{ site.github_username }}</span> auf GitHub
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if site.twitter_username %}
+                    <li class="nav-item">
+                        <a href="https://twitter.com/{{ site.twitter_username }}">
+                            <span class="username">@{{ site.twitter_username }}</span> auf Twitter
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if site.email %}
+                    <li class="nav-item">
+                        <a href="mailto:{{ site.email }}">
+                            {{ site.email }} per E-Mail
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-            <div class="col-sm-4">
-                <div class="footer-segment">
+            <div class="footer-segment">
                     <h2 class="h3">Sonstiges</h2>
                     <ul class="nav">
                         {% for page in site.pages %}{% if page.footernav %}
@@ -46,7 +41,6 @@
                         {% endif %}{% endfor %}
                     </ul>
                 </div>
-            </div>
         </div>
     </div>
 

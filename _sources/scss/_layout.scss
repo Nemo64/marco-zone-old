@@ -33,4 +33,9 @@ body,
 
 .footer-segment {
     margin-top: $spacer-y * 2;
+
+    @include make-col();
+    @include media-breakpoint-up(sm) {
+        @include make-col-span(4);
+    }
 }
