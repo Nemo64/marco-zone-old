@@ -4,6 +4,5 @@ layout: null
 User-agent: *
 {% for page in site.pages %}{% if page.noindex %}
 Disallow: {{ page.url | prepend: site.baseurl }}{% endif %}{% endfor %}
-Disallow: {{ site.baseurl }}/assets/
 
 Sitemap: {{ site.url | prepend: site.baseurl }}/sitemap.xml
