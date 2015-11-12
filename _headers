@@ -3,11 +3,28 @@ layout:      none
 is_internal: true
 ---
 {% assign default_changefreq = 'monthly' %}
+{% assign image_changefreq = 'never' %}
+{% assign asset_changefreq = 'monthly' %}
 
 /*
     X-Frame-Options: DENY
-    # default change frequency is {{ default_changefreq }}
+    X-XSS-Protection: 1; mode=block
+
+    # The default change frequency is {{ default_changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[default_changefreq].max_age }}
+
+/images/*
+    # For images with permlink. Others will be delivered though the cdn and have other cache times anyways.
+    # Images change {{ image_changefreq }}
+    Cache-Control: public, max-age={{ site.data.changefreq[image_changefreq].max_age }}
+
+/assets/*
+    # Assets, that for some reason aren't delivered though the cdn, should still be cached a bit.
+    # I don't want them to be cached forever because they could change.
+    # Assets change {{ asset_changefreq }}
+    Cache-Control: public, max-age={{ site.data.changefreq[asset_changefreq].max_age }}
+
+
 
 #########
 # pages #
@@ -18,6 +35,8 @@ is_internal: true
     # this page may change {{ page.changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}
 {% endunless %}{% endfor %}
+
+
 
 #########
 # posts #
