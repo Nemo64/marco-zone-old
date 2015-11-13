@@ -1,0 +1,6 @@
+---
+permalink:  /404
+changefreq: always
+noindex:    true
+---
+Diese Seite, welche du versucht hast auf zu rufen, existiert nicht!
