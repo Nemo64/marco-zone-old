@@ -33,7 +33,7 @@ is_server_configuration:    true
 # pages #
 #########
 
-{% for page in site.pages %}{% unless page.server_conf or page.changefreq == default_changefreq %}
+{% for page in site.pages %}{% unless page.is_server_configuration or page.changefreq == default_changefreq %}
 {{ page.url }}
     # this page may change {{ page.changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}
