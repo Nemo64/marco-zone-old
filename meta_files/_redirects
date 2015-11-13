@@ -1,6 +1,7 @@
 ---
-layout:      null
-is_internal: true
+layout:                     null
+permalink:                  /_redirects
+is_server_configuration:    true
 ---
 
 # old permalink styles

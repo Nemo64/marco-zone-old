@@ -1,5 +1,6 @@
 ---
-layout: null
+layout:     null
+permalink:  /robots.txt
 ---
 User-agent: *
 {% for page in site.pages %}{% if page.noindex %}

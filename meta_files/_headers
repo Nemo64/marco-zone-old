@@ -1,12 +1,15 @@
 ---
-layout:      none
-is_internal: true
+layout:                     none
+permalink:                  /_headers
+is_server_configuration:    true
 ---
 {% assign default_changefreq = 'monthly' %}
 {% assign image_changefreq = 'never' %}
-{% assign asset_changefreq = 'monthly' %}
+{% assign asset_changefreq = 'weekly' %}
 
-/*
+/*  {% comment %}
+        any header modification here should also be present in the gulp serve command
+    {% endcomment %}
     X-Frame-Options: DENY
     X-XSS-Protection: 1; mode=block
 
@@ -19,7 +22,7 @@ is_internal: true
     Cache-Control: public, max-age={{ site.data.changefreq[image_changefreq].max_age }}
 
 /assets/*
-    # Assets, that for some reason aren't delivered though the cdn, should still be cached a bit.
+    # Assets, that for some reason aren't delivered though the cdn, should still be cached.
     # I don't want them to be cached forever because they could change.
     # Assets change {{ asset_changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[asset_changefreq].max_age }}
@@ -30,7 +33,7 @@ is_internal: true
 # pages #
 #########
 
-{% for page in site.pages %}{% unless page.is_internal or page.changefreq == default_changefreq %}
+{% for page in site.pages %}{% unless page.server_conf or page.changefreq == default_changefreq %}
 {{ page.url }}
     # this page may change {{ page.changefreq }}
     Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}

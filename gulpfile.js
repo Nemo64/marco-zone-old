@@ -2,14 +2,14 @@ var gulp = require('gulp');
 var del = require('del');
 var browserSync = require('browser-sync').create();
 
-var deployPath = 'web';
+var deployPath = '_site';
 var sourceFiles = {
-    scss: '_sources/*.scss',
-    topicImages: ['images/topics/*.png', 'images/topics/*.jpeg'],
-    inlineImages: ['images/inline/**/*.png', 'images/inline/**/*.jpeg']
+    scss: '_resources/*.scss',
+    topicImages: ['_images/topics/*.png', '_images/topics/*.jpeg'],
+    inlineImages: ['_images/inline/**/*.png', '_images/inline/**/*.jpeg']
 };
 var targetDirectories = {
-    assets: deployPath + '/assets',
+    assets: deployPath + '/resources',
     images: deployPath + '/images'
 };
 
@@ -116,10 +116,17 @@ gulp.task('default', ['clean', 'html', 'css', 'images']);
 
 gulp.task('watch', ['default'], function () {
     gulp.watch([
-        '*.html',
-        '_*/*.html',
-        'pages/*.*',
-        '*/*.markdown'
+        '_includes/*.html',
+        '_includes/**/*.html',
+        '_layouts/*.html',
+        '_layouts/**/*.html',
+        '_data/*',
+        '_data/**/*',
+        '_posts/*',
+        '_posts/**/*',
+        'pages/*',
+        'pages/**/*',
+        'meta_files/*'
     ], ['html']);
     gulp.watch([
         '_sources/*.scss',
@@ -146,7 +153,8 @@ gulp.task('serve', ['watch'], function () {
                 ]),
                 header({
                     // these should be the same in the _headers file
-                    'X-Frame-Options': 'DENY'
+                    'X-Frame-Options': 'DENY',
+                    'X-XSS-Protection': '1; mode=block'
                 })
             ]
         }

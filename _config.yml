@@ -12,7 +12,7 @@ github_username:  Nemo64
 # Build settings
 timezone: Europe/Berlin
 markdown: kramdown
-destination: web
+destination: _site
 permalink: /:title
 defaults:
   -
@@ -41,7 +41,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - gulpfile.js
-  - _sources
+  - resources
   - images
 
 include:
@@ -49,5 +49,5 @@ include:
   - _headers
 
 keep_files:
-  - assets
+  - resources
   - images
