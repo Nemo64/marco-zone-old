@@ -14,15 +14,12 @@
     {% endif %}
 
     <!-- other meta -->
-    {% if page.noindex %}
-        <meta name="robots" content="no-index, nofollow">
-    {% else %}
-        <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-        <meta name="author" content="{{ page.author }}">
-        {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
-        {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
-        <meta name="revisit-after" content="{{ site.data.changefreq[page.changefreq].revisit_after }}">
-    {% endif %}
+    {% if page.noindex %}<meta name="robots" content="no-index, nofollow">{% endif %}
+    <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="{{ page.author }}">
+    {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
+    {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
+    <meta name="revisit-after" content="{{ site.data.changefreq[page.changefreq].revisit_after }}">
     <meta name="generator" content="Jekyll v{{ jekyll.version }}">
 
     <!-- google analytics -->
