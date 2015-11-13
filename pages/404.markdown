@@ -3,7 +3,9 @@ title:      Die Seite existiert nicht!
 permalink:  /404
 changefreq: always
 noindex:    true
+headers:
+    status: 404
 ---
 Es sieht so aus als wärst du einem kaputtem link gefolgt oder du hast dich bei der eingabe der url vertippt.
 
-[Hier ein link zur Startseite](/).
+[Hier ein link zur Startseite]({{ '/' | prepend: site.baseurl }}).
