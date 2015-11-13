@@ -3,50 +3,16 @@ layout:                     none
 permalink:                  /_headers
 is_server_configuration:    true
 ---
-{% assign default_changefreq = 'monthly' %}
-{% assign image_changefreq = 'never' %}
-{% assign asset_changefreq = 'weekly' %}
 
-/*  {% comment %}
-        any header modification here should also be present in the gulp serve command
-    {% endcomment %}
+/*
     X-Frame-Options: DENY
     X-XSS-Protection: 1; mode=block
 
-    # The default change frequency is {{ default_changefreq }}
-    Cache-Control: public, max-age={{ site.data.changefreq[default_changefreq].max_age }}
-
 /images/*
     # For images with permlink. Others will be delivered though the cdn and have other cache times anyways.
-    # Images change {{ image_changefreq }}
-    Cache-Control: public, max-age={{ site.data.changefreq[image_changefreq].max_age }}
+    Cache-Control: public, max-age=86400
 
-/assets/*
-    # Assets, that for some reason aren't delivered though the cdn, should still be cached.
-    # I don't want them to be cached forever because they could change.
-    # Assets change {{ asset_changefreq }}
-    Cache-Control: public, max-age={{ site.data.changefreq[asset_changefreq].max_age }}
-
-
-
-#########
-# pages #
-#########
-
-{% for page in site.pages %}{% unless page.is_server_configuration or page.changefreq == default_changefreq %}
-{{ page.url }}
-    # this page may change {{ page.changefreq }}
-    Cache-Control: public, max-age={{ site.data.changefreq[page.changefreq].max_age }}
-{% endunless %}{% endfor %}
-
-
-
-#########
-# posts #
-#########
-
-{% for post in site.posts %}{% unless post.changefreq == default_changefreq %}
-{{ post.url }}
-    # this post may change {{ page.changefreq }}
-    Cache-Control: public, max-age={{ site.data.changefreq[post.changefreq].max_age }}
-{% endunless %}{% endfor %}
+{% for page in site.pages %}{% if page.headers %}
+{{ page.url }}{% for header in page.headers %}
+    {{ header[0] }}: {{ header[1] }}{% endfor %}
+{% endif %}{% endfor %}
