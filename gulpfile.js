@@ -99,7 +99,7 @@ gulp.task('images', function () {
     var topicImages = gulp.src(sourceFiles.topicImages);
     topicImages.setMaxListeners(100);
 
-    [48, 96, 144, 288].forEach(function (size) {
+    [48, 96, 144, 192, 288, 432].forEach(function (size) {
         resizePipe(topicImages, size, {width: size});
     });
 
