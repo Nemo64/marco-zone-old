@@ -1,7 +1,7 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-{% assign basepath = '/thumbnail' | prepend: site.image_baseurl %}
+{% assign basepath = site.image_baseurl %}
 {% assign sizes = '48, 96, 144, 288' | split: ', ' %}
 <img src="{{ basepath }}/144/{{ include.image }}"
      srcset="{% for size in sizes %}{{ basepath }}/{{ size }}/{{ include.image }} {{ size }}w{% unless forloop.last %},{% endunless %}{% endfor %}"
@@ -10,7 +10,7 @@
      {{ include.attr }}>
 
 {% when 'banner' %}
-{% assign basepath = '/banner' | prepend: site.image_baseurl %}
+{% assign basepath = site.image_baseurl %}
 {% assign sizes = '720, 1080, 1440, 1920, 2560' | split: ', ' %}
 <img src="{{ basepath }}/1080/{{ include.image }}"
      srcset="{% for size in sizes %}{{ basepath }}/{{ size }}/{{ include.image }} {{ size }}w{% unless forloop.last %},{% endunless %}{% endfor %}"

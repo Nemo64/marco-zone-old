@@ -100,11 +100,11 @@ gulp.task('images', function () {
     topicImages.setMaxListeners(100);
 
     [48, 96, 144, 288].forEach(function (size) {
-        resizePipe(topicImages, 'thumbnail/' + size, {width: size});
+        resizePipe(topicImages, size, {width: size});
     });
 
     [720, 1080, 1440, 1920, 2560].forEach(function (size) {
-        resizePipe(topicImages, 'banner/' + size, {width: size, height: size / 21 * 9, crop: true});
+        resizePipe(topicImages, size, {width: size, height: size / 21 * 9, crop: true});
     });
 
     resizePipe(inlineImages, 'inline', {width: 690});
