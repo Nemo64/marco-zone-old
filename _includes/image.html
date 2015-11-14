@@ -15,7 +15,11 @@
      {{ include.attr }}>
 
 {% when 'opengraph' %}
-<meta property="og:image" content="{{ site.image_url }}{% include image/src.html image=include.image variant='1080' %}">
+{% assign sizes = '720, 1080, 1440, 1920, 2560, 48, 96, 144, 192, 288, 432' | split: ', ' %}
+{% for size in sizes %}
+<meta property="og:image:url" content="{{ site.image_url }}{% include image/src.html image=include.image variant=size %}">
+<meta property="og:image:width" content="{{ size }}">
+{% endfor %}
 
 {% else %}
 <p class="image-paragraph">
