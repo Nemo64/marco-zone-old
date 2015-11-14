@@ -13,8 +13,59 @@ var targetDirectories = {
     images: deployPath + '/images'
 };
 
+gulp.task('default', ['clean', 'html', 'css', 'images']);
+
 gulp.task('clean', function () {
-    del([targetDirectories.assets])
+    del(Object.keys(targetDirectories).map(function (key) {
+        return targetDirectories[key];
+    }));
+});
+
+gulp.task('serve', ['watch'], function () {
+    var modRewrite = require('connect-modrewrite');
+    var header = require('connect-header');
+
+    browserSync.init({
+        open: false,
+        server: {
+            baseDir: deployPath,
+            middleware: [
+                modRewrite([
+                    // rewrite eg. "index" to "index.html"
+                    '^(.*)/([^\.\/]+)$ $1/$2.html'
+                ]),
+                header({
+                    // these should be the same in the _headers file
+                    'X-Frame-Options': 'DENY',
+                    'X-XSS-Protection': '1; mode=block'
+                })
+            ]
+        }
+    });
+});
+
+gulp.task('watch', ['default'], function () {
+    gulp.watch([
+        '_includes/*.html',
+        '_includes/**/*.html',
+        '_layouts/*.html',
+        '_layouts/**/*.html',
+        '_data/*',
+        '_data/**/*',
+        '_posts/*',
+        '_posts/**/*',
+        'pages/*',
+        'pages/**/*',
+        'meta_files/*'
+    ], ['html']);
+    gulp.watch([
+        '_resources/*.scss',
+        '_resources/**/*.scss'
+    ], ['css']);
+    gulp.watch([
+        'images/*',
+        'images/**/*'
+    ], ['images']);
 });
 
 gulp.task('jekyll', function (gulpCallBack) {
@@ -35,9 +86,8 @@ gulp.task('jekyll', function (gulpCallBack) {
 
 gulp.task('html', ['jekyll'], function () {
     var htmlmin = require('gulp-htmlmin');
-    var path = require('path');
 
-    return gulp.src([path.join(deployPath, '*.html'), path.join(deployPath, '**/*.html')])
+    return gulp.src([deployPath + '/*.html', deployPath + '/**/*.html'])
         .pipe(htmlmin({
             removeComments: false,
             collapseWhitespace: true,
@@ -55,10 +105,8 @@ gulp.task('html', ['jekyll'], function () {
 gulp.task('sass', function () {
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
-    var sourcemaps = require('gulp-sourcemaps');
 
     return gulp.src(sourceFiles.scss)
-        .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(autoprefixer({browsers: [
             '> 0.2% in DE',
@@ -66,7 +114,6 @@ gulp.task('sass', function () {
             'Firefox ESR',
             'not IE <= 8'
         ]}))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(targetDirectories.assets))
         .pipe(browserSync.stream());
 });
@@ -110,53 +157,4 @@ gulp.task('images', function () {
     resizePipe(inlineImages, 'inline', {width: 690});
 
     return masterStream;
-});
-
-gulp.task('default', ['clean', 'html', 'css', 'images']);
-
-gulp.task('watch', ['default'], function () {
-    gulp.watch([
-        '_includes/*.html',
-        '_includes/**/*.html',
-        '_layouts/*.html',
-        '_layouts/**/*.html',
-        '_data/*',
-        '_data/**/*',
-        '_posts/*',
-        '_posts/**/*',
-        'pages/*',
-        'pages/**/*',
-        'meta_files/*'
-    ], ['html']);
-    gulp.watch([
-        '_sources/*.scss',
-        '_sources/**/*.scss'
-    ], ['css']);
-    gulp.watch([
-        'images/*',
-        'images/**/*'
-    ], ['images']);
-});
-
-gulp.task('serve', ['watch'], function () {
-    var modRewrite = require('connect-modrewrite');
-    var header = require('connect-header');
-
-    browserSync.init({
-        open: false,
-        server: {
-            baseDir: deployPath,
-            middleware: [
-                modRewrite([
-                    // rewrite eg. "index" to "index.html"
-                    '^(.*)/([^\.\/]+)$ $1/$2.html'
-                ]),
-                header({
-                    // these should be the same in the _headers file
-                    'X-Frame-Options': 'DENY',
-                    'X-XSS-Protection': '1; mode=block'
-                })
-            ]
-        }
-    });
 });

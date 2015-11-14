@@ -22,7 +22,7 @@ defaults:
       layout:     page
       author:     Marco Pfeiffer
       language:   de
-      changefreq: monthly # this value is dublicated in _headers
+      changefreq: monthly
       priority:   0.5
   -
     scope:
@@ -30,11 +30,9 @@ defaults:
       type: "posts"
     values:
       layout:     post
-      changefreq: monthly # this value is dublicated in _headers
       priority:   0.75
 
 exclude:
-  - bower_components
   - bower.json
   - node_modules
   - package.json

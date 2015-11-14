@@ -1,6 +1,7 @@
 $paragraph-width: map_get($container-max-widths, md) - $grid-gutter-width;
 
 body {
+    @extend body;
     overflow-y: scroll;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
