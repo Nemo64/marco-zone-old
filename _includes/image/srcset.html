@@ -1,0 +1,1 @@
+{% assign sizes = include.sizes | split: ', ' %}{% for size in sizes %}{% include image/src.html image=include.image variant=size %} {{ size }}w{% unless forloop.last %}, {% endunless %}{% endfor %}

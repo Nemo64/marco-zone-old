@@ -9,8 +9,8 @@
     <meta property="og:title" content="{% if page.og.title %}{{ page.og.title }}{% else %}{{ page.title }}{% endif %}">
     <meta property="og:type" content="{% if page.og.type %}{{ page.og.type }}{% else %}website{% endif %}">
     <meta property="og:url" content="{% if page.og.url %}{{ page.og.url }}{% else %}{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}{% endif %}">
-    {% if page.image or page.og.image %}
-    <meta property="og:image" content="{% if page.og.image %}{{ page.og.image }}{% else %}{{ page.image | prepend: '/banner/1080/' | prepend: site.image_baseurl | prepend: site.image_url }}{% endif %}">
+    {% if page.og.image %}{% include image.html image=page.og.image variant='opengraph' %}
+    {% elsif page.image %}{% include image.html image=page.image variant='opengraph' %}
     {% endif %}
 
     <!-- other meta -->

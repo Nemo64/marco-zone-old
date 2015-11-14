@@ -1,26 +1,25 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-{% assign basepath = site.image_baseurl %}
-{% assign sizes = '48, 96, 144, 192, 288, 432' | split: ', ' %}
-<img src="{{ basepath }}/144/{{ include.image }}"
-     srcset="{% for size in sizes %}{{ basepath }}/{{ size }}/{{ include.image }} {{ size }}w{% unless forloop.last %}, {% endunless %}{% endfor %}"
+<img src="{% include image/src.html image=include.image variant='144' %}"
+     srcset="{% include image/srcset.html image=include.image sizes='48, 96, 144, 192, 288, 432' %}"
      sizes="(min-width: 48em) 9rem, 3rem"
      alt="{{ include.alt }}"
      {{ include.attr }}>
 
 {% when 'banner' %}
-{% assign basepath = site.image_baseurl %}
-{% assign sizes = '720, 1080, 1440, 1920, 2560' | split: ', ' %}
-<img src="{{ basepath }}/1080/{{ include.image }}"
-     srcset="{% for size in sizes %}{{ basepath }}/{{ size }}/{{ include.image }} {{ size }}w{% unless forloop.last %}, {% endunless %}{% endfor %}"
+<img src="{% include image/src.html image=include.image variant='1080' %}"
+     srcset="{% include image/srcset.html image=include.image sizes='720, 1080, 1440, 1920, 2560' %}"
      sizes="100vw"
      alt="{{ include.alt }}"
      {{ include.attr }}>
 
+{% when 'opengraph' %}
+<meta property="og:image" content="{{ site.image_url }}{% include image/src.html image=include.image variant='1080' %}">
+
 {% else %}
-{% assign basepath = '/inline' | prepend: site.image_baseurl %}
 <p class="image-paragraph">
-    <img src="{{ basepath }}/{{ include.image }}" alt="{{ include.alt }}" {{ include.attr }}>
+    <img src="{% include image/src.html image=include.image variant='inline' %}" alt="{{ include.alt }}" {{ include.attr }}>
 </p>
+
 {% endcase %}
