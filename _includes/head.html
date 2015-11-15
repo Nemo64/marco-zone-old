@@ -58,17 +58,100 @@
             // track copy of code snippets... i'm curious ;)
             ['copy', 'cut'].forEach(function (event) {
                 document.addEventListener(event, function (e) {
-
                     var node = e.target;
                     while (!/code/i.test(node.nodeName)) {
                         // iterate until there is no parent
-                        if (!(node = node.parentNode)) return;
+                        if (!(node = node.parentNode)) {
+                            return;
+                        }
                     }
 
                     var language = (node.getAttribute('data-lang') + '').toLowerCase();
                     ga('send', 'event', 'Code', 'copy', language);
                 }, true);
             });
+
+            // track special links
+            document.addEventListener('click', function (e) {
+                if (e.defaultPrevented) {
+                    return;
+                }
+
+                var link = e.target;
+                while (!/a/i.test(link.nodeName)) {
+                    // iterate until there is no parent
+                    if (!(link = link.parentNode)) {
+                        return;
+                    }
+                }
+
+                if (link.clickTracked) {
+                    return;
+                }
+
+                var category = (function () {
+                    var dataCategory = link.getAttribute('data-ga-event-category');
+                    if (dataCategory) {
+                        return dataCategory;
+                    }
+
+                    return 'link';
+                })();
+
+                var action = (function () {
+                    var dataAction = link.getAttribute('data-ga-event-action');
+                    if (dataAction) {
+                        return dataAction
+                    }
+
+                    if (link.host !== location.host) {
+                        return 'external'
+                    }
+
+                    if (/^mailto\:/i.test(link.href)) {
+                        return 'mail';
+                    }
+
+                    if (/^tel:/i.test(link.href)) {
+                        return 'call'
+                    }
+
+                    if (!/\/([^\.]*|.*\.(x?htm.?|asp.?|.{5,}))(\?.*)?$/i.test(link.href)) {
+                        return 'download';
+                    }
+
+                    if (link.host === location.host) {
+                        return null;
+                    }
+
+                    return 'click';
+                })();
+
+                var label = (function () {
+                    var dataLabel = link.getAttribute('data-ga-event-label');
+                    if (dataLabel) {
+                        return dataLabel;
+                    }
+
+                    if (/^(tel|mailto)\:/i.test(link.href)) {
+                        return href.replace(/^(mailto|tel)\:\s*/, '');
+                    }
+
+                    // if everything fails use href
+                    return link.href;
+                })();
+
+                e.preventDefault();
+                console.log('click started');
+                ga('send', 'event', category, action, label, {
+                    hitCallback: function () {
+                        console.log('click ended');
+                        link.clickTracked = true;
+                        link.click();
+                    }
+                });
+
+            }, false);
         }
     </script>
     {% if page.include.noga %}
