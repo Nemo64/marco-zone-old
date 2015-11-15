@@ -141,11 +141,14 @@
                     return link.href;
                 })();
 
+                var valid = category && action && label;
+                if (!valid) {
+                    return;
+                }
+
                 e.preventDefault();
-                console.log('click started');
                 ga('send', 'event', category, action, label, {
                     hitCallback: function () {
-                        console.log('click ended');
                         link.clickTracked = true;
                         link.click();
                     }
