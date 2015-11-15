@@ -54,6 +54,21 @@
             ga('create', 'UA-60388424-1', 'auto');
             ga('set', 'anonymizeIp', true);
             ga('send', 'pageview');
+
+            // track copy of code snippets... i'm curious ;)
+            ['copy', 'cut'].forEach(function (event) {
+                document.addEventListener(event, function (e) {
+
+                    var node = e.target;
+                    while (!/code/i.test(node.nodeName)) {
+                        // iterate until there is no parent
+                        if (!(node = node.parentNode)) return;
+                    }
+
+                    var language = (node.getAttribute('data-lang') + '').toLowerCase();
+                    ga('send', 'event', 'Code', 'copy', language);
+                }, true);
+            });
         }
     </script>
     {% if page.include.noga %}
