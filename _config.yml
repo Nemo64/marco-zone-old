@@ -42,10 +42,6 @@ exclude:
   - resources
   - images
 
-include:
-  - _redirects
-  - _headers
-
 keep_files:
   - resources
   - images
