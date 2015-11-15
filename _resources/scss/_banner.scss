@@ -2,6 +2,7 @@
     position: relative;
     text-align: center;
     overflow: hidden;
+    background-color: $dark-bg;
 
     &:before {
         content: "";
@@ -78,9 +79,10 @@
         pointer-events: none;
     }
 
-    &, &:after {
+    @include gradient-vertical(rgba(0, 0, 0, .33), rgba(0, 0, 0, 0));
+    background-color: rgba(0, 0, 0, .25);
+
+    &:after {
         @include gradient-vertical(rgba(0, 0, 0, .25), rgba(0, 0, 0, 0));
     }
-
-    background-color: rgba(0, 0, 0, .25);
 }
