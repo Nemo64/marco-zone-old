@@ -22,8 +22,9 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6,
-p,
-blockquote {
+blockquote,
+ul, ol, // this can make problems with .nav's but should be fine. They shouldn't be wider than this to begin with
+p {
     max-width: $paragraph-width;
 }
 
@@ -35,16 +36,18 @@ header, footer {
 
 @supports (hyphens: auto) {
     //noinspection CssUnknownProperty, CssInvalidPropertyValue
-    [lang^=de] p {
-        text-align: justify;
-        hyphens: auto;
-        // properties not unterstood by autoprefixer
-        -webkit-hyphenate-limit-before: 3;
-        -webkit-hyphenate-limit-after: 4;
-        hyphenate-limit-chars: auto 3 4;
+    [lang^=de] {
+        p, li {
+            text-align: justify;
+            hyphens: auto;
+            // properties not understood by autoprefixer
+            -webkit-hyphenate-limit-before: 3;
+            -webkit-hyphenate-limit-after: 4;
+            hyphenate-limit-chars: auto 3 4;
+        }
     }
 
-    a, b, abbr, strong, blockquote {
+    a, b, abbr, strong, blockquote, .nav > li {
         hyphens: manual;
     }
 }
@@ -101,7 +104,7 @@ blockquote {
 
 code {
     padding: .2rem .2rem;
-    font-size: $font-size-sm;
+    font-size: .9em;
     color: $code-color;
     background-color: $code-bg;
     hyphens: none;
@@ -114,8 +117,8 @@ code {
     > pre {
         display: block;
         padding: ($grid-gutter-width / 6) $horizontal-padding;
-        font-size: 0.85rem;
         line-height: 1.3;
+        font-size: .9em;
         color: $pre-color;
 
         // Account for some code outputs that place code tags in pre tags
