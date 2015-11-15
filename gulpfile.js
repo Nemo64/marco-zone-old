@@ -103,10 +103,12 @@ gulp.task('html', ['jekyll'], function () {
 });
 
 gulp.task('sass', function () {
+    var sourcemaps = require('gulp-sourcemaps');
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
 
     return gulp.src(sourceFiles.scss)
+        .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(autoprefixer({browsers: [
             '> 0.2% in DE',
@@ -114,6 +116,7 @@ gulp.task('sass', function () {
             'Firefox ESR',
             'not IE <= 8'
         ]}))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(targetDirectories.assets))
         .pipe(browserSync.stream());
 });
