@@ -69,7 +69,7 @@ $list-item-desktop-breakpoint: md;
         $filter: contrast(3) saturate(2) blur(2rem);
         @supports (filter: $filter) {
             filter: $filter;
-            opacity: .7;
+            opacity: .9;
         }
     }
 }
