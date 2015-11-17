@@ -7,7 +7,11 @@
 
         ga('create', 'UA-60388424-1', 'auto');
         ga('set', 'anonymizeIp', true);
-        ga('send', 'pageview');
+
+        // use the canonical url if possible
+        var canonical = document.querySelector('link[rel="canonical"]');
+        var pathname = canonical && canonical.getAttribute('href') || location.pathname;
+        ga('send', 'pageview', pathname.replace(/^https?\:\/\/[^\/]+\/?/i, '/'));
 
         // track copy of code snippets... i'm curious ;)
         ['copy', 'cut'].forEach(function (event) {
