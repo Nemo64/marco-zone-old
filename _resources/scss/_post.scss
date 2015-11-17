@@ -113,3 +113,10 @@ $list-item-desktop-breakpoint: md;
         padding-left: $list-item-height + $list-item-padding;
     }
 }
+
+#disqus_thread {
+    // the disqus thread does not resize on ipad
+    width: $paragraph-width;
+    max-width: 100%;
+    overflow: hidden;
+}
