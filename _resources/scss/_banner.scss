@@ -79,10 +79,11 @@
         pointer-events: none;
     }
 
-    @include gradient-vertical(rgba(0, 0, 0, .33), rgba(0, 0, 0, 0));
-    background-color: rgba(0, 0, 0, .25);
+    $gradient-color: mix($brand-primary, black, 14%);
+    @include gradient-vertical(fade-out($gradient-color, 0.67), fade-out($gradient-color, 1));
+    background-color: fade-out($gradient-color, 0.75);
 
     &:after {
-        @include gradient-vertical(rgba(0, 0, 0, .25), rgba(0, 0, 0, 0));
+        @include gradient-vertical(fade-out($gradient-color, 0.75), fade-out($gradient-color, 1));
     }
 }
