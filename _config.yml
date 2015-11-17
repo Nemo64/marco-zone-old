@@ -5,7 +5,7 @@ description: Dies ist ein Platzhalter für eine gute Beschreibung der Seite
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://www.marco.zone" # the base hostname & protocol for your site
 image_baseurl: "/images" # subpath for iamges
-image_url: "http://www.marco.zone" # hostname & protocol for images
+image_url: "https://www.marco.zone" # hostname & protocol for images
 twitter_username: thetruenemo
 github_username:  Nemo64
 
