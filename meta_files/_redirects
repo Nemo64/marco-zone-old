@@ -4,16 +4,23 @@ permalink:                  /_redirects
 is_server_configuration:    true
 ---
 
-# old permalink styles
+# force the none html variant
+/*.html         /:splat
 
-/post/:slug     /:slug
-/posts/:slug    /:slug
 
 # redirect attempts for mobile pages
-
 /mobile/*       /:splat
 /m/*            /:splat
 
+
 # deny access to server configuration
-{% for page in site.pages %}{% if page.is_server_configuration %}
-{{ page.url }}  /404.html   404!{% endif %}{% endfor %}
+{% for page in site.pages %}{% if page.is_server_configuration %}{{ page.url }}  /404.html   404!
+{% endif %}{% endfor %}
+
+# page specific
+{% for page in site.pages %}{% for redirect in page.redirects %}{{ redirect.path }}  {{ page.url }}
+{% endfor %}{% endfor %}
+
+# post specific
+{% for page in site.posts %}{% for redirect in page.redirects %}{{ redirect.path }}  {{ page.url }}
+{% endfor %}{% endfor %}

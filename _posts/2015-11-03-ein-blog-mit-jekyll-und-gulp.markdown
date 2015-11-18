@@ -8,6 +8,9 @@ categories:
     - Webseite
     - Gulp
     - Jekyll
+redirects:
+    - path: /posts/ein-blog-mit-jekyll-und-gulp
+    - path: /post/ein-blog-mit-jekyll-und-gulp
 ---
 
 ## Der ursprüngliche Plan

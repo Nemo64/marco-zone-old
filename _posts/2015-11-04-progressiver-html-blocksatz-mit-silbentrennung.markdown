@@ -7,6 +7,9 @@ lastmod:        2015-11-10 12:00:00 +0100
 categories:
     - Webseite
     - CSS
+redirects:
+    - path: /posts/progressiver-html-blocksatz-mit-silbentrennung
+    - path: /post/progressiver-html-blocksatz-mit-silbentrennung
 ---
 
 Schon mal eine Zeitung gesehen und danach eine News-Seite? Das Schriftbild von Zeitungen ist meistens deutlich schöner als das von Webseiten. Woran liegt das? Mir fallen 3 Gründe ein. Einmal die meist recht hübsche Serif-Schriftart welche auf einem low-DPI Monitor allerdings furchtbar aussieht. Dann allgemein die recht niedrige Auflösung auf modernen Desktop-PC's. und zuletzt der Blocksatz, welche den Text schön gleichmäßig aussehen lässt.
