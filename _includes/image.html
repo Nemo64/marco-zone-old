@@ -15,7 +15,7 @@
      {{ include.attr }}>
 
 {% when 'opengraph' %}
-{% assign sizes = '720, 1080, 1440, 1920, 2560, 48, 96, 144, 192, 288, 432' | split: ', ' %}
+{% assign sizes = '720, 1080' | split: ', ' %}
 {% for size in sizes %}
 <meta property="og:image" content="{{ site.image_url }}{% include image/src.html image=include.image variant=size %}">
 <meta property="og:image:width" content="{{ size }}">
