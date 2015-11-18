@@ -14,7 +14,7 @@ is_server_configuration:    true
 
 # deny access to server configuration
 {% for page in site.pages %}{% if page.is_server_configuration %}{{ page.url }}  /404.html   404!
-{% endif %}{% endfor %}emove*.html
+{% endif %}{% endfor %}
 
 # page specific
 {% for page in site.pages %}{% for redirect in page.redirects %}{{ redirect.path }}  {{ page.url }}
