@@ -82,7 +82,8 @@ $navbar-height: $line-height * $font-size-base + 2rem;
         position: absolute;
         left: 0;
         top: 100%;
-        height: $navbar-height;
+        // ie 9 & 10 supposedly do not support rem in pseudo elements
+        height: $navbar-height / ($navbar-height * 0 + 1) * 1em;
         width: 100%;
         pointer-events: none;
     }
