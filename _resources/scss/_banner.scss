@@ -3,6 +3,7 @@
     text-align: center;
     overflow: hidden;
     background-color: $dark-bg;
+    white-space: nowrap;
 
     &:before {
         content: "";
@@ -32,6 +33,7 @@
     display: inline-block;
     vertical-align: bottom;
     text-align: left;
+    white-space: normal;
     width: 100%;
     padding-top: $line-height * $font-size-base + 2rem;
     padding-bottom: 1rem;
