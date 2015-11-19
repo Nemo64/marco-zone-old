@@ -1,9 +1,18 @@
+$navbar-height: $line-height * $font-size-base + 2rem;
+
 .banner {
     position: relative;
     text-align: center;
     overflow: hidden;
     background-color: $dark-bg;
+
     white-space: nowrap;
+    font-size: 0;
+
+    .banner-overlay {
+        white-space: normal;
+        font-size: 1rem;
+    }
 
     &:before {
         content: "";
@@ -33,11 +42,10 @@
     display: inline-block;
     vertical-align: bottom;
     text-align: left;
-    white-space: normal;
     width: 100%;
-    padding-top: $line-height * $font-size-base + 2rem;
     padding-bottom: 1rem;
     position: relative;
+    padding-top: $navbar-height;
 }
 
 .cover-banner {
@@ -69,8 +77,6 @@
 }
 
 .navbar-cover-bg {
-    $navbar-height: $line-height * $font-size-base;
-
     &:after {
         content: "";
         position: absolute;
