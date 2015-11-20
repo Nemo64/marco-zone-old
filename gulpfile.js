@@ -89,7 +89,7 @@ gulp.task('html', ['jekyll'], function () {
 
     return gulp.src([deployPath + '/*.html', deployPath + '/**/*.html'])
         .pipe(htmlmin({
-            removeComments: false,
+            removeComments: true,
             collapseWhitespace: true,
             collapseBooleanAttributes: true,
             removeAttributeQuotes: false,
