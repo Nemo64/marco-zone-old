@@ -27,6 +27,14 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <meta name="theme-color" content="#d50000">
 
+    <!-- google analytics -->
+    {% include google-analytics.html %}
+
+    <!-- external resources -->
+    <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
+
     <!-- open graph -->
     <meta property="og:title" content="{% if page.og.title %}{{ page.og.title }}{% else %}{{ page.title }}{% endif %}">
     <meta property="og:description" content="{% if page.description %}{{ page.description | strip_html  | strip_newlines }}{% else %}{{ site.description }}{% endif %}">
@@ -43,14 +51,6 @@
     {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
     {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
     <meta name="generator" content="Jekyll v{{ jekyll.version }}">
-
-    <!-- google analytics -->
-    {% include google-analytics.html %}
-
-    <!-- external resources -->
-    <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
 
     <!-- schema meta -->
     <link itemprop="url" href="{{ site.baseurl | prepend: site.url }}">
