@@ -42,7 +42,6 @@
     <meta name="author" content="{{ page.author }}">
     {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
     {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
-    <meta name="revisit-after" content="{{ site.data.changefreq[page.changefreq].revisit_after }}">
     <meta name="generator" content="Jekyll v{{ jekyll.version }}">
 
     <!-- google analytics -->
