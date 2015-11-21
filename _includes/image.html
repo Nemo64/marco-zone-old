@@ -21,6 +21,9 @@
 <meta property="og:image:width" content="{{ size }}">
 {% endfor %}
 
+{% when 'enclosure' %}
+<enclosure length="0" type="image/jpeg" url="{% include image/src.html absolute=true image=include.image variant='432' %}"/>
+
 {% else %}
 <p class="image-paragraph">
     <img src="{% include image/src.html image=include.image variant='inline' %}" alt="{{ include.alt }}" {{ include.attr }}>
