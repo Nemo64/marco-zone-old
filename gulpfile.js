@@ -37,6 +37,7 @@ gulp.task('serve', ['watch'], function () {
                 header({
                     // these should be the same in the _headers file
                     'X-Frame-Options': 'DENY',
+                    'X-UA-Compatible': 'IE=Edge',
                     'X-XSS-Protection': '1; mode=block'
                 })
             ]
