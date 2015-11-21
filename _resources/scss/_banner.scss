@@ -38,6 +38,18 @@ $navbar-height: $line-height * $font-size-base + 2rem;
     height: 100%;
 }
 
+@include media-breakpoint-up(lg) {
+    .banner:before {
+        padding-bottom: map_get($grid-breakpoints, md) / 16em * 9rem;
+    }
+
+    .banner-image {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+    }
+}
+
 .banner-overlay {
     display: inline-block;
     vertical-align: bottom;

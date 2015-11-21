@@ -16,10 +16,16 @@ redirects:
              itemscope itemtype="http://schema.org/BlogPosting"
              itemid="{{ post.url | prepend: site.baseurl }}">
         <a href="{{ post.url | prepend: site.baseurl }}" tabindex="-1">
-            {% include image.html image=post.image variant='banner' attr='class="banner-image" itemprop="image"' %}
+            {% include image.html image=post.image variant='banner' attr='class="banner-image"' %}
         </a>
         <div class="container banner-overlay">
             <div class="post-banner-item">
+
+                {% if post.image %}
+                <a href="{{ post.url | prepend: site.baseurl }}" class="post-banner-image" tabindex="-1">
+                    {% include image.html image=post.image variant='thumbnail' attr='class="main-image" itemprop="image"' %}
+                </a>
+                {% endif %}
 
                 <header class="post-banner-header">
                     <h1 class="post-banner-title" itemprop="headline">
