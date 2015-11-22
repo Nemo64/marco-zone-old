@@ -14,6 +14,12 @@ $list-item-desktop-breakpoint: md;
     color: $text-muted;
 }
 
+.post-meta-entry {
+    + .post-meta-entry:not(:empty):before {
+        content: " – ";
+    }
+}
+
 .post-image {
     margin-bottom: 1rem;
 }
@@ -30,6 +36,11 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     min-height: $list-item-height;
     margin-bottom: $list-item-padding;
+}
+
+.post-banner-item,
+.post-list-item {
+    max-width: $paragraph-width;
 }
 
 .post-banner-title,

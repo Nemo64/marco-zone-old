@@ -1,13 +1,14 @@
 <div class="post-meta">
+    {% if include.post.date %}
+    <time class="post-meta-entry post-date" itemprop="datePublished" datetime="{{ include.post.date | date_to_xmlschema }}">
+        {{ include.post.date | date_to_long_string }}
+    </time>
+    {% endif %}
+    <span class="post-meta-entry disqus-comment-count" data-disqus-identifier="{{ post.url }}"></span>
     {% if include.post.author %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="{{ include.post.author }}">
     </span>
-    {% endif %}
-    {% if include.post.date %}
-    <time class="post-date" itemprop="datePublished" datetime="{{ include.post.date | date_to_xmlschema }}">
-        {{ include.post.date | date_to_long_string }}
-    </time>
     {% endif %}
     {% if include.post.lastmod %}
     <meta itemprop="dateModified" content="{{ include.post.lastmod | date_to_long_string }}">

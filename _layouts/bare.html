@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
-
     {% include head.html %}
-
     <body itemscope itemtype="{% if page.schema %}{{page.schema}}{% else %}http://schema.org/WebPage{% endif %}">
-
         {{ content }}
-
+        <script id="dsq-count-scr" src="//{{ site.disqus_name }}.disqus.com/count.js" async></script>
     </body>
-
 </html>

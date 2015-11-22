@@ -8,6 +8,7 @@ image_baseurl: "/images" # subpath for iamges
 image_url: "https://www.marco.zone" # hostname & protocol for images
 twitter_username: thetruenemo
 github_username:  Nemo64
+disqus_name: marco-zone
 
 # Build settings
 timezone: Europe/Berlin
