@@ -26,7 +26,7 @@ permalink:  /feed.xml
             <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
             <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
             {% for cat in post.categories %}<category>{{ cat | xml_escape }}</category>{% endfor %}
-            <comments>{{ post.url | prepend: site.baseurl | prepend: site.url | append: '#kommentare' }}</comments>
+            <comments>{{ post.url | prepend: site.baseurl | prepend: site.url | append: '#disqus_thread' }}</comments>
             {% include image.html image=post.image variant='enclosure' %}
             <description>{{ post.description | strip_html | strip_newlines | xml_escape }}</description>
             <content:encoded><![CDATA[{{ post.content | replace_regex: '\s*data-[\w-]+(="[^"]*")?', '' | replace_regex: '(?<=src=")', site.image_url }}]]></content:encoded>
