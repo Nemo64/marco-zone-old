@@ -58,6 +58,11 @@ $navbar-height: $line-height * $font-size-base + 2rem;
     padding-bottom: 1rem;
     position: relative;
     padding-top: $navbar-height;
+    pointer-events: none;
+
+    > * {
+        pointer-events: auto;
+    }
 }
 
 .cover-banner {
