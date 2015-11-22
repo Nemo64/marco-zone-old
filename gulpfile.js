@@ -157,7 +157,8 @@ gulp.task('images', function () {
                 var blurStrength = Math.max(options.width, options.height) / 24;
                 var scaleFactor = 4;
                 arguments.push('(', '+clone');
-                arguments.push('-level', '15%,85%');
+                arguments.push('-level', '10%,90%');
+                arguments.push('-modulate', '100,150');
                 arguments.push('-blur', '0x' + blurStrength);
                 arguments.push('-resize', scaleFactor * 100 + '%');
                 arguments.push('-channel', 'a', '-evaluate', 'set', '90%');
@@ -203,22 +204,24 @@ gulp.task('images', function () {
         masterStream.add(stream);
     };
 
+    var jpgOptions = {background: '#6B0000', format: 'jpeg'};
+
     [48, 96].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, {
-            width: size, height: size, crop: true, gravity: 'East', background: '#D50000', format: 'jpeg'
-        });
+        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+            width: size, height: size, crop: true, gravity: 'East'
+        }, jpgOptions));
     });
 
     [144, 288].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, {
-            width: size, height: size, upscale: true, backdrop: true, background: '#D50000', format: 'jpeg'
-        });
+        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+            width: size, height: size, upscale: true, backdrop: true
+        }, jpgOptions));
     });
 
     [768, 1440, 2048].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, {
-            width: size, height: Math.floor(size / 21 * 9), crop: true, format: 'jpeg'
-        });
+        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+            width: size, height: Math.floor(size / 21 * 9), crop: true
+        }, jpgOptions));
     });
 
     resizePipe(gulp.src(sourceFiles.inlineImages), 'inline', {width: 690});

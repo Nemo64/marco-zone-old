@@ -56,8 +56,15 @@ $navbar-height: $line-height * $font-size-base + 2rem;
 .cover-banner {
     background-color: $brand-primary;
     @include gradient-directional(darken($brand-primary, 20%), $brand-primary, -10deg);
-    text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
-    color: white;
+
+    .banner-overlay {
+        text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
+        color: white;
+
+        img {
+            box-shadow: 0 0 2rem rgba(0, 0, 0, .3);
+        }
+    }
 
     a,
     h1, .h1,
@@ -78,7 +85,7 @@ $navbar-height: $line-height * $font-size-base + 2rem;
     position: absolute;
     z-index: 2;
     width: 100%;
-    text-shadow: 0 0 2rem black;
+    text-shadow: 0 0 2rem rgba(0, 0, 0, .7);
 }
 
 .navbar-cover-bg {

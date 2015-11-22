@@ -55,8 +55,7 @@ $list-item-desktop-breakpoint: md;
     z-index: 1;
     margin-right: $list-item-padding;
     float: left;
-    background-color: mix($brand-primary, $body-bg, 50%);
-    overflow: hidden;
+    background-color: mix($brand-primary, black, 50%);
 
     @include image-square-container($list-item-mobile-image-size);
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
@@ -64,8 +63,6 @@ $list-item-desktop-breakpoint: md;
     }
 
     img {
-        position: relative;
-        z-index: 1;
         @include image-contain;
     }
 }
@@ -86,16 +83,6 @@ $list-item-desktop-breakpoint: md;
     width: 100%;
     padding-top: $font-size-base * ($line-height - 1) * 0.5;
     background-color: $body-bg;
-
-    //&:before {
-    //    content: "";
-    //    position: absolute;
-    //    top: -$line-height * $font-size-base * 2;
-    //    height: $line-height * $font-size-base * 2;
-    //    width: 100%;
-    //    @include gradient-vertical(fade-out($body-bg, 1), $body-bg);
-    //    pointer-events: none;
-    //}
 
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         padding-left: $list-item-height + $list-item-padding;
