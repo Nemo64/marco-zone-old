@@ -7,24 +7,24 @@
             </div>
             <div class="footer-segment">
                 <h2 class="h3">Erreichbar unter</h2>
-                <ul class="nav">
+                <ul class="nav nav-pills nav-stacked">
                     {% if site.github_username %}
                     <li class="nav-item">
-                        <a href="https://github.com/{{ site.github_username }}">
+                        <a href="https://github.com/{{ site.github_username }}" class="nav-link">
                             <span class="username">{{ site.github_username }}</span> auf GitHub
                         </a>
                     </li>
                     {% endif %}
                     {% if site.twitter_username %}
                     <li class="nav-item">
-                        <a href="https://twitter.com/{{ site.twitter_username }}">
+                        <a href="https://twitter.com/{{ site.twitter_username }}" class="nav-link">
                             <span class="username">@{{ site.twitter_username }}</span> auf Twitter
                         </a>
                     </li>
                     {% endif %}
                     {% if site.email %}
                     <li class="nav-item">
-                        <a href="mailto:{{ site.email }}">
+                        <a href="mailto:{{ site.email }}" class="nav-link">
                             {{ site.email }} per E-Mail
                         </a>
                     </li>
@@ -32,15 +32,15 @@
                 </ul>
             </div>
             <div class="footer-segment">
-                    <h2 class="h3">Sonstiges</h2>
-                    <ul class="nav">
-                        {% for page in site.pages %}{% if page.footernav %}
-                        <li class="nav-item">
-                            {% include internal-link.html page=page class='nav-link' attributes='itemprop="url"' %}
-                        </li>
-                        {% endif %}{% endfor %}
-                    </ul>
-                </div>
+                <h2 class="h3">Sonstiges</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    {% for page in site.pages %}{% if page.footernav %}
+                    <li class="nav-item">
+                        {% include internal-link.html page=page class='nav-link' attributes='itemprop="url"' %}
+                    </li>
+                    {% endif %}{% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 

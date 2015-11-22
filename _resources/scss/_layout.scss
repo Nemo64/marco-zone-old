@@ -35,7 +35,12 @@ body,
     margin-top: $spacer-y * 2;
 
     @include make-col();
+    @include make-col-span(12);
     @include media-breakpoint-up(sm) {
         @include make-col-span(4);
+    }
+
+    .nav-stacked {
+        margin: 0 -1rem;
     }
 }
