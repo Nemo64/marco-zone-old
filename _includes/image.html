@@ -1,28 +1,29 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-<img src="{% include image/src.html image=include.image variant='144' %}"
-     srcset="{% include image/srcset.html image=include.image sizes='48, 96, 144, 192, 288, 432' %}"
-     sizes="(min-width: 48em) 9rem, 3rem"
-     alt="{{ include.alt }}"
-     {{ include.attr }}>
+<picture>
+    <source srcset="{% include image/srcset.html image=include.image sizes='144, 288' %}" sizes="9rem" media="(min-width: 48em)">
+    <source srcset="{% include image/srcset.html image=include.image sizes='48, 96' %}" sizes="3rem">
+    <img src="{% include image/src.html image=include.image variant='144' %}" alt="{{ include.alt }}" {{ include.attr }}>
+</picture>
 
 {% when 'banner' %}
-<img src="{% include image/src.html image=include.image variant='1080' %}"
-     srcset="{% include image/srcset.html image=include.image sizes='720, 1080, 1440, 1920, 2560' %}"
+<img src="{% include image/src.html image=include.image variant='1440' %}"
+     srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
      sizes="100vw"
      alt="{{ include.alt }}"
      {{ include.attr }}>
 
 {% when 'opengraph' %}
-{% assign sizes = '720, 1080' | split: ', ' %}
+{% assign sizes = '768, 1440' | split: ', ' %}
 {% for size in sizes %}
 <meta property="og:image" content="{{ site.image_url }}{% include image/src.html image=include.image variant=size %}">
 <meta property="og:image:width" content="{{ size }}">
+<meta property="og:image:height" content="{{ size | times: 9 | divided_by: 21 }}">
 {% endfor %}
 
 {% when 'enclosure' %}
-<enclosure length="0" type="image/jpeg" url="{% include image/src.html absolute=true image=include.image variant='432' %}"/>
+<enclosure length="0" type="image/jpeg" url="{% include image/src.html absolute=true image=include.image variant='288' %}"/>
 
 {% else %}
 <p class="image-paragraph">

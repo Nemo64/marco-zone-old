@@ -55,7 +55,7 @@ $list-item-desktop-breakpoint: md;
     z-index: 1;
     margin-right: $list-item-padding;
     float: left;
-    background-color: mix($brand-primary, $body-bg, 100%);
+    background-color: mix($brand-primary, $body-bg, 50%);
     overflow: hidden;
 
     @include image-square-container($list-item-mobile-image-size);
@@ -63,26 +63,10 @@ $list-item-desktop-breakpoint: md;
         @include image-square-container($list-item-height);
     }
 
-    .main-image {
+    img {
         position: relative;
         z-index: 1;
         @include image-contain;
-    }
-
-    .backdrop-image {
-        $overscale: 60%;
-        position: absolute;
-        top: -$overscale;
-        right: -$overscale;
-        min-width: 100% + $overscale * 2;
-        min-height: 100% + $overscale * 2;
-        opacity: .1;
-
-        $filter: contrast(3) saturate(2) blur(2rem);
-        @supports (filter: $filter) {
-            filter: $filter;
-            opacity: .9;
-        }
     }
 }
 

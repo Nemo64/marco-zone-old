@@ -23,7 +23,7 @@ redirects:
 
                 {% if post.image %}
                 <a href="{{ post.url | prepend: site.baseurl }}" class="post-banner-image" tabindex="-1">
-                    {% include image.html image=post.image variant='thumbnail' attr='class="main-image" itemprop="image"' %}
+                    {% include image.html image=post.image variant='thumbnail' attr='itemprop="image"' %}
                 </a>
                 {% endif %}
 
@@ -60,8 +60,7 @@ redirects:
 
                     {% if post.image %}
                     <a href="{{ post.url | prepend: site.baseurl }}" class="post-list-image" tabindex="-1">
-                        {% include image.html image=post.image variant='thumbnail' attr='class="backdrop-image"' %}
-                        {% include image.html image=post.image variant='thumbnail' attr='class="main-image" itemprop="image"' %}
+                        {% include image.html image=post.image variant='thumbnail' attr='itemprop="image"' %}
                     </a>
                     {% endif %}
 
