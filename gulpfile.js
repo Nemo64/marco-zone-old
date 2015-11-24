@@ -155,7 +155,7 @@ gulp.task('images', function () {
                 arguments.push('-background', 'transparent', '-extent', size);
 
                 var blurStrength = Math.max(options.width, options.height) / 24;
-                var scaleFactor = 4;
+                var scaleFactor = 3;
                 arguments.push('(', '+clone');
                 arguments.push('-level', '10%,90%');
                 arguments.push('-modulate', '100,150');
@@ -181,7 +181,11 @@ gulp.task('images', function () {
             case 'jpg':
                 images = images.pipe(rename({extname: '.jpeg'}));
                 changedParams.extension = '.jpeg';
-                arguments.push('-quality', '80%');
+                arguments.push('-quality', '90%');
+                if (options.width && options.height) {
+                    var calculatedFileSize = Math.ceil(Math.sqrt(options.width * options.height) / 10);
+                    arguments.push('-define', 'jpeg:extent=' + Math.max(1, calculatedFileSize) + 'kb');
+                }
                 arguments.push('jpg:-');
                 break;
             case 'png':
