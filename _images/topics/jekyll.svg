@@ -15,7 +15,10 @@
    viewBox="0 0 542 249"
    id="svg4351"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="jekyll.svg">
+   sodipodi:docname="jekyll.svg"
+   inkscape:export-filename="/Users/marco/Workspace/raw/marco-zone/_images/topics/jekyll.png"
+   inkscape:export-xdpi="637.59033"
+   inkscape:export-ydpi="637.59033">
   <metadata
      id="metadata4403">
     <rdf:RDF>
@@ -24,6 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,10 +45,10 @@
      id="namedview4401"
      showgrid="false"
      inkscape:zoom="2.3265683"
-     inkscape:cx="271"
+     inkscape:cx="167.84378"
      inkscape:cy="124.5"
-     inkscape:window-x="580"
-     inkscape:window-y="197"
+     inkscape:window-x="278"
+     inkscape:window-y="220"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg4351" />
   <defs
@@ -112,14 +116,12 @@
        x1="37.163" />
   </defs>
   <rect
-     opacity=".3"
      height="249"
      width="542"
-     y="5.6843e-14"
-     x="1"
-     fill="#333"
+     y="5.6842999e-14"
+     x="0"
      id="rect4371"
-     style="opacity:1" />
+     style="opacity:1;fill:#333333" />
   <g
      transform="translate(414.23 20)"
      id="g4373">
