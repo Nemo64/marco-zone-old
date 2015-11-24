@@ -21,7 +21,7 @@ defaults:
       path: ""
     values:
       layout:     page
-      author:     Marco Pfeiffer
+      author:     marco
       language:   de
       changefreq: monthly
       priority:   0.5
