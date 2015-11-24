@@ -11,6 +11,7 @@
         <meta itemprop="name" content="{{ author.name }}">
         {% if author.email %}<meta itemprop="email" content="{{ author.email }}">{% endif %}
         {% if author.twitter %}<meta itemprop="url" content="https://twitter.com/{{ author.twitter }}">{% endif %}
+        {% if author.github %}<meta itemprop="url" content="https://github.com/{{ author.github }}">{% endif %}
         {% if author.website %}<meta itemprop="url" content="{{ author.website }}">{% endif %}
     </span>
     {% endif %}

@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var del = require('del');
 var browserSync = require('browser-sync').create();
 
 var deployPath = '_site';
@@ -13,13 +12,7 @@ var targetDirectories = {
     images: deployPath + '/images'
 };
 
-gulp.task('default', ['clean', 'html', 'css', 'images']);
-
-gulp.task('clean', function () {
-    del(Object.keys(targetDirectories).map(function (key) {
-        return targetDirectories[key];
-    }));
-});
+gulp.task('default', ['html', 'css', 'images']);
 
 gulp.task('serve', ['watch'], function () {
     var modRewrite = require('connect-modrewrite');
