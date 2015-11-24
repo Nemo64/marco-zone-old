@@ -17,13 +17,20 @@
 {% when 'opengraph' %}
 {% assign sizes = '768, 1440' | split: ', ' %}
 {% for size in sizes %}
-<meta property="og:image" content="{{ site.image_url }}{% include image/src.html image=include.image variant=size %}">
+<meta property="og:image" content="{% include image/src.html image=include.image variant=size absolute=true %}">
 <meta property="og:image:width" content="{{ size }}">
 <meta property="og:image:height" content="{{ size | times: 9 | divided_by: 21 }}">
 {% endfor %}
 
 {% when 'enclosure' %}
-<enclosure length="0" type="image/jpeg" url="{% include image/src.html absolute=true image=include.image variant='288' %}"/>
+<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='288' absolute=true %}"/>
+
+{% when 'rss_image' %}
+<image>
+    <url>{% include image/src.html absolute=true image=include.image variant='768' absolute=true %}</url>
+    <title>{{ site.title | xml_escape }}</title>
+    <link>{{ site.url | prepend: site.baseurl }}/</link>
+</image>
 
 {% else %}
 <p class="image-paragraph">

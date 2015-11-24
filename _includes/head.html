@@ -32,21 +32,26 @@
 
     <!-- external resources -->
     <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
 
-    <!-- open graph -->
-    <meta property="og:title" content="{% if page.og.title %}{{ page.og.title }}{% else %}{{ page.title }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description | strip_html  | strip_newlines }}{% else %}{{ site.description }}{% endif %}">
-    <meta property="og:type" content="{% if page.og.type %}{{ page.og.type }}{% else %}website{% endif %}">
-    <meta property="og:url" content="{% if page.og.url %}{{ page.og.url }}{% else %}{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}{% endif %}">
-    {% if page.og.image %}{% include image.html image=page.og.image variant='opengraph' %}
-    {% elsif page.image %}{% include image.html image=page.image variant='opengraph' %}
+    {% if page.title and page.description %}
+        <!-- open graph & twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@TheTrueNemo">
+        <meta name="twitter:creator" content="@TheTrueNemo">
+        <meta property="og:title" content="{{ page.title | truncate: 70 }}">
+        <meta property="og:description" content="{{ page.description | strip_html | strip_newlines | truncate: 200 }}">
+        <meta property="og:type" content="{% if page.og.type %}{{ page.og.type }}{% else %}website{% endif %}">
+        <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+        {% if page.image %}{% include image.html image=page.image variant='opengraph' %}
+        {% else %}{% include image.html image='marco-zone.jpeg' variant='opengraph' %}
+        {% endif %}
     {% endif %}
 
     <!-- other meta -->
     {% if page.noindex %}<meta name="robots" content="no-index, nofollow">{% endif %}
-    <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    {% if page.description %}<meta name="description" content="{{ page.description | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
     <meta name="author" content="{{ page.author }}">
     {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
     {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}

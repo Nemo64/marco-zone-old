@@ -161,7 +161,7 @@ gulp.task('images', function () {
                 arguments.push('-modulate', '100,150');
                 arguments.push('-blur', '0x' + blurStrength);
                 arguments.push('-resize', scaleFactor * 100 + '%');
-                arguments.push('-channel', 'a', '-evaluate', 'set', '90%');
+                arguments.push('-channel', 'a', '-evaluate', 'multiply', '0.9');
                 arguments.push('-gravity', 'East', '-crop', size + '+' + (blurStrength * scaleFactor * 2) + '+0');
                 arguments.push('-page', '+0+0');
                 arguments.push(')', '+swap');
