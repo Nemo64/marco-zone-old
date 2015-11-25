@@ -19,9 +19,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "~2.0.4",
     "gulp-sourcemaps": "~1.6.0",
-    "gulp-spawn": "^0.3.0",
+    "gulp-spawn-shim": "^0.1.2",
     "merge": "^1.2.0",
     "merge-stream": "^1.0.0",
+    "shell-escape": "^0.2.0",
     "yargs": "^3.30.0"
   }
 }

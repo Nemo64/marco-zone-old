@@ -5,8 +5,8 @@ var argv = require('yargs').argv;
 var deployPath = '_site';
 var sourceFiles = {
     scss: '_resources/*.scss',
-    topicImages: ['_images/topics/*.png', '_images/topics/*.jpeg'],
-    inlineImages: ['_images/inline/**/*.png', '_images/inline/**/*.jpeg']
+    topicImages: ['_images/topics/*.{png,jpg,jpeg,gif}'],
+    inlineImages: ['_images/inline/**/*.{png,jpg,jpeg,gif}']
 };
 var targetDirectories = {
     assets: deployPath + '/resources',
@@ -123,7 +123,7 @@ gulp.task('sass', function () {
 gulp.task('css', ['sass']);
 
 gulp.task('images', function () {
-    var spawn = require('gulp-spawn');
+    var spawn = require('gulp-spawn-shim');
     var rename = require('gulp-rename');
     var changed = require("gulp-changed");
     var merge = require('merge');
@@ -196,7 +196,9 @@ gulp.task('images', function () {
                 arguments.push('-');
         }
 
-        console.log(arguments.join(' '));
+        var shellescape = require('shell-escape');
+        console.log(shellescape(arguments));
+
         if (build.incremental) {
             images = images.pipe(changed(targetDirectories.images + '/' + variant, changedParams))
         }
@@ -209,26 +211,27 @@ gulp.task('images', function () {
     };
 
     var jpgOptions = {background: '#6B0000', format: 'jpeg'};
+    var gulpStreamOptions = {buffer: false};
 
     [48, 96].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
             width: size, height: size, crop: true, gravity: 'East'
         }, jpgOptions));
     });
 
     [144, 288].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
             width: size, height: size, upscale: true, backdrop: true
         }, jpgOptions));
     });
 
     [768, 1440, 2048].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages), size, merge({
+        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
             width: size, height: Math.floor(size / 21 * 9), crop: true
         }, jpgOptions));
     });
 
-    resizePipe(gulp.src(sourceFiles.inlineImages), 'inline', {width: 690});
+    resizePipe(gulp.src(sourceFiles.inlineImages, gulpStreamOptions), 'inline', {width: 690});
 
     return masterStream;
 });
