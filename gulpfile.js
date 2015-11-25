@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var argv = require('yargs').argv;
 
 var deployPath = '_site';
 var sourceFiles = {
@@ -12,9 +13,13 @@ var targetDirectories = {
     images: deployPath + '/images'
 };
 
-gulp.task('default', ['html', 'css', 'images']);
+var build = {
+    incemental: argv.complete != true
+};
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('build', ['html', 'css', 'images']);
+
+gulp.task('serve', ['build', 'watch'], function () {
     var modRewrite = require('connect-modrewrite');
     var header = require('connect-header');
 
@@ -38,7 +43,7 @@ gulp.task('serve', ['watch'], function () {
     });
 });
 
-gulp.task('watch', ['default'], function () {
+gulp.task('watch', ['build'], function () {
     gulp.watch([
         '_includes/*.html',
         '_includes/**/*.html',
@@ -192,8 +197,10 @@ gulp.task('images', function () {
         }
 
         console.log(arguments.join(' '));
+        if (build.incremental) {
+            images = images.pipe(changed(targetDirectories.images + '/' + variant, changedParams))
+        }
         var stream = images
-            .pipe(changed(targetDirectories.images + '/' + variant, changedParams))
             .pipe(spawn({cmd: 'convert', args: arguments}))
             .pipe(gulp.dest(targetDirectories.images + '/' + variant))
             .pipe(browserSync.stream());

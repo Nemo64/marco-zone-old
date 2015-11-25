@@ -21,6 +21,7 @@
     "gulp-sourcemaps": "~1.6.0",
     "gulp-spawn": "^0.3.0",
     "merge": "^1.2.0",
-    "merge-stream": "^1.0.0"
+    "merge-stream": "^1.0.0",
+    "yargs": "^3.30.0"
   }
 }
