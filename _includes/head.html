@@ -6,6 +6,14 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <!-- google analytics -->
+    {% include google-analytics.html %}
+
+    <!-- external resources -->
+    <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
+    <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
+
     <!-- realfavicongenerator.net -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
@@ -26,14 +34,6 @@
     <meta name="msapplication-TileColor" content="#d50000">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <meta name="theme-color" content="#d50000">
-
-    <!-- google analytics -->
-    {% include google-analytics.html %}
-
-    <!-- external resources -->
-    <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
-    <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}">
 
     {% if page.title and page.description %}
         <!-- open graph & twitter -->
