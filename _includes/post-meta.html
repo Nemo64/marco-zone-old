@@ -6,16 +6,18 @@
     {% endif %}
     <span class="post-meta-entry disqus-comment-count" data-disqus-identifier="{{ post.url }}"></span>
     {% if include.post.author %}
-    {% assign author=site.data.authors[include.post.author] %}
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="{{ author.name }}">
-        {% if author.email %}<meta itemprop="email" content="{{ author.email }}">{% endif %}
-        {% if author.twitter %}<meta itemprop="url" content="https://twitter.com/{{ author.twitter }}">{% endif %}
-        {% if author.github %}<meta itemprop="url" content="https://github.com/{{ author.github }}">{% endif %}
-        {% if author.website %}<meta itemprop="url" content="{{ author.website }}">{% endif %}
-    </span>
+    {% if include.post.lastmod > include.post.date %}
+    <meta itemprop="dateModified" content="{{ include.post.lastmod | date_to_xmlschema }}">
     {% endif %}
-    {% if include.post.lastmod %}
-    <meta itemprop="dateModified" content="{{ include.post.lastmod | date_to_long_string }}">
+    {% if include.detailed %}
+        {% assign author=site.data.authors[include.post.author] %}
+        <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+            von <span itemprop="name">{{ author.name }}</span>
+            {% if author.email %}<meta itemprop="email" content="{{ author.email }}">{% endif %}
+            {% if author.twitter %}<meta itemprop="url" content="https://twitter.com/{{ author.twitter }}">{% endif %}
+            {% if author.github %}<meta itemprop="url" content="https://github.com/{{ author.github }}">{% endif %}
+            {% if author.website %}<meta itemprop="url" content="{{ author.website }}">{% endif %}
+        </div>
+        {% endif %}
     {% endif %}
 </div>
