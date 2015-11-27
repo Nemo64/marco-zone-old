@@ -33,13 +33,13 @@ $list-item-desktop-breakpoint: md;
 }
 
 .post-list-item {
-    position: relative;
-    min-height: $list-item-height;
     margin-bottom: $list-item-padding;
 }
 
 .post-banner-item,
 .post-list-item {
+    position: relative;
+    min-height: $list-item-height;
     max-width: $paragraph-width;
 }
 
@@ -76,22 +76,14 @@ $list-item-desktop-breakpoint: md;
     min-height: $line-height * $font-size-base * 3;
 }
 
+.post-banner-footer,
 .post-list-footer {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     padding-top: $font-size-base * ($line-height - 1) * 0.5;
-    background-color: $body-bg;
 
-    @include media-breakpoint-up($list-item-desktop-breakpoint) {
-        padding-left: $list-item-height + $list-item-padding;
-    }
-}
-
-.post-banner-header,
-.post-banner-description,
-.post-banner-footer {
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         padding-left: $list-item-height + $list-item-padding;
     }
