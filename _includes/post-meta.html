@@ -7,7 +7,7 @@
     {% if include.comments %}
     <span class="post-meta-entry disqus-comment-count" data-disqus-identifier="{{ include.post.url }}"></span>
     {% endif %}
-    {% if include.post.author and include.detailed %}
+    {% if include.post.author and include.author %}
         {% assign author=site.data.authors[include.post.author] %}
         <span class="post-meta-entry post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
             von <span itemprop="name">{{ author.name }}</span>
