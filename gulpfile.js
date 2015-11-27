@@ -194,17 +194,21 @@ gulp.task('images', function () {
         }
 
         arguments.push('-flatten');
-        arguments.push('-interlace', 'plane');
+
+        if (options.interlace) {
+            arguments.push('-interlace', 'plane');
+        }
 
         // this has to be the last part
         switch (options.format) {
             case 'jpeg':
             case 'jpg':
+                var quality = parseInt(options.quality || 90, 10);
                 images = images.pipe(rename({extname: '.jpeg'}));
                 changedParams.extension = '.jpeg';
-                arguments.push('-quality', '90%');
+                arguments.push('-quality', quality + '%');
                 if (options.width && options.height) {
-                    var calculatedFileSize = Math.ceil(Math.sqrt(options.width * options.height) / 10);
+                    var calculatedFileSize = Math.ceil(Math.sqrt(options.width * options.height) * quality / 1000);
                     arguments.push('-define', 'jpeg:extent=' + Math.max(1, calculatedFileSize) + 'kb');
                 }
                 arguments.push('jpg:-');
@@ -236,21 +240,21 @@ gulp.task('images', function () {
     var jpgOptions = {background: '#6B0000', format: 'jpeg'};
     var gulpStreamOptions = {buffer: false};
 
-    [48, 96].forEach(function (size) {
+    [96].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, crop: true, gravity: 'East'
+            width: size, height: size, crop: true, gravity: 'East', quality: 65
         }, jpgOptions));
     });
 
-    [144, 288].forEach(function (size) {
+    [288].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, upscale: true, backdrop: true
+            width: size, height: size, upscale: true, backdrop: true, quality: 65
         }, jpgOptions));
     });
 
     [768, 1440, 2048].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: Math.floor(size / 21 * 9), crop: true
+            width: size, height: Math.floor(size / 21 * 9), crop: true, interlace: true
         }, jpgOptions));
     });
 

@@ -2,15 +2,14 @@
 
 {% when 'thumbnail' %}
 <picture>
-    <source srcset="{% include image/srcset.html image=include.image sizes='144, 288' %}" sizes="9rem" media="(min-width: 48em)">
-    <source srcset="{% include image/srcset.html image=include.image sizes='48, 96' %}" sizes="3rem">
-    <img src="{% include image/src.html image=include.image variant='144' %}" alt="{{ include.alt }}" {{ include.attr }}>
+    <source srcset="{% include image/srcset.html image=include.image sizes='96' %}" media="(max-width: 47.99em)">
+    <img src="{% include image/src.html image=include.image variant='288' %}" alt="{{ include.alt }}" {{ include.attr }}>
 </picture>
 
 {% when 'banner' %}
-<img src="{% include image/src.html image=include.image variant='1440' %}"
-     srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
+<img srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
      sizes="100vw"
+     src="{% include image/src.html image=include.image variant='1440' %}"
      alt="{{ include.alt }}"
      {{ include.attr }}>
 
