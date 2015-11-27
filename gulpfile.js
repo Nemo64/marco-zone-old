@@ -5,8 +5,10 @@ var argv = require('yargs').argv;
 var deployPath = '_site';
 var sourceFiles = {
     scss: '_resources/*.scss',
-    topicImages: ['_images/topics/*.{png,jpg,jpeg,gif}'],
-    inlineImages: ['_images/inline/**/*.{png,jpg,jpeg,gif}']
+    javascript: '_resources/*.js',
+    allJavascript: ['_resources/*.js', '_resources/javascript/*.js', '_resources/javascript/**/*.js'],
+    topicImages: '_images/topics/*.{png,jpg,jpeg,gif}',
+    inlineImages: '_images/inline/**/*.{png,jpg,jpeg,gif}'
 };
 var targetDirectories = {
     assets: deployPath + '/resources',
@@ -17,7 +19,7 @@ var build = {
     incemental: argv.complete != true
 };
 
-gulp.task('build', ['html', 'css', 'images']);
+gulp.task('build', ['html', 'css', 'images', 'js']);
 
 gulp.task('serve', ['build', 'watch'], function () {
     var modRewrite = require('connect-modrewrite');
@@ -121,6 +123,27 @@ gulp.task('sass', function () {
 });
 
 gulp.task('css', ['sass']);
+
+gulp.task('jshint', function () {
+    var jshint = require('gulp-jshint');
+
+    return gulp.src(sourceFiles.allJavascript)
+        .pipe(jshint())
+        .pipe(jshint.reporter('default', { verbose: true }))
+});
+
+gulp.task('js', ['jshint'], function () {
+    var sourcemaps = require('gulp-sourcemaps');
+    var browserify = require('gulp-browserify');
+    var uglify = require('gulp-uglify');
+
+    return gulp.src(sourceFiles.javascript)
+        .pipe(browserify({debug: true}))
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify({compress: {unsafe: true}}))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(targetDirectories.assets));
+});
 
 gulp.task('images', function () {
     var spawn = require('gulp-spawn-shim');
