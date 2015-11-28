@@ -16,7 +16,8 @@ var targetDirectories = {
 };
 
 var build = {
-    incemental: argv.complete != true
+    incremental: argv.complete != true,
+    verbose: argv.verbose == true
 };
 
 gulp.task('build', ['html', 'css', 'images', 'js']);
@@ -74,7 +75,7 @@ gulp.task('jekyll', function (gulpCallBack) {
     var jekyll = spawn('jekyll', [
         'build',
         '--no-watch',
-        '--quiet',
+        build.verbose ? undefined : '--quiet',
         '--future',
         //'--incremental',
         '--destination', deployPath
@@ -223,12 +224,15 @@ gulp.task('images', function () {
                 arguments.push('-');
         }
 
-        var shellescape = require('shell-escape');
-        console.log(shellescape(arguments));
+        if (build.verbose) {
+            var shellescape = require('shell-escape');
+            console.log(shellescape(arguments));
+        }
 
         if (build.incremental) {
             images = images.pipe(changed(targetDirectories.images + '/' + variant, changedParams))
         }
+
         var stream = images
             .pipe(spawn({cmd: 'convert', args: arguments}))
             .pipe(gulp.dest(targetDirectories.images + '/' + variant))
