@@ -41,7 +41,7 @@ redirects:
                 {% endif %}
 
                 <footer class="post-banner-footer">
-                    {% include post-meta.html post=post %}
+                    {% include post-meta.html post=post author=false %}
                 </footer>
             </article>
         </div>
@@ -77,7 +77,7 @@ redirects:
                     {% endif %}
 
                     <footer class="post-list-footer">
-                        {% include post-meta.html post=post author=false comments=true %}
+                        {% include post-meta.html post=post author=false %}
                     </footer>
 
                 </article>
