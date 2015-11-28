@@ -1,5 +1,6 @@
 $list-item-padding: 1rem;
-$list-item-headline-size: $font-size-h3;
+$list-item-headline-size: 1.4rem;
+$list-item-headline-margin: 0.25rem;
 $list-item-mobile-image-size: 3rem;
 $list-item-height: 9rem;
 $list-item-desktop-breakpoint: md;
@@ -46,6 +47,7 @@ $list-item-desktop-breakpoint: md;
 .post-banner-title,
 .post-list-title {
     font-size: $list-item-headline-size;
+    margin: 0 0 $list-item-headline-margin;
 }
 
 .post-banner-image,
