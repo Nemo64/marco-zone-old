@@ -1,4 +1,4 @@
-<footer class="site-footer" itemscope itemtype="http://schema.org/WPFooter">
+<footer class="site-footer">
 
     <div class="container">
         <div class="row">
@@ -36,7 +36,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     {% for page in site.pages %}{% if page.footernav %}
                     <li class="nav-item">
-                        {% include internal-link.html page=page class='nav-link' attributes='itemprop="url"' %}
+                        {% include internal-link.html page=page class='nav-link' %}
                     </li>
                     {% endif %}{% endfor %}
                 </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
 
-    <head itemscope itemtype="http://schema.org/WebSite">
+    <head>
 
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
@@ -17,13 +17,9 @@
         {% assign feed_url = '/feed.xml' | prepend: site.baseurl | prepend: site.url %}
         <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ feed_url }}">
 
-        <!-- schema.org additions -->
-        <link itemprop="url" href="{{ '/' | prepend: site.baseurl | prepend: site.url }}">
-        <meta itemprop="name" content="{{ site.title }}">
-
     </head>
 
-    <body itemscope itemtype="{% if page.schema %}{{page.schema}}{% else %}http://schema.org/WebPage{% endif %}">
+    <body>
 
         {{ content }}
 
