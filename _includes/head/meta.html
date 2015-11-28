@@ -1,0 +1,19 @@
+{% if page.title and page.description %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@TheTrueNemo">
+    {% if page.author %}<meta name="twitter:creator" content="@{{ site.data.authors[page.author].twitter }}">{% endif %}
+    <meta property="og:title" content="{{ page.title | truncate: 70 }}">
+    <meta property="og:description" content="{{ page.description | strip_html | strip_newlines | truncate: 200 }}">
+    <meta property="og:type" content="{% if page.og.type %}{{ page.og.type }}{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+    {% if page.image %}{% include image.html image=page.image variant='opengraph' %}
+    {% else %}{% include image.html image='marco-zone.jpeg' variant='opengraph' %}
+    {% endif %}
+{% endif %}
+
+{% if page.noindex %}<meta name="robots" content="no-index, nofollow">{% endif %}
+{% if page.description %}<meta name="description" content="{{ page.description | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
+{% if page.author %}<meta name="author" content="{{ site.data.authors[page.author].name }}">{% endif %}
+{% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
+{% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
+<meta name="generator" content="Jekyll v{{ jekyll.version }}">

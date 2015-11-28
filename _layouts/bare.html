@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
-    {% include head.html %}
+
+    <head itemscope itemtype="http://schema.org/WebSite">
+
+        <meta charset="utf-8">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        {% include head/favicons.html %}
+        {% include head/meta.html %}
+
+        <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+        {% assign feed_url = '/feed.xml' | prepend: site.baseurl | prepend: site.url %}
+        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ feed_url }}">
+
+        <!-- schema.org additions -->
+        <link itemprop="url" href="{{ '/' | prepend: site.baseurl | prepend: site.url }}">
+        <meta itemprop="name" content="{{ site.title }}">
+
+    </head>
+
     <body itemscope itemtype="{% if page.schema %}{{page.schema}}{% else %}http://schema.org/WebPage{% endif %}">
+
         {{ content }}
+
         <script src="resources/main.js" async></script>
         <script id="dsq-count-scr" src="//{{ site.disqus_name }}.disqus.com/count.js" async></script>
     </body>
+
 </html>
