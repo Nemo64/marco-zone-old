@@ -1,5 +1,5 @@
 ---
-layout:                     none
+layout:                     null
 permalink:                  /_headers
 is_server_configuration:    true
 ---
