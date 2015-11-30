@@ -1,0 +1,62 @@
+@import "scss/variables";
+
+.post-footer {
+    margin-bottom: 1rem;
+}
+
+#disqus_thread {
+    // the disqus thread does not resize on ipad
+    width: $paragraph-width;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+blockquote {
+    $horizontal-padding: 2rem;
+
+    position: relative;
+    display: table;
+    padding: 0 2rem 1rem;
+    font-size: 95%;
+
+    [lang^=de] & p {
+        text-align: left;
+        hyphens: manual;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        font-family: Georgia, serif;
+        font-size: 3rem;
+    }
+
+    &:before {
+        content: "\201E";
+        bottom: 0;
+        left: 0;
+    }
+
+    &:after {
+        content: "\201C";
+        top: -1.1rem;
+        right: 0;
+    }
+
+    cite {
+        position: absolute;
+        bottom: -.2rem;
+        display: block;
+        font-size: $font-size-xs;
+        color: $text-muted;
+        @include text-truncate;
+
+        a {
+            color: inherit;
+        }
+    }
+}

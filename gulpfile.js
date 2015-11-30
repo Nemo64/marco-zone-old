@@ -16,8 +16,9 @@ var targetDirectories = {
 };
 
 var build = {
-    incremental: argv.complete != true,
-    verbose: argv.verbose == true
+    production: argv.production == true,
+    incremental: argv.complete != true || argv.production == true,
+    verbose: argv.verbose == true || argv.production == true
 };
 
 gulp.task('build', ['html', 'css', 'images', 'js']);
@@ -28,6 +29,9 @@ gulp.task('serve', ['build', 'watch'], function () {
 
     browserSync.init({
         open: false,
+        snippetOptions: {
+            rule: build.production ? { match: /qqqqqqqqq/ } : {}
+        },
         server: {
             baseDir: deployPath,
             middleware: [
@@ -86,7 +90,7 @@ gulp.task('jekyll', function (gulpCallBack) {
     });
 });
 
-gulp.task('html', ['jekyll'], function () {
+gulp.task('html', build.production ? ['jekyll', 'css'] : ['jekyll'], function () {
     var htmlmin = require('gulp-htmlmin');
 
     return gulp.src([deployPath + '/*.html', deployPath + '/**/*.html'])
@@ -98,7 +102,13 @@ gulp.task('html', ['jekyll'], function () {
             removeRedundantAttributes: true,
             removeEmptyAttributes: true,
             removeOptionalTags: false,
-            minifyJS: true
+            minifyJS: true,
+            minifyCSS: {
+                advanced: true,
+                keepSpecialComments: 0,
+                processImport: build.production,
+                root: deployPath
+            }
         }))
         .pipe(gulp.dest(deployPath))
         .pipe(browserSync.stream());
@@ -108,10 +118,20 @@ gulp.task('sass', function () {
     var sourcemaps = require('gulp-sourcemaps');
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
+    var replace = require('gulp-replace');
 
+    var removeRules = 'button,input,optgroup,select,textarea,caption,fieldset,legend,label,figure,hr,dfn,' +
+        '\\.navbar-fixed-bottom,\\.navbar-fixed-top,\\.navbar-sticky-top,\\.navbar-divider,\\.navbar-toggler,.navbar-light' +
+        '\\.nav-tabs,\\.tab-content';
+    var selectorRegEx = '[^{},]*(' + removeRules.split(',').join('|') + ')([\\[\\.\\#\\: ][^{},]*)?';
+    var multiSelectorRegEx = '^' + selectorRegEx + '(\\s*,\\s*' + selectorRegEx + ')*';
+    var blockRegEx = multiSelectorRegEx + '\\s*\\{[^{}]*\\}\\s*';
+
+    console.log(blockRegEx);
     return gulp.src(sourceFiles.scss)
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
+        .pipe(replace(new RegExp(blockRegEx, 'gim'), ''))
         .pipe(autoprefixer({browsers: [
             '> 0.2% in DE',
             'last 2 versions',

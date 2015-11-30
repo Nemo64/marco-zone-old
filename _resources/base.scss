@@ -1,0 +1,77 @@
+@import "scss/variables";
+@import "bower_components/bootstrap/scss/normalize";
+@import "bower_components/bootstrap/scss/reboot";
+
+body {
+    overflow-y: scroll;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    margin-bottom: $headings-margin-bottom;
+}
+
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
+h5, .h5 { font-size: $font-size-h5; }
+h6, .h6 { font-size: $font-size-h6; }
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    color: $headings-color;
+
+    p + & {
+        margin-top: 2rem;
+    }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+blockquote,
+ul, ol, // this can make problems with .nav's but should be fine. They shouldn't be wider than this to begin with
+p {
+    max-width: $paragraph-width;
+}
+
+header, footer {
+    a {
+        color: inherit;
+    }
+}
+
+@supports (hyphens: auto) {
+    //noinspection CssUnknownProperty, CssInvalidPropertyValue
+    [lang^=de] {
+        p, li {
+            text-align: justify;
+            hyphens: auto;
+            // properties not understood by autoprefixer
+            -webkit-hyphenate-limit-before: 3;
+            -webkit-hyphenate-limit-after: 4;
+            hyphenate-limit-chars: auto 3 4;
+        }
+    }
+
+    a, b, abbr, strong, blockquote, .nav > li {
+        hyphens: manual;
+    }
+}

@@ -1,3 +1,6 @@
+---
+layout_styles: []
+---
 <!DOCTYPE html>
 <html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
 
@@ -12,7 +15,25 @@
         {% include head/favicons.html %}
         {% include head/meta.html %}
 
-        <link rel="stylesheet" href="{{ '/resources/main.css' | prepend: site.baseurl }}">
+        <!--suppress CssInvalidImport -->
+        <style>
+            @import url("/resources/base.css");
+            @import url("/resources/layout.css");
+            {% case page.layout %}
+            {% when 'post' %}
+            @import url("/resources/basic-banner.css");
+            @import url("/resources/post-detail.css");
+            @import url("/resources/post-meta.css");
+            @import url("/resources/syntax-highlighting.css");
+            {% endcase %}
+
+            {% for path in page.page_styles %}
+            @import url("{{ path | prepend: '/resources' }}");
+            {% endfor %}
+
+            {{ page.style }}
+        </style>
+
         <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
         {% assign feed_url = '/feed.xml' | prepend: site.baseurl | prepend: site.url %}
         <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ feed_url }}">

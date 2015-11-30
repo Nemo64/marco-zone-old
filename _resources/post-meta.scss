@@ -1,0 +1,12 @@
+@import "scss/variables";
+
+.post-meta {
+    font-size: $font-size-xs;
+    color: $text-muted;
+}
+
+.post-meta-entry {
+    + .post-meta-entry:not(:empty):before {
+        content: " \2014 ";
+    }
+}

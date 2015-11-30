@@ -1,0 +1,97 @@
+@import "scss/variables";
+@import "bower_components/bootstrap/scss/navbar";
+@import "bower_components/bootstrap/scss/nav";
+
+$site-shadow-size: 1rem / 4;
+$site-shadow-color: fade-out(black, 0.9);
+$navbar-height: $line-height * $font-size-base + 2rem;
+
+.navbar-cover {
+    position: absolute;
+    width: 100%;
+    text-shadow: 0 0 2rem rgba(0, 0, 0, .7);
+}
+
+.navbar-cover-bg {
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 100%;
+        // ie 9 & 10 supposedly do not support rem in pseudo elements
+        height: $navbar-height / 1rem * 1em;
+        width: 100%;
+        pointer-events: none;
+    }
+
+    $gradient-color: mix($brand-primary, black, 14%);
+    @include gradient-vertical(fade-out($gradient-color, 0.67), fade-out($gradient-color, 1));
+    background-color: fade-out($gradient-color, 0.75);
+
+    &:after {
+        @include gradient-vertical(fade-out($gradient-color, 0.75), fade-out($gradient-color, 1));
+    }
+}
+
+.container {
+    @include make-container();
+
+    // For each breakpoint, define the maximum width of the container in a media query
+    @each $breakpoint, $container-max-width in $container-max-widths {
+        @include media-breakpoint-up($breakpoint) {
+            max-width: $container-max-width;
+        }
+    }
+}
+
+.row {
+    @include make-row();
+}
+
+// workaround until bootstrap has a working container
+.navbar-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body,
+.site-header,
+.site-footer {
+    background-color: $body-dark-bg;
+}
+
+.site-content {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 $site-shadow-size $site-shadow-color;
+    min-height: 20rem;
+    background-color: $body-bg;
+}
+
+.site-section {
+    padding-top: $spacer-y;
+    padding-bottom: $spacer-y;
+}
+
+.main-page-nav {
+    @include pull-right;
+}
+
+.site-footer {
+    min-height: 10rem;
+    font-size: 95%;
+}
+
+.footer-segment {
+    margin-top: $spacer-y * 2;
+
+    @include make-col();
+    @include make-col-span(12);
+    @include media-breakpoint-up(sm) {
+        @include make-col-span(4);
+    }
+
+    .nav-stacked {
+        margin: 0 -1rem;
+    }
+}

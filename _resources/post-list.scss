@@ -1,33 +1,12 @@
+@import "scss/variables";
+@import "scss/image";
+
 $list-item-padding: 1rem;
 $list-item-headline-size: 1.4rem;
 $list-item-headline-margin: 0.25rem;
 $list-item-mobile-image-size: 3rem;
 $list-item-height: 9rem;
 $list-item-desktop-breakpoint: md;
-
-.post-inner {
-    padding-top: $spacer-y;
-    padding-bottom: $spacer-y;
-}
-
-.post-meta {
-    font-size: $font-size-xs;
-    color: $text-muted;
-}
-
-.post-meta-entry {
-    + .post-meta-entry:not(:empty):before {
-        content: " – ";
-    }
-}
-
-.post-image {
-    margin-bottom: 1rem;
-}
-
-.post-footer {
-    margin-bottom: 1rem;
-}
 
 .post-list-inner {
     padding-top: 1rem;
@@ -89,11 +68,4 @@ $list-item-desktop-breakpoint: md;
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         padding-left: $list-item-height + $list-item-padding;
     }
-}
-
-#disqus_thread {
-    // the disqus thread does not resize on ipad
-    width: $paragraph-width;
-    max-width: 100%;
-    overflow: hidden;
 }

@@ -1,0 +1,29 @@
+@import "scss/variables";
+
+.cover-banner {
+    background-color: $brand-primary;
+    @include gradient-directional(darken($brand-primary, 20%), $brand-primary, -10deg);
+
+    .banner-overlay {
+        text-shadow: 0 0 2rem rgba(0, 0, 0, .4);
+        color: white;
+
+        img {
+            box-shadow: 0 0 2rem rgba(0, 0, 0, .3);
+        }
+    }
+
+    a,
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+        color: inherit;
+    }
+
+    .banner-image {
+        opacity: .1;
+    }
+}

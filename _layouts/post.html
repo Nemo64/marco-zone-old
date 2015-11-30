@@ -15,53 +15,49 @@ layout: bare
         </div>
         {% endif %}
 
-        <div class="container">
+        <div class="container site-section">
 
-            <div class="post-inner">
+            <header class="post-header">
+                <h1 class="post-title" itemprop="headline">
+                    <a href="{{ page.url | prepend: site.baseurl }}">
+                        {{ page.title }}
+                    </a>
+                </h1>
+            </header>
 
-                <header class="post-header">
-                    <h1 class="post-title" itemprop="headline">
-                        <a href="{{ page.url | prepend: site.baseurl }}">
-                            {{ page.title }}
-                        </a>
-                    </h1>
-                </header>
+            <p class="lead" itemprop="description">
+                {{ page.description }}
+            </p>
 
-                <p class="lead" itemprop="description">
-                    {{ page.description }}
-                </p>
-
-                <div class="post-content" itemprop="articleBody">
-                    {{ content }}
-                </div>
-
-                <footer class="post-footer">
-                    {% include post-meta.html post=page author=true comments=false %}
-                </footer>
-
-                <div id="disqus_thread"></div>
-                <script>
-                    var disqus_config = function () {
-                        this.page.url = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}";
-                        this.page.identifier = "{{ page.url }}";
-                    };
-                    (function () {  // DON'T EDIT BELOW THIS LINE
-                        var d = document, s = d.createElement('script');
-
-                        s.src = '//{{ site.disqus_name }}.disqus.com/embed.js';
-
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>
-                    Please enable JavaScript to view the
-                    <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-                </noscript>
-
+            <div class="post-content" itemprop="articleBody">
+                {{ content }}
             </div>
-        </div>
 
+            <footer class="post-footer">
+                {% include post-meta.html post=page author=true comments=false %}
+            </footer>
+
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}";
+                    this.page.identifier = "{{ page.url }}";
+                };
+                (function () {  // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//{{ site.disqus_name }}.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>
+                Please enable JavaScript to view the
+                <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+            </noscript>
+
+        </div>
     </article>
 </div>
 
