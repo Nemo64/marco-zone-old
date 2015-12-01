@@ -47,9 +47,13 @@ h4, .h4,
 h5, .h5,
 h6, .h6,
 blockquote,
-ul, ol, // this can make problems with .nav's but should be fine. They shouldn't be wider than this to begin with
 p {
     max-width: $paragraph-width;
+}
+
+ul, ol {
+    // this can make problems with .nav's but should be fine. They shouldn't be wider than this to begin with
+    max-width: $paragraph-width - 3rem;
 }
 
 header, footer {
@@ -61,7 +65,7 @@ header, footer {
 @supports (hyphens: auto) {
     //noinspection CssUnknownProperty, CssInvalidPropertyValue
     [lang^=de] {
-        p, li {
+        p {
             text-align: justify;
             hyphens: auto;
             // properties not understood by autoprefixer
