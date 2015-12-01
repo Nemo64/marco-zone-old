@@ -17,7 +17,7 @@ var targetDirectories = {
 
 var build = {
     production: argv.production == true,
-    incremental: argv.complete != true || argv.production == true,
+    incremental: argv.complete != true && argv.production != true,
     verbose: argv.verbose == true || argv.production == true
 };
 
@@ -121,7 +121,7 @@ gulp.task('sass', function () {
     var replace = require('gulp-replace');
 
     var removeRules = 'button,input,optgroup,select,textarea,caption,fieldset,legend,label,figure,hr,dfn,' +
-        '\\.navbar-fixed-bottom,\\.navbar-fixed-top,\\.navbar-sticky-top,\\.navbar-divider,\\.navbar-toggler,.navbar-light' +
+        '\\.navbar-fixed-bottom,\\.navbar-fixed-top,\\.navbar-sticky-top,\\.navbar-divider,\\.navbar-toggler,\\.navbar-light' +
         '\\.nav-tabs,\\.tab-content';
     var selectorRegEx = '[^{},]*(' + removeRules.split(',').join('|') + ')([\\[\\.\\#\\: ][^{},]*)?';
     var multiSelectorRegEx = '^' + selectorRegEx + '(\\s*,\\s*' + selectorRegEx + ')*';
@@ -216,10 +216,6 @@ gulp.task('images', function () {
 
         arguments.push('-flatten');
 
-        if (options.interlace) {
-            arguments.push('-interlace', 'plane');
-        }
-
         // this has to be the last part
         switch (options.format) {
             case 'jpeg':
@@ -270,15 +266,15 @@ gulp.task('images', function () {
         }, jpgOptions));
     });
 
-    [288].forEach(function (size) {
+    [128, 256].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, upscale: true, backdrop: true, quality: 65
+            width: size, height: size, upscale: true, backdrop: true, quality: size > 128 ? 65 : 90
         }, jpgOptions));
     });
 
     [768, 1440, 2048].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: Math.floor(size / 21 * 9), crop: true, interlace: true
+            width: size, height: Math.floor(size / 21 * 9), crop: true
         }, jpgOptions));
     });
 

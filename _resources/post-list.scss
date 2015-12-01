@@ -5,7 +5,8 @@ $list-item-padding: 1rem;
 $list-item-headline-size: 1.4rem;
 $list-item-headline-margin: 0.25rem;
 $list-item-mobile-image-size: 3rem;
-$list-item-height: 9rem;
+$list-item-height: 8rem;
+$list-item-footer-height: $line-height * $font-size-xs;
 $list-item-desktop-breakpoint: md;
 
 .post-list-inner {
@@ -21,12 +22,17 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     min-height: $list-item-height;
     max-width: $paragraph-width;
+    padding-bottom: $line-height * $font-size-base;
 }
 
 .post-banner-title,
 .post-list-title {
-    font-size: $list-item-headline-size;
     margin: 0 0 $list-item-headline-margin;
+    font-size: $font-size-lg;
+
+    @include media-breakpoint-up($list-item-desktop-breakpoint) {
+        font-size: $list-item-headline-size;
+    }
 }
 
 .post-banner-image,
@@ -34,13 +40,15 @@ $list-item-desktop-breakpoint: md;
     display: block;
     position: relative;
     z-index: 1;
-    margin-right: $list-item-padding;
     float: left;
     background-color: mix($brand-primary, black, 50%);
 
     @include image-square-container($list-item-mobile-image-size);
+    margin-right: $list-item-padding * 0.8;
+
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         @include image-square-container($list-item-height);
+        margin-right: $list-item-padding;
     }
 
     img {
@@ -63,7 +71,8 @@ $list-item-desktop-breakpoint: md;
     left: 0;
     bottom: 0;
     width: 100%;
-    padding-top: $font-size-base * ($line-height - 1) * 0.5;
+    height: $list-item-footer-height;
+    line-height: $list-item-footer-height;
 
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
         padding-left: $list-item-height + $list-item-padding;

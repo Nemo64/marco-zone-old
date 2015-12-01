@@ -3,7 +3,11 @@
 {% when 'thumbnail' %}
 <picture>
     <source srcset="{% include image/srcset.html image=include.image sizes='96' %}" media="(max-width: 47.99em)">
-    <img src="{% include image/src.html image=include.image variant='288' %}" alt="{{ include.alt }}" {{ include.attr }}>
+    <img srcset="{% include image/srcset.html image=include.image sizes='96, 128, 256' %}"
+         sizes="(max-width: 47.99em) 3rem, 8rem"
+         src="{% include image/src.html image=include.image variant='128' %}"
+         alt="{{ include.alt }}"
+         {{ include.attr }}>
 </picture>
 
 {% when 'banner' %}
@@ -22,7 +26,7 @@
 {% endfor %}
 
 {% when 'enclosure' %}
-<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='288' absolute=true %}"/>
+<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='256' absolute=true %}"/>
 
 {% when 'rss_image' %}
 <image>
@@ -33,7 +37,9 @@
 
 {% else %}
 <p class="image-paragraph">
-    <img src="{% include image/src.html image=include.image variant='inline' %}" alt="{{ include.alt }}" {{ include.attr }}>
+    <img src="{% include image/src.html image=include.image variant='inline' %}"
+         alt="{{ include.alt }}"
+         {{ include.attr }}>
 </p>
 
 {% endcase %}
