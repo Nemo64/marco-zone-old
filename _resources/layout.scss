@@ -87,8 +87,17 @@ body,
 
     @include make-col();
     @include make-col-span(12);
+
     @include media-breakpoint-up(sm) {
-        @include make-col-span(4);
+        &.footer-navigation-segment {
+            @include make-col-span(6);
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        &, &.footer-navigation-segment {
+            @include make-col-span(4);
+        }
     }
 
     .nav-stacked {

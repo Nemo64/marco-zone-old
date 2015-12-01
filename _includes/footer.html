@@ -5,7 +5,7 @@
             <div class="footer-segment">
                 {{ site.description }}
             </div>
-            <div class="footer-segment">
+            <div class="footer-segment footer-navigation-segment">
                 <strong class="h3">Erreichbar unter</strong>
                 <ul class="nav nav-pills nav-stacked">
                     {% if site.github_username %}
@@ -31,7 +31,7 @@
                     {% endif %}
                 </ul>
             </div>
-            <div class="footer-segment">
+            <div class="footer-segment footer-navigation-segment">
                 <strong class="h3">Sonstiges</strong>
                 <ul class="nav nav-pills nav-stacked">
                     {% for page in site.pages %}{% if page.footernav %}
