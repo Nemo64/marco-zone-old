@@ -132,7 +132,6 @@ gulp.task('sass', function () {
     var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 
     return gulp.src(sourceFiles.scss)
-        .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(replace(/([^{}]+)(\{[^{}]*})/g, function (match, selector, blockContent) {
             var filteredSelector = selector.replace(selectorRegEx, '');
@@ -144,7 +143,6 @@ gulp.task('sass', function () {
             'Firefox ESR',
             'not IE <= 8'
         ]}))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(targetDirectories.assets))
         .pipe(browserSync.stream());
 });
