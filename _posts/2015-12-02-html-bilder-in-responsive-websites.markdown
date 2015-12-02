@@ -140,7 +140,7 @@ Mehrere Bilder in verschiedenen Größen an zu bieten ist eine super Sache um di
 
 Allerdings gibt es den Nachteile der komplizierteren Konfiguration und bei sehr vielen Bildern ist die Dateigröße auf dem Server auch nicht zu vernachlässigen. In meinen Tests ist es häufig schlauer das Bild in einer höheren Auflösung aus zu liefern und dafür eine niedrigere Jpeg-Qualität zu verwenden (zB. 65% anstatt 85%). Die Dateien sind dann meistens nicht viel größer als die low-DPI Variante und auf einem high-DPI Gerät ist der Unterschied kaum sichtbar. Es sieht allerdings immer noch deutlich besser aus, als ein low-DPI Bild auf einem high-DPI Gerät.
 
-Wo es allerdings viel Sinn macht ist bei Bannern oder anderen Bildern, die ihre Größe anhand des Viewports ändern. Dort spielt häufig nicht nur die Datengröße eine Rolle, sondern auch die Skalierung vom Endgerät. Der Safari zum Beispiel erzeugt sehr schnell hässliche Treppen bei einer starken Skalierung. Dort macht ein `srcset` sehr viel Sinn.
+Wo es allerdings viel Sinn macht ist bei Bannern oder anderen Bildern, die ihre Größe anhand des Viewports ändern. Dort spielt häufig nicht nur die Datengröße eine Rolle, sondern auch die Skalierung vom Endgerät. Der Safari zum Beispiel erzeugt sehr schnell hässliche Treppen bei einer starken Skalierung und der Chrome erzeugt immer sehr verwaschene Bilder. Dort macht ein `srcset` sehr viel Sinn.
 
 Und zuletzt ist für Art-Direction ein `<picture>`-Element sehr viel Wert. Allerdings kann in einigen Fällen auch eine CSS-Lösung mit Media-Abfragen sehr gut funktionieren. So eine Lösung benötigt dann auch keinen Polyfill.
  
