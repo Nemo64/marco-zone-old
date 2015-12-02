@@ -18,7 +18,7 @@ var targetDirectories = {
 var build = {
     production: argv.production == true,
     incremental: argv.complete != true && argv.production != true,
-    verbose: argv.verbose == true || argv.production == true
+    verbose: argv.verbose == true
 };
 
 gulp.task('build', ['html', 'css', 'images', 'js']);
@@ -120,18 +120,24 @@ gulp.task('sass', function () {
     var autoprefixer = require('gulp-autoprefixer');
     var replace = require('gulp-replace');
 
-    var removeRules = 'button,input,optgroup,select,textarea,caption,fieldset,legend,label,figure,hr,dfn,' +
-        '\\.navbar-fixed-bottom,\\.navbar-fixed-top,\\.navbar-sticky-top,\\.navbar-divider,\\.navbar-toggler,\\.navbar-light' +
-        '\\.nav-tabs,\\.tab-content';
-    var selectorRegEx = '[^{},]*(' + removeRules.split(',').join('|') + ')([\\[\\.\\#\\: ][^{},]*)?';
-    var multiSelectorRegEx = '^' + selectorRegEx + '(\\s*,\\s*' + selectorRegEx + ')*';
-    var blockRegEx = multiSelectorRegEx + '\\s*\\{[^{}]*\\}\\s*';
+    var removeRules = [
+        'button|input|optgroup|select|textarea|label|caption|fieldset|legend', // form elements
+        'address|figure|hr|dfn|h4|h5|h6|abbr|mark|sub|sup', // content description
+        'audio|canvas|progress|video|template|svg', // function
+        'kbd|samp|output', // code
+        'table|tbody|thead|tfoot|tr|td|th', // table
+        '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
+        '\\.nav-tabs|\\.tab-content' // tabs
+    ];
+    var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 
-    console.log(blockRegEx);
     return gulp.src(sourceFiles.scss)
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
-        .pipe(replace(new RegExp(blockRegEx, 'gim'), ''))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(replace(/([^{}]+)(\{[^{}]*})/g, function (match, selector, blockContent) {
+            var filteredSelector = selector.replace(selectorRegEx, '');
+            return (filteredSelector.length > 0) ? (filteredSelector + blockContent) : '';
+        }))
         .pipe(autoprefixer({browsers: [
             '> 0.2% in DE',
             'last 2 versions',
