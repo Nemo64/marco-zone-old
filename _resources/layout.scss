@@ -9,7 +9,6 @@ $navbar-height: $line-height * $font-size-base + 2rem;
 .navbar-cover {
     position: absolute;
     width: 100%;
-    text-shadow: 0 0 2rem rgba(0, 0, 0, .7);
 }
 
 .navbar-cover-bg {
@@ -55,9 +54,14 @@ $navbar-height: $line-height * $font-size-base + 2rem;
 }
 
 body,
-.site-header,
 .site-footer {
     background-color: $body-dark-bg;
+}
+
+.site-header {
+    background-color: $brand-primary;
+    @include gradient-directional(darken($brand-primary, 20%), $brand-primary, -10deg);
+    text-shadow: 0 0 2rem rgba(0, 0, 0, .7);
 }
 
 .site-content {
@@ -100,7 +104,8 @@ body,
         }
     }
 
-    .nav-stacked {
-        margin: 0 -1rem;
+    .nav-stacked .nav-link {
+        margin: 0 $grid-gutter-width / -2;
+        padding: .5rem $grid-gutter-width / 2;
     }
 }
