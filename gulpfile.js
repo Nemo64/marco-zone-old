@@ -23,7 +23,7 @@ var build = {
 
 gulp.task('build', ['html', 'css', 'images', 'js']);
 
-gulp.task('serve', ['build', 'watch'], function () {
+gulp.task('serve', function () {
     var modRewrite = require('connect-modrewrite');
     var header = require('connect-header');
 
@@ -50,28 +50,32 @@ gulp.task('serve', ['build', 'watch'], function () {
     });
 });
 
-gulp.task('watch', ['build'], function () {
-    gulp.watch([
-        '_includes/*.html',
-        '_includes/**/*.html',
-        '_layouts/*.html',
-        '_layouts/**/*.html',
-        '_data/*',
-        '_data/**/*',
-        '_posts/*',
-        '_posts/**/*',
-        'pages/*',
-        'pages/**/*',
-        'meta_files/*'
-    ], ['html']);
-    gulp.watch([
-        '_resources/*.scss',
-        '_resources/**/*.scss'
-    ], ['css']);
-    gulp.watch([
-        'images/*',
-        'images/**/*'
-    ], ['images']);
+gulp.task('watch', function () {
+    var watchFiles = {
+        html: [
+            '_includes/*.html',
+            '_includes/**/*.html',
+            '_layouts/*.html',
+            '_layouts/**/*.html',
+            '_data/*',
+            '_data/**/*',
+            '_posts/*',
+            '_posts/**/*',
+            'pages/*',
+            'pages/**/*',
+            'meta_files/*'
+        ],
+        css: [
+            '_resources/*.scss',
+            '_resources/**/*.scss'
+        ]
+    };
+    if (build.production) {
+        gulp.watch(watchFiles.html.concat(watchFiles.css), ['html', 'css']);
+    } else {
+        gulp.watch(watchFiles.html, ['html']);
+        gulp.watch(watchFiles.css, ['css']);
+    }
 });
 
 gulp.task('jekyll', function (gulpCallBack) {
