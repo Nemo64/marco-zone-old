@@ -130,6 +130,7 @@ gulp.task('sass', function () {
         'audio|canvas|progress|video|template|svg', // function
         'kbd|samp|output', // code
         'table|tbody|thead|tfoot|tr|td|th', // table
+        'dl|dt|dd', // definition list
         '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
         '\\.nav-tabs|\\.tab-content' // tabs
     ];
