@@ -277,7 +277,7 @@ gulp.task('images', function () {
 
     [128, 256].forEach(function (size) {
         resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, upscale: true, backdrop: true, quality: size > 128 ? 65 : 90
+            width: size, height: size, upscale: true, backdrop: true, quality: size >= 256 ? 65 : 85
         }, jpgOptions));
     });
 

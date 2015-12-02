@@ -3,9 +3,9 @@
 {% when 'thumbnail' %}
 <picture>
     <source srcset="{% include image/srcset.html image=include.image sizes='96' %}" media="(max-width: 47.99em)">
-    <img srcset="{% include image/srcset.html image=include.image sizes='96, 128, 256' %}"
-         sizes="(max-width: 47.99em) 3rem, 8rem"
-         src="{% include image/src.html image=include.image variant='128' %}"
+    <img srcset="{% include image/srcset.html image=include.image sizes='128, 256' %}"
+         sizes="(min-width: 48em) 8rem, 3rem"
+         src="{% include image/src.html image=include.image variant='256' %}"
          alt="{{ include.alt }}"
          {{ include.attr }}>
 </picture>
