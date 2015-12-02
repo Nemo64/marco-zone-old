@@ -3,6 +3,7 @@ $enable-rounded: false;
 $grid-gutter-width: 1rem; // just 2 pixels for nice round numbers, i don't unterstand bootstraps default value here
 
 $brand-primary: #D50000;
+$brand-dark: mix($brand-primary, black, 50%);
 
 $font-size-h1: 2rem;
 $font-size-h2: 1.7rem;

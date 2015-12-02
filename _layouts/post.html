@@ -4,17 +4,16 @@ layout: bare
 
 {% include header.html class='navbar-dark navbar-cover navbar-cover-bg' %}
 
-<div class="site-content">
-    <article class="post" itemprop="mainEntity"
-             itemscope itemtype="http://schema.org/BlogPosting"
-             itemid="{{ page.url | prepend: site.baseurl }}">
+<article class="post" itemprop="mainEntity"
+         itemscope itemtype="http://schema.org/BlogPosting"
+         itemid="{{ page.url | prepend: site.baseurl }}">
 
-        {% if page.image %}
-        <div class="post-image banner">
-            {% include image.html image=page.image variant='banner' attr='itemprop="image" class="banner-image"' %}
-        </div>
-        {% endif %}
-
+    {% if page.image %}
+    <div class="post-image banner">
+        {% include image.html image=page.image variant='banner' attr='itemprop="image" class="banner-image"' %}
+    </div>
+    {% endif %}
+    <div class="site-content">
         <div class="container site-section">
 
             <header class="post-header">
@@ -58,7 +57,7 @@ layout: bare
             </noscript>
 
         </div>
-    </article>
-</div>
+    </div>
+</article>
 
 {% include footer.html %}

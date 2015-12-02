@@ -41,7 +41,7 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     z-index: 1;
     float: left;
-    background-color: mix($brand-primary, black, 50%);
+    background-color: $brand-dark;
 
     @include image-square-container($list-item-mobile-image-size);
     margin-right: $list-item-padding * 0.8;
