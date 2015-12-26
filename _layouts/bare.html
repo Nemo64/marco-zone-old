@@ -2,21 +2,20 @@
 layout_styles: []
 ---
 <!DOCTYPE html>
-<html lang="{{ page.language }}" prefix="og: http://ogp.me/ns#">
+<html lang="{{ page.language }}" amp>
 
     <head>
 
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width,minimum-scale=1">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
         <meta name="format-detection" content="telephone=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
 
-        {% include head/favicons.html %}
-        {% include head/meta.html %}
+        <style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
 
         <!--suppress CssInvalidImport -->
-        <style>
+        <style amp-custom>
             @import url("/resources/base.css");
             @import url("/resources/layout.css");
             {% case page.layout %}
@@ -34,6 +33,9 @@ layout_styles: []
             {{ page.style }}
         </style>
 
+        {% include head/favicons.html %}
+        {% include head/meta.html %}
+
         <link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
         {% assign feed_url = '/feed.xml' | prepend: site.baseurl | prepend: site.url %}
         <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ feed_url }}">
@@ -44,7 +46,6 @@ layout_styles: []
 
         {{ content }}
 
-        <script src="resources/main.js" async></script>
     </body>
 
 </html>

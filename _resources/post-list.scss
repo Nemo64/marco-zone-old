@@ -51,6 +51,8 @@ $list-item-desktop-breakpoint: md;
         margin-right: $list-item-padding;
     }
 
+    // not needed anymore (and removed automaticalls) since amp-img uses layout="fill"
+    // however, if i ever want to go back, i have the style right here
     img {
         @include image-contain;
     }

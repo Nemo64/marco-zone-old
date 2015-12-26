@@ -58,20 +58,21 @@ header, footer {
     }
 }
 
-@supports (hyphens: auto) {
-    //noinspection CssUnknownProperty, CssInvalidPropertyValue
-    [lang^=de] {
-        p {
-            text-align: justify;
-            hyphens: auto;
-            // properties not understood by autoprefixer
-            -webkit-hyphenate-limit-before: 3;
-            -webkit-hyphenate-limit-after: 4;
-            hyphenate-limit-chars: auto 3 4;
-        }
-    }
-
-    a, b, abbr, strong, blockquote, .nav > li {
-        hyphens: manual;
-    }
-}
+// removed for now, amp mobile does not like @supports
+//@supports (hyphens: auto) {
+//    //noinspection CssUnknownProperty, CssInvalidPropertyValue
+//    [lang^=de] {
+//        p {
+//            text-align: justify;
+//            hyphens: auto;
+//            // properties not understood by autoprefixer
+//            -webkit-hyphenate-limit-before: 3;
+//            -webkit-hyphenate-limit-after: 4;
+//            hyphenate-limit-chars: auto 3 4;
+//        }
+//    }
+//
+//    a, b, abbr, strong, blockquote, .nav > li {
+//        hyphens: manual;
+//    }
+//}

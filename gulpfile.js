@@ -5,8 +5,6 @@ var argv = require('yargs').argv;
 var deployPath = '_site';
 var sourceFiles = {
     scss: '_resources/*.scss',
-    javascript: '_resources/*.js',
-    allJavascript: ['_resources/*.js', '_resources/javascript/*.js', '_resources/javascript/**/*.js'],
     topicImages: '_images/topics/*.{png,jpg,jpeg,gif}',
     inlineImages: '_images/inline/**/*.{png,jpg,jpeg,gif}'
 };
@@ -21,7 +19,7 @@ var build = {
     verbose: argv.verbose == true
 };
 
-gulp.task('build', ['html', 'css', 'images', 'js']);
+gulp.task('build', ['html', 'css', 'images']);
 
 gulp.task('serve', function () {
     var modRewrite = require('connect-modrewrite');
@@ -125,6 +123,7 @@ gulp.task('sass', function () {
     var replace = require('gulp-replace');
 
     var removeRules = [
+        '@[\\w-]*viewport', // is currently still invalid
         'button|input|optgroup|select|textarea|label|caption|fieldset|legend', // form elements
         'address|figure|hr|dfn|h4|h5|h6|abbr|mark|sub|sup', // content description
         'audio|canvas|progress|video|template|svg', // function
@@ -132,7 +131,8 @@ gulp.task('sass', function () {
         'table|tbody|thead|tfoot|tr|td|th', // table
         'dl|dt|dd', // definition list
         '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
-        '\\.nav-tabs|\\.tab-content' // tabs
+        '\\.nav-tabs|\\.tab-content', // tabs
+        'img' // replaced though amp- versions
     ];
     var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 
@@ -153,27 +153,6 @@ gulp.task('sass', function () {
 });
 
 gulp.task('css', ['sass']);
-
-gulp.task('jshint', function () {
-    var jshint = require('gulp-jshint');
-
-    return gulp.src(sourceFiles.allJavascript)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default', { verbose: true }))
-});
-
-gulp.task('js', ['jshint'], function () {
-    var sourcemaps = require('gulp-sourcemaps');
-    var browserify = require('gulp-browserify');
-    var uglify = require('gulp-uglify');
-
-    return gulp.src(sourceFiles.javascript)
-        .pipe(browserify({debug: true}))
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify({compress: {unsafe: true}}))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(targetDirectories.assets));
-});
 
 gulp.task('images', function () {
     var spawn = require('gulp-spawn-shim');

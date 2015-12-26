@@ -1,21 +1,30 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-<picture>
-    <source srcset="{% include image/srcset.html image=include.image sizes='96' %}" media="(max-width: 47.99em)">
-    <img srcset="{% include image/srcset.html image=include.image sizes='128, 256' %}"
-         sizes="(min-width: 48em) 8rem, 3rem"
-         src="{% include image/src.html image=include.image variant='256' %}"
+<amp-img srcset="{% include image/srcset.html image=include.image sizes='128, 256' %}"
+         width="128"
+         height="128"
+         sizes="8rem"
+         layout="fill"
+         media="(min-width: 48em)"
          alt="{{ include.alt }}"
-         {{ include.attr }}>
-</picture>
+         {{ include.attr }}></amp-img>
+<amp-img src="{% include image/src.html image=include.image variant='96' %}"
+         width="96"
+         height="96"
+         layout="fill"
+         media="(max-width: 47.99em)"
+         alt="{{ include.alt }}"
+         {{ include.attr }}></amp-img>
 
 {% when 'banner' %}
-<img srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
-     sizes="100vw"
-     src="{% include image/src.html image=include.image variant='1440' %}"
-     alt="{{ include.alt }}"
-     {{ include.attr }}>
+<amp-img srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
+         sizes="100vw"
+         width="2048"
+         height="877"
+         layout="responsive"
+         alt="{{ include.alt }}"
+         {{ include.attr }}>
 
 {% when 'opengraph' %}
 {% assign sizes = '768, 1440' | split: ', ' %}

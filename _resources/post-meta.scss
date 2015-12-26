@@ -6,7 +6,7 @@
 }
 
 .post-meta-entry {
-    + .post-meta-entry:not(:empty):before {
+    + .post-meta-entry:before {
         content: " \2014 ";
     }
 }

@@ -78,7 +78,7 @@ body,
 }
 
 .main-page-nav {
-    @include pull-right;
+    float: right;
 }
 
 .site-footer {

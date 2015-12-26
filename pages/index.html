@@ -19,8 +19,7 @@ page_styles:
 
     {% for post in site.posts limit: 1 %}
     <div class="banner cover-banner" itemprop="blogPost"
-         itemscope itemtype="http://schema.org/BlogPosting"
-         itemid="{{ post.url | prepend: site.baseurl }}">
+         itemscope itemtype="http://schema.org/BlogPosting">
         <a href="{{ post.url | prepend: site.baseurl }}" tabindex="-1">
             {% include image.html image=post.image variant='banner' attr='class="banner-image"' %}
         </a>
@@ -60,8 +59,7 @@ page_styles:
             <div class="post-list-inner">
                 {% for post in site.posts offset: 1 %}
                 <article class="post-list-item" itemprop="blogPost"
-                         itemscope itemtype="http://schema.org/BlogPosting"
-                         itemid="{{ post.url | prepend: site.baseurl }}">
+                         itemscope itemtype="http://schema.org/BlogPosting">
 
                     <header class="post-list-header">
                         <h1 class="post-list-title">
