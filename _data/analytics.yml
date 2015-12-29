@@ -1,0 +1,8 @@
+vars:
+  account: "UA-60388424-1"
+triggers:
+  default pageview:
+    "on": LOAD
+    request: pageview
+    vars:
+      title: "[title]"
