@@ -38,4 +38,4 @@ $text-muted: fade-out($body-color, 0.6);
 @import "../bower_components/bootstrap/scss/variables";
 @import "../bower_components/bootstrap/scss/mixins";
 
-$paragraph-width: map_get($container-max-widths, md) - $grid-gutter-width;
+$paragraph-width: map_get($container-max-widths, md) - ($grid-gutter-width / 1rem) * 16px;

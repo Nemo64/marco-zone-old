@@ -2,18 +2,8 @@
 
 {% when 'thumbnail' %}
 <amp-img srcset="{% include image/srcset.html image=include.image sizes='128, 256' %}"
-         width="128"
-         height="128"
-         sizes="8rem"
+         sizes="(min-width: 768px) 8rem, 3rem"
          layout="fill"
-         media="(min-width: 48em)"
-         alt="{{ include.alt }}"
-         {{ include.attr }}></amp-img>
-<amp-img src="{% include image/src.html image=include.image variant='96' %}"
-         width="96"
-         height="96"
-         layout="fill"
-         media="(max-width: 47.99em)"
          alt="{{ include.alt }}"
          {{ include.attr }}></amp-img>
 

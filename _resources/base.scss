@@ -49,7 +49,7 @@ p {
 
 ul, ol {
     // this can make problems with .nav's but should be fine. They shouldn't be wider than this to begin with
-    max-width: $paragraph-width - 3rem;
+    max-width: $paragraph-width * 0.9;
 }
 
 header, footer {

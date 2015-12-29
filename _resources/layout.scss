@@ -9,6 +9,7 @@ $navbar-height: $line-height * $font-size-base + 2rem;
 .navbar-cover {
     position: absolute;
     width: 100%;
+    z-index: $zindex-navbar;
 }
 
 .navbar-cover-bg {

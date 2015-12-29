@@ -77,7 +77,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('jekyll', function (gulpCallBack) {
-    var spawn = require('child_process').spawn;
+    var spawn = require('win-spawn');
     var jekyll = spawn('jekyll', [
         'build',
         '--no-watch',
@@ -117,7 +117,6 @@ gulp.task('html', build.production ? ['jekyll', 'css'] : ['jekyll'], function ()
 });
 
 gulp.task('sass', function () {
-    var sourcemaps = require('gulp-sourcemaps');
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
     var replace = require('gulp-replace');
@@ -155,118 +154,40 @@ gulp.task('sass', function () {
 gulp.task('css', ['sass']);
 
 gulp.task('images', function () {
-    var spawn = require('gulp-spawn-shim');
-    var rename = require('gulp-rename');
-    var changed = require("gulp-changed");
-    var merge = require('merge');
-
+    var gm = require('gulp-gm');
     var masterStream = require('merge-stream')();
 
-    var resizePipe = function (images, variant, options) {
-        var arguments = [];
-        var changedParams = {};
-
-        arguments.push('-', '-strip');
-        arguments.push('-gravity', options.gravity || 'center');
-
-        if (options.width || options.height) {
-            var size = [options.width, options.height].join('x');
-            arguments.push('-filter', 'Catrom');
-
-            if (options.crop) {
-                arguments.push('-resize', size + '^', '-crop', size + '+0+0', '+repage');
-            } else if (options.upscale) {
-                arguments.push('-resize', size);
-            } else {
-                arguments.push('-resize', size + '>');
-            }
-
-            if (options.backdrop && options.width && options.height) {
-                arguments.push('-background', 'transparent', '-extent', size);
-
-                var blurStrength = Math.max(options.width, options.height) / 24;
-                var scaleFactor = 3;
-                arguments.push('(', '+clone');
-                arguments.push('-level', '10%,90%');
-                arguments.push('-modulate', '100,150');
-                arguments.push('-blur', '0x' + blurStrength);
-                arguments.push('-resize', scaleFactor * 100 + '%');
-                arguments.push('-channel', 'a', '-evaluate', 'multiply', '0.9');
-                arguments.push('-gravity', 'East', '-crop', size + '+' + (blurStrength * scaleFactor * 2) + '+0');
-                arguments.push('-page', '+0+0');
-                arguments.push(')', '+swap');
-            }
-        }
-
-        if (options.background || options.format === 'jpeg') {
-            arguments.push('-background', options.background || 'white');
-        }
-
-        arguments.push('-flatten');
-
-        // this has to be the last part
-        switch (options.format) {
-            case 'jpeg':
-            case 'jpg':
-                var quality = parseInt(options.quality || 90, 10);
-                images = images.pipe(rename({extname: '.jpeg'}));
-                changedParams.extension = '.jpeg';
-                arguments.push('-quality', quality + '%');
-                if (options.width && options.height) {
-                    var calculatedFileSize = Math.ceil(Math.sqrt(options.width * options.height) * quality / 1000);
-                    arguments.push('-define', 'jpeg:extent=' + Math.max(1, calculatedFileSize) + 'kb');
-                }
-                arguments.push('jpg:-');
-                break;
-            case 'png':
-                images = images.pipe(rename({extname: '.png'}));
-                changedParams.extension = '.png';
-                arguments.push('-quality', '9');
-                arguments.push('png:-');
-                break;
-            default:
-                arguments.push('-');
-        }
-
-        if (build.verbose) {
-            var shellescape = require('shell-escape');
-            console.log(shellescape(arguments));
-        }
-
-        if (build.incremental) {
-            images = images.pipe(changed(targetDirectories.images + '/' + variant, changedParams))
-        }
-
-        var stream = images
-            .pipe(spawn({cmd: 'convert', args: arguments}))
-            .pipe(gulp.dest(targetDirectories.images + '/' + variant))
-            .pipe(browserSync.stream());
-
+    function processImages(src, variant, callback) {
+        var stream = gulp.src(src)
+            .pipe(gm(callback))
+            .pipe(gulp.dest(targetDirectories.images + '/' + variant));
         masterStream.add(stream);
-    };
+    }
 
-    var jpgOptions = {background: '#6B0000', format: 'jpeg'};
-    var gulpStreamOptions = {buffer: false};
+    function asIs(gmfile) {
+        return gmfile.strip();
+    }
 
-    [96].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, crop: true, gravity: 'East', quality: 65
-        }, jpgOptions));
+    function asJpeg(quality, gmfile) {
+        return gmfile.strip().background('#6B0000').flatten().setFormat('jpeg').quality(quality);
+    }
+
+    [128, 256].forEach(function (width) {
+        processImages(sourceFiles.topicImages, width, function (gmfile) {
+            return asJpeg(width > 128 ? 65 : 90, gmfile.resize(width, width, '^').gravity('Center').crop(width, width));
+        });
     });
 
-    [128, 256].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: size, upscale: true, backdrop: true, quality: size >= 256 ? 65 : 85
-        }, jpgOptions));
+    [768, 1440, 2048].forEach(function (width) {
+        var height = Math.floor(width / 21 * 9);
+        processImages(sourceFiles.topicImages, width, function (gmfile) {
+            return asJpeg(90, gmfile.resize(width, height, '^').gravity('Center').crop(width, height));
+        });
     });
 
-    [768, 1440, 2048].forEach(function (size) {
-        resizePipe(gulp.src(sourceFiles.topicImages, gulpStreamOptions), size, merge({
-            width: size, height: Math.floor(size / 21 * 9), crop: true
-        }, jpgOptions));
+    processImages(sourceFiles.inlineImages, 'inline', function (gmfile) {
+        return asIs(gmfile.resize(690, null, '>'));
     });
-
-    resizePipe(gulp.src(sourceFiles.inlineImages, gulpStreamOptions), 'inline', {width: 690});
 
     return masterStream;
 });

@@ -23,6 +23,7 @@
 }
 
 @mixin image-square-container($size) {
-    @include square($size);
+    width: $size;
+    height: $size;
     @include image-container($size);
 }
