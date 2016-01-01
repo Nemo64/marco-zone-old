@@ -27,6 +27,7 @@ gulp.task('serve', function () {
 
     browserSync.init({
         open: false,
+        https: true,
         snippetOptions: {
             rule: build.production ? { match: /qqqqqqqqq/ } : {}
         },
@@ -39,7 +40,6 @@ gulp.task('serve', function () {
                 ]),
                 header({
                     // these should be the same in the _headers file
-                    'X-Frame-Options': 'DENY',
                     'X-UA-Compatible': 'IE=Edge',
                     'X-XSS-Protection': '1; mode=block'
                 })

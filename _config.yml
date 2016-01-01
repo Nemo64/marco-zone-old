@@ -4,6 +4,8 @@ email: hallo@marco.zone
 description: Dies ist ein Platzhalter für eine gute Beschreibung der Seite
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://www.marco.zone" # the base hostname & protocol for your site
+alt_baseurl: ""
+alt_url: "https://marco-zone.netlify.com"
 image_baseurl: "/images" # subpath for iamges
 image_url: "https://www.marco.zone" # hostname & protocol for images
 twitter_username: thetruenemo

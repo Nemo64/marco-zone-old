@@ -4,11 +4,8 @@
     margin-bottom: 1rem;
 }
 
-#disqus_thread {
-    // the disqus thread does not resize on ipad
-    width: $paragraph-width;
-    max-width: 100%;
-    overflow: hidden;
+.post-comments {
+    max-width: $paragraph-width;
 }
 
 blockquote {

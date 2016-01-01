@@ -8,9 +8,12 @@ layout_styles: []
 
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <meta name="viewport" content="width=device-width,minimum-scale=1">
         <meta name="format-detection" content="telephone=no">
 
+        {% if page.layout == 'post' %}
+        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+        {% endif %}
         <style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
         <script async src="https://cdn.ampproject.org/v0.js"></script>
 
@@ -18,13 +21,12 @@ layout_styles: []
         <style amp-custom>
             @import url("/resources/base.css");
             @import url("/resources/layout.css");
-            {% case page.layout %}
-            {% when 'post' %}
+            {% if page.layout == 'post' %}
             @import url("/resources/basic-banner.css");
             @import url("/resources/post-detail.css");
             @import url("/resources/post-meta.css");
             @import url("/resources/syntax-highlighting.css");
-            {% endcase %}
+            {% endif %}
 
             {% for path in page.page_styles %}
             @import url("{{ path | prepend: '/resources' }}");
