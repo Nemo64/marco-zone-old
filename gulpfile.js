@@ -141,6 +141,7 @@ gulp.task('sass', function () {
             var filteredSelector = selector.replace(selectorRegEx, '');
             return (filteredSelector.length > 0) ? (filteredSelector + blockContent) : '';
         }))
+        .pipe(replace(/\s*!important\s*/ig, '')) // !important is prohibited by amp
         .pipe(autoprefixer({browsers: [
             '> 0.2% in DE',
             'last 2 versions',
