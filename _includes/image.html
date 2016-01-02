@@ -28,16 +28,6 @@
 <meta property="og:image:height" content="{{ size | times: 100 | divided_by: 191 }}">
 {% endfor %}
 
-{% when 'enclosure' %}
-<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='192' absolute=true %}"/>
-
-{% when 'rss_image' %}
-<image>
-    <url>{% include image/src.html absolute=true image=include.image variant='768' absolute=true %}</url>
-    <title>{{ site.title | xml_escape }}</title>
-    <link>{{ site.url | prepend: site.baseurl }}/</link>
-</image>
-
 {% else %}
 <figure class="image-figure">
     {% assign max-width = 704 %}

@@ -4,7 +4,7 @@ changefreq: weekly
 permalink:  /feed.xml
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>{{ site.title | xml_escape }}</title>
         <description>{{ site.description | xml_escape }}</description>
@@ -14,7 +14,6 @@ permalink:  /feed.xml
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         <generator>Jekyll v{{ jekyll.version }}</generator>
         <language>de</language>
-        {% include image.html variant='rss_image' image='marco-zone.jpeg' %}
         {% for post in site.posts limit:10 %}
         <item>
             <title>{{ post.title | xml_escape }}</title>
@@ -22,10 +21,8 @@ permalink:  /feed.xml
             <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
             <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
             {% for cat in post.categories %}<category>{{ cat | xml_escape }}</category>{% endfor %}
-            <comments>{{ post.url | prepend: site.baseurl | prepend: site.url | append: '#disqus_thread' }}</comments>
-            {% include image.html image=post.image variant='enclosure' %}
+            <comments>{{ post.url | prepend: site.baseurl | prepend: site.url | append: '#comments' }}</comments>
             <description>{{ post.description | strip_html | strip_newlines | xml_escape }}</description>
-            <content:encoded><![CDATA[{{ post.content | replace_regex: '\s*data-[\w-]+(="[^"]*")?', '' | replace_regex: '(?<=src=")', site.image_url }}]]></content:encoded>
         </item>
         {% endfor %}
     </channel>
