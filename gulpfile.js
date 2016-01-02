@@ -181,7 +181,8 @@ gulp.task('images', function () {
     });
 
     [768, 1440, 2048].forEach(function (width) {
-        var height = Math.floor(width / 21 * 9);
+        // the aspect ratio is taken from https://developers.facebook.com/docs/sharing/best-practices#images
+        var height = Math.floor(width / 1.91);
         processImages(sourceFiles.topicImages, width, function (gmfile) {
             return asJpeg(90, gmfile.resize(width, height, '^').gravity('Center').crop(width, height));
         });
