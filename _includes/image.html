@@ -40,8 +40,11 @@
 
 {% else %}
 <figure class="image-figure">
+    {% assign max-width = 704 %}
     <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
-             sizes="(min-width: {{ include.width }}px) {{ include.width }}px, 100vw"
+             {% if include.width >= max-width %}sizes="100vw"
+             {% else %}sizes="(min-width: {{ include.width }}px) {{ include.width }}px, 100vw"
+             {% endif %}
              alt="{{ include.alt }}"
              width="{{ include.width }}"
              height="{{ include.height }}"
