@@ -53,12 +53,12 @@ $banner-aspect-ratio: 1 / 1.91;
     padding-top: $navbar-height;
     pointer-events: none;
 
-    > * {
+    .banner-overlay-content {
         pointer-events: auto;
     }
 }
 
-@media (min-width: ($banner-max-height / $banner-aspect-ratio)) {
+@media (min-width: ($banner-max-height / $banner-aspect-ratio / 1rem * 16px)) {
     .banner:before {
         padding-bottom: $banner-max-height;
     }
