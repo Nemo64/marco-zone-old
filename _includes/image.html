@@ -39,7 +39,7 @@
 </image>
 
 {% else %}
-<p class="image-paragraph">
+<figure class="image-figure">
     <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
              sizes="(min-width: {{ include.width }}px) {{ include.width }}px, 100vw"
              alt="{{ include.alt }}"
@@ -47,6 +47,6 @@
              height="{{ include.height }}"
              {{ include.attr }}>
     </amp-img>
-</p>
+</figure>
 
 {% endcase %}

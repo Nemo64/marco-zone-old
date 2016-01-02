@@ -5,22 +5,27 @@ code {
     font-size: .9em;
     color: $code-color;
     background-color: $code-bg;
-    hyphens: none;
     word-break: keep-all;
 }
 
 .highlight {
     $horizontal-padding: $grid-gutter-width / 4;
-
-    @include gradient-horizontal($code-bg, $body-bg);
-    margin: (-$grid-gutter-width / 6) 0;
+    $vertical-padding: $grid-gutter-width / 6;
 
     > pre {
         display: block;
-        padding: ($grid-gutter-width / 6) $horizontal-padding;
         line-height: 1.3;
         font-size: .9em;
         color: $pre-color;
+        white-space: pre-wrap;
+
+        margin: (-$vertical-padding) 0;
+        padding: $vertical-padding $horizontal-padding;
+        background-color: $code-bg;
+
+        @include media-breakpoint-up(sm) {
+            @include gradient-horizontal($code-bg, $body-bg);
+        }
 
         // Account for some code outputs that place code tags in pre tags
         code {
