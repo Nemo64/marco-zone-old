@@ -1,11 +1,12 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-<amp-img srcset="{% include image/srcset.html image=include.image sizes='128, 256' %}"
-         sizes="(min-width: 768px) 8rem, 3rem"
+<amp-img srcset="{% include image/srcset.html image=include.image sizes='48, 96, 192' %}"
+         sizes="(min-width: 768px) 6rem, 3rem"
          layout="fill"
          alt="{{ include.alt }}"
-         {{ include.attr }}></amp-img>
+         {{ include.attr }}>
+</amp-img>
 
 {% when 'banner' %}
 <amp-img srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
@@ -15,6 +16,7 @@
          layout="responsive"
          alt="{{ include.alt }}"
          {{ include.attr }}>
+</amp-img>
 
 {% when 'opengraph' %}
 {% assign sizes = '768, 1440' | split: ', ' %}
@@ -25,7 +27,7 @@
 {% endfor %}
 
 {% when 'enclosure' %}
-<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='256' absolute=true %}"/>
+<enclosure length="0" type="image/jpeg" url="{% include image/src.html image=include.image variant='192' absolute=true %}"/>
 
 {% when 'rss_image' %}
 <image>

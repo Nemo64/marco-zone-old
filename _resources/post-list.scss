@@ -2,10 +2,9 @@
 @import "scss/image";
 
 $list-item-padding: 1rem;
-$list-item-headline-size: 1.4rem;
-$list-item-headline-margin: 0.25rem;
-$list-item-mobile-image-size: 3rem;
-$list-item-height: 8rem;
+$list-item-headline-size: $font-size-base * $line-height / $headings-line-height;
+$list-item-mobile-image-size: $list-item-headline-size * $headings-line-height * 2;
+$list-item-height: 6rem;
 $list-item-footer-height: $line-height * $font-size-xs;
 $list-item-desktop-breakpoint: md;
 
@@ -27,12 +26,9 @@ $list-item-desktop-breakpoint: md;
 
 .post-banner-title,
 .post-list-title {
-    margin: 0 0 $list-item-headline-margin;
-    font-size: $font-size-lg;
-
-    @include media-breakpoint-up($list-item-desktop-breakpoint) {
-        font-size: $list-item-headline-size;
-    }
+    margin: 0;
+    font-size: $list-item-headline-size;
+    line-height: $headings-line-height;
 }
 
 .post-banner-image,
@@ -41,30 +37,29 @@ $list-item-desktop-breakpoint: md;
     position: relative;
     z-index: 1;
     float: left;
+    overflow: hidden;
     background-color: $brand-dark;
 
-    @include image-square-container($list-item-mobile-image-size);
-    margin-right: $list-item-padding * 0.8;
+    width: $list-item-mobile-image-size;
+    height: $list-item-mobile-image-size;
+    $line-height-margin: $list-item-headline-size * $headings-line-height - $list-item-headline-size;
+    margin-right: $line-height-margin * 2;
 
     @include media-breakpoint-up($list-item-desktop-breakpoint) {
-        @include image-square-container($list-item-height);
+        width: $list-item-height;
+        height: $list-item-height;
         margin-right: $list-item-padding;
-    }
-
-    // not needed anymore (and removed automaticalls) since amp-img uses layout="fill"
-    // however, if i ever want to go back, i have the style right here
-    img {
-        @include image-contain;
     }
 }
 
 .post-banner-description,
 .post-list-description {
     margin-bottom: 0;
-}
 
-.post-list-description {
-    min-height: $line-height * $font-size-base * 3;
+    @include media-breakpoint-up($list-item-desktop-breakpoint) {
+        height: $font-size-base * $line-height * 2;
+        padding-left: $list-item-height + $list-item-padding;
+    }
 }
 
 .post-banner-footer,

@@ -173,9 +173,10 @@ gulp.task('images', function () {
         return gmfile.strip().background('#6B0000').flatten().setFormat('jpeg').quality(quality);
     }
 
-    [128, 256].forEach(function (width) {
+    [48, 96, 192].forEach(function (width) {
         processImages(sourceFiles.topicImages, width, function (gmfile) {
-            return asJpeg(width > 128 ? 65 : 90, gmfile.resize(width, width, '^').gravity('Center').crop(width, width));
+            var q = width > 128 ? 65 : 90;
+            return asJpeg(q, gmfile.filter('Catrom').resize(width, width, '^').gravity('Center').crop(width, width));
         });
     });
 
