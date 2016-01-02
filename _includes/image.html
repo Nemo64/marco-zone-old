@@ -13,7 +13,6 @@
          sizes="100vw"
          width="2048"
          height="{{ 2048 | times: 100 | divided_by: 191 }}"
-         layout="responsive"
          alt="{{ include.alt }}"
          {{ include.attr }}>
 </amp-img>
@@ -41,9 +40,13 @@
 
 {% else %}
 <p class="image-paragraph">
-    <img src="{% include image/src.html image=include.image variant='inline' %}"
-         alt="{{ include.alt }}"
-         {{ include.attr }}>
+    <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
+             sizes="(min-width: {{ include.width }}px) {{ include.width }}px, 100vw"
+             alt="{{ include.alt }}"
+             width="{{ include.width }}"
+             height="{{ include.height }}"
+             {{ include.attr }}>
+    </amp-img>
 </p>
 
 {% endcase %}

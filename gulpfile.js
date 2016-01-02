@@ -130,8 +130,7 @@ gulp.task('sass', function () {
         'table|tbody|thead|tfoot|tr|td|th', // table
         'dl|dt|dd', // definition list
         '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
-        '\\.nav-tabs|\\.tab-content', // tabs
-        'img' // replaced though amp- versions
+        '\\.nav-tabs|\\.tab-content' // tabs
     ];
     var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 

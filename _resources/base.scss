@@ -64,6 +64,12 @@ header, footer {
     }
 }
 
+.container {
+    amp-img, img {
+        max-width: 100%;
+    }
+}
+
 // removed for now, amp mobile does not like @supports
 //@supports (hyphens: auto) {
 //    //noinspection CssUnknownProperty, CssInvalidPropertyValue
