@@ -172,18 +172,19 @@ gulp.task('images', function () {
         return gmfile.strip().background('#6B0000').flatten().setFormat('jpeg').quality(quality);
     }
 
-    [48, 96, 192].forEach(function (width) {
-        processImages(sourceFiles.topicImages, width, function (gmfile) {
-            var q = width > 128 ? 65 : 90;
-            return asJpeg(q, gmfile.filter('Catrom').resize(width, width, '^').gravity('Center').crop(width, width));
+    [96, 192].forEach(function (size) {
+        processImages(sourceFiles.topicImages, size, function (gmfile) {
+            var q = size > 128 ? 65 : 90;
+            return asJpeg(q, gmfile.filter('Catrom').resize(size, size, '^').gravity('Center').crop(size, size));
         });
     });
 
-    [768, 1440, 2048].forEach(function (width) {
+    [1].forEach(function (factor) {
         // the aspect ratio is taken from https://developers.facebook.com/docs/sharing/best-practices#images
-        var height = Math.floor(width / 1.91);
+        var width = 1200 * factor;
+        var height = 630 * factor;
         processImages(sourceFiles.topicImages, width, function (gmfile) {
-            return asJpeg(90, gmfile.resize(width, height, '^').gravity('Center').crop(width, height));
+            return asJpeg(90, gmfile.filter('Catrom').resize(width, height, '^').gravity('Center').crop(width, height));
         });
     });
 

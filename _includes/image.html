@@ -1,7 +1,7 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-<amp-img srcset="{% include image/srcset.html image=include.image sizes='48, 96, 192' %}"
+<amp-img srcset="{% include image/srcset.html image=include.image sizes='96, 192' %}"
          sizes="(min-width: 768px) 6rem, 3rem"
          layout="fill"
          alt="{{ include.alt }}"
@@ -9,10 +9,10 @@
 </amp-img>
 
 {% when 'banner' %}
-<amp-img srcset="{% include image/srcset.html image=include.image sizes='768, 1440, 2048' %}"
+<amp-img src="{% include image/src.html image=include.image variant='1200' %}"
          sizes="100vw"
-         width="2048"
-         height="{{ 2048 | times: 100 | divided_by: 191 }}"
+         width="1200"
+         height="630"
          alt="{{ include.alt }}"
          {{ include.attr }}>
 </amp-img>
@@ -21,20 +21,18 @@
 <meta name="twitter:image" content="{% include image/src.html image=include.image variant='192' absolute=true %}">
 
 {% when 'opengraph' %}
-{% assign sizes = '768, 1440' | split: ', ' %}
-{% for size in sizes %}
-<meta property="og:image" content="{% include image/src.html image=include.image variant=size absolute=true %}">
-<meta property="og:image:width" content="{{ size }}">
-<meta property="og:image:height" content="{{ size | times: 100 | divided_by: 191 }}">
-{% endfor %}
+<meta property="og:image" content="{% include image/src.html image=include.image variant='1200' absolute=true %}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 {% else %}
 <figure class="image-figure">
     {% assign max-width = 704 %}
+    {% if include.width < max-width %}
+        {% assign max-width = include.width %}
+    {% endif %}
     <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
-             {% if include.width >= max-width %}sizes="100vw"
-             {% else %}sizes="(min-width: {{ include.width }}px) {{ include.width }}px, 100vw"
-             {% endif %}
+             sizes="(min-width: {{ max-width }}px) {{ max-width }}px, 100vw"
              alt="{{ include.alt }}"
              width="{{ include.width }}"
              height="{{ include.height }}"

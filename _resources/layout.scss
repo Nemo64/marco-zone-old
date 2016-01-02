@@ -33,15 +33,6 @@ $navbar-height: $line-height * $font-size-base + 2rem;
     }
 }
 
-.container {
-    @include make-container();
-    @include make-container-max-widths();
-}
-
-.row {
-    @include make-row();
-}
-
 // workaround until bootstrap has a working container
 .navbar-container {
     padding-left: 0;

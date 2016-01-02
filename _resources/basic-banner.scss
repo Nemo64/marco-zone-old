@@ -2,7 +2,7 @@
 
 $navbar-height: $line-height * $font-size-base + 2rem;
 $banner-max-height: 25rem;
-$banner-aspect-ratio: 1 / 1.91;
+$banner-aspect-ratio: 630 / 1200;
 
 .banner {
     position: relative;
@@ -58,7 +58,7 @@ $banner-aspect-ratio: 1 / 1.91;
     }
 }
 
-@media (min-width: ($banner-max-height / $banner-aspect-ratio / 1rem * 16px)) {
+@media (min-width: floor($banner-max-height / $banner-aspect-ratio / 1rem * 16px)) {
     .banner:before {
         padding-bottom: $banner-max-height;
     }

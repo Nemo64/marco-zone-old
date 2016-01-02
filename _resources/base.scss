@@ -9,7 +9,12 @@ html {
 }
 
 .container {
-    min-width: 320px
+    @include make-container();
+    @include make-container-max-widths();
+}
+
+.row {
+    @include make-row();
 }
 
 h1, .h1 { font-size: $font-size-h1 * 0.8; }
