@@ -1,14 +1,18 @@
 @import "scss/variables";
 
 $navbar-height: $line-height * $font-size-base + 2rem;
+$banner-aspect-ratio: 630px / 1200px;
 $banner-max-height: 25rem;
-$banner-aspect-ratio: 630 / 1200;
+$banner-max-width: $banner-max-height / $banner-aspect-ratio;
+$banner-min-height: 15rem;
+$banner-min-width: $banner-min-height / $banner-aspect-ratio;
 
 .banner {
     position: relative;
     text-align: center;
     overflow: hidden;
     background-color: $brand-dark;
+    min-height: $banner-min-height;
 
     white-space: nowrap;
     font-size: 0;
@@ -34,13 +38,30 @@ $banner-aspect-ratio: 630 / 1200;
 
 .banner-image {
     position: absolute;
+    left: 0;
     top: 0;
-    left: 50%;
-    margin-left: -50%;
-    margin-right: -50%;
-    min-width: 100%;
+    min-width: $banner-min-width;
     min-height: 100%;
-    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: ceil($banner-min-width / 1rem * 16px)) {
+    .banner-image {
+        left: 50%;
+        margin-left: -$banner-min-width / 2;
+        margin-right: -$banner-min-width / 2;
+    }
+}
+
+@media (min-width: floor($banner-max-width / 1rem * 16px)) {
+    .banner:before {
+        padding-bottom: $banner-max-height;
+    }
+
+    .banner-image {
+        margin: percentage(-$banner-aspect-ratio / 2) 0 0;
+        border-top: solid transparent $banner-max-height / 2;
+    }
 }
 
 .banner-overlay {
@@ -55,18 +76,5 @@ $banner-aspect-ratio: 630 / 1200;
 
     .banner-overlay-content {
         pointer-events: auto;
-    }
-}
-
-@media (min-width: floor($banner-max-height / $banner-aspect-ratio / 1rem * 16px)) {
-    .banner:before {
-        padding-bottom: $banner-max-height;
-    }
-
-    .banner-image {
-        height: auto;
-        width: 100%;
-        margin-top: percentage($banner-aspect-ratio / -2);
-        border-top: solid transparent $banner-max-height / 2;
     }
 }
