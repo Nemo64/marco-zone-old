@@ -1,22 +1,31 @@
 ---
-layout: default
+layout: bare
 ---
-<div class="container site-section">
 
-    {% if page.hidetitle == true %}
-    <meta itemprop="headline" content="{{ page.title }}">
-    {% else %}
-    <header class="page-header">
-        <h1 class="page-title" itemprop="headline">
-            <a href="{{ post.url | prepend: site.baseurl }}">
-                {{ page.title }}
-            </a>
-        </h1>
-    </header>
-    {% endif %}
+{% include header.html class='' %}
 
-    <div class="page-content">
-        {{ content }}
+<div class="site-content">
+    <div class="container site-section">
+
+        <main>
+            {% if page.hidetitle == true %}
+            <meta itemprop="headline" content="{{ page.title }}">
+            {% else %}
+            <header class="page-header">
+                <h1 class="page-title" itemprop="headline">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        {{ page.title }}
+                    </a>
+                </h1>
+            </header>
+            {% endif %}
+
+            <div class="page-content">
+                {{ content }}
+            </div>
+        </main>
+
     </div>
-
 </div>
+
+{% include footer.html %}

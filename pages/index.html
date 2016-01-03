@@ -15,7 +15,7 @@ page_styles:
 ---
 {% include header.html class='navbar-cover' %}
 
-<div class="post-list" itemscope itemtype="http://schema.org/Blog">
+<main class="post-list" itemscope itemtype="http://schema.org/Blog">
 
     {% for post in site.posts limit: 1 %}
     <div class="banner cover-banner" itemprop="blogPost"
@@ -94,6 +94,6 @@ page_styles:
         </div>
 
     </div>
-</div>
+</main>
 
 {% include footer.html %}
