@@ -124,7 +124,7 @@ gulp.task('sass', function () {
     var removeRules = [
         '@[\\w-]*viewport', // is currently still invalid
         'button|input|optgroup|select|textarea|label|caption|fieldset|legend', // form elements
-        'address|hr|dfn|h4|h5|h6|abbr|mark|sub|sup', // content description
+        'address|hr|dfn|h4|h5|h6|abbr|mark|sub|sup|aside|details|hgroup|section|summary', // content description
         'audio|canvas|progress|video|template|svg', // function
         'kbd|samp|output', // code
         'table|tbody|thead|tfoot|tr|td|th', // table
