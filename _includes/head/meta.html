@@ -21,3 +21,5 @@
 {% if page.categories %}<meta name="keywords" content="{{ page.categories | join: ', ' }}">{% endif %}
 {% if page.date %}<meta name="date" content="{{ page.date | date_to_rfc822 }}">{% endif %}
 <meta name="generator" content="Jekyll v{{ jekyll.version }}">
+
+<script type="application/ld+json">{{ site.data.websiteSchema | jsonify }}</script>
