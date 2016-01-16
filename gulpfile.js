@@ -21,7 +21,7 @@ var build = {
 
 gulp.task('build', ['html', 'css', 'images']);
 
-gulp.task('serve', function () {
+gulp.task('serve', ['build', 'watch'], function () {
     var modRewrite = require('connect-modrewrite');
     var header = require('connect-header');
 
