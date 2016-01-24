@@ -53,9 +53,10 @@ body,
 .site-content {
     position: relative;
     z-index: 1;
-    box-shadow: 0 0 $site-shadow-size $site-shadow-color;
+    // box-shadow: 0 0 $site-shadow-size $site-shadow-color;
     min-height: 20rem;
     background-color: $body-bg;
+    overflow: hidden;
 }
 
 .site-section {
@@ -93,5 +94,37 @@ body,
     .nav-stacked .nav-link {
         margin: 0 $grid-gutter-width / -2;
         padding: .5rem $grid-gutter-width / 2;
+    }
+}
+
+$shape-offset: 4vw;
+$shape: polygon(0 0, 100% $shape-offset, 100% 100%, 0 calc(100% - #{$shape-offset}));
+// $shape: polygon(0 $shape-offset, 100% 0, 100% calc(100% - #{$shape-offset}), 0 100%);
+@supports (clip-path: $shape) {
+    .site-content {
+        clip-path: $shape;
+        margin-top: -$shape-offset;
+        margin-bottom: -$shape-offset;
+    }
+
+    .site-footer, .site-content {
+        &::before {
+            content: "";
+            display: block;
+            padding-top: $shape-offset;
+            width: 100%;
+            shape-outside: polygon(0 0, 100% 0, 100% 100%);
+            shape-margin: .2rem;
+            float: right;
+        }
+    }
+
+    .banner, .navbar-standalone, .site-content {
+        > .container:last-child::after {
+            content: "";
+            display: block;
+            padding-top: $shape-offset / 2vw * 1%;
+            padding-bottom: $shape-offset / 2;
+        }
     }
 }

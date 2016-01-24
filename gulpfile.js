@@ -69,7 +69,7 @@ gulp.task('watch', function () {
         ]
     };
     if (build.production) {
-        gulp.watch(watchFiles.html.concat(watchFiles.css), ['html', 'css']);
+        gulp.watch(watchFiles.html.concat(watchFiles.css), ['html']);
     } else {
         gulp.watch(watchFiles.html, ['html']);
         gulp.watch(watchFiles.css, ['css']);

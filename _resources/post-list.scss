@@ -19,6 +19,7 @@ $list-item-desktop-breakpoint: md;
 .post-banner-item,
 .post-list-item {
     position: relative;
+    display: inline-block;
     min-height: $list-item-height;
     max-width: $paragraph-width;
     padding-bottom: $line-height * $font-size-base;
@@ -49,6 +50,7 @@ $list-item-desktop-breakpoint: md;
         width: $list-item-height;
         height: $list-item-height;
         margin-right: $list-item-padding;
+        margin-bottom: -$line-height * $font-size-base;
     }
 }
 
