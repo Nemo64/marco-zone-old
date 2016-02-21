@@ -98,8 +98,8 @@ module.exports.prototype = {
                 hitCallbackExecuted = true;
             };
 
-            ga('send', 'event', category, action, label, {hitCallback: hitCallback});
             setTimeout(hitCallback, 500);
+            ga('send', 'event', category, action, label, {hitCallback: hitCallback});
 
             // start prefetch of links
             if (link.host) {

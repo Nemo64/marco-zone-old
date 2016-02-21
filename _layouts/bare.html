@@ -60,9 +60,15 @@ layout_styles: []
     </head>
 
     <body>
+        {% if page.amp %}
+            <strong>The amp version isn't finished. It is missing analytics and nice discuss integration.</strong>
+        {% endif %}
 
         {{ content }}
 
+        {% unless page.amp %}
+            <script src="resources/main.js" async></script>
+        {% endunless %}
     </body>
 
 </html>
