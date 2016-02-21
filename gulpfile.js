@@ -61,6 +61,8 @@ gulp.task('watch', function () {
             '_data/**/*',
             '_posts/*',
             '_posts/**/*',
+            '_drafts/*',
+            '_drafts/**/*',
             'pages/*',
             'pages/**/*',
             'meta_files/*'
