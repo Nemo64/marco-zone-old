@@ -2,23 +2,24 @@
 layout_styles: []
 ---
 <!DOCTYPE html>
-<html lang="{{ page.language }}" amp>
+<html lang="{{ page.language }}" {%if page.amp %}amp{% endif%}>
 
     <head>
 
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
         <meta name="viewport" content="width=device-width,minimum-scale=1">
-        <meta name="format-detection" content="telephone=no">
 
-        {% if page.layout == 'post' %}
-        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+        {% if page.amp %}
+            {% if page.layout == 'post' %}
+            <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+            {% endif %}
+            <style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
+            <script async src="https://cdn.ampproject.org/v0.js"></script>
         {% endif %}
-        <style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
-        <script async src="https://cdn.ampproject.org/v0.js"></script>
 
         <!--suppress CssInvalidImport -->
-        <style amp-custom>
+        <style {%if page.amp %}amp-custom{% endif %}>
             @import url("/resources/base.css");
             @import url("/resources/layout.css");
             {% if page.layout == 'post' %}
@@ -33,6 +34,21 @@ layout_styles: []
             {% endfor %}
 
             {{ page.style }}
+
+            {% unless page.amp %}
+                .image-box {
+                    position: relative;
+                }
+                .image-box img {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            {% endunless %}
         </style>
 
         {% include head/meta.html %}

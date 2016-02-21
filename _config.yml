@@ -22,6 +22,7 @@ defaults:
     scope:
       path: ""
     values:
+      amp:        false
       layout:     page
       author:     marco
       language:   de

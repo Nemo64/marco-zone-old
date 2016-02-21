@@ -1,20 +1,37 @@
 {% case include.variant %}
 
 {% when 'thumbnail' %}
-<amp-img srcset="{% include image/srcset.html image=include.image sizes='96, 192' %}"
-         layout="fill"
-         alt="{{ include.alt }}"
-         {{ include.attr }}>
-</amp-img>
+{% if page.amp %}
+    <amp-img srcset="{% include image/srcset.html image=include.image sizes='96, 192' %}"
+             layout="fill"
+             alt="{{ include.alt }}"
+             {{ include.attr }}>
+    </amp-img>
+{% else %}
+    <div class="image-box">
+        <div style="padding-top: 100%"></div>
+        <img src="{% include image/src.html image=include.image variant='192' %}"
+             srcset="{% include image/srcset.html image=include.image sizes='96, 192' %}"
+             sizes="(min-width: 768px) 6rem, 3rem"
+             alt="{{ include.alt }}"
+             {{ include.attr }}>
+    </div>
+{% endif %}
 
 {% when 'banner' %}
-<amp-img src="{% include image/src.html image=include.image variant='1200' %}"
-         layout="responsive"
-         width="1200"
-         height="630"
+{% if page.amp %}
+    <amp-img src="{% include image/src.html image=include.image variant='1200' %}"
+             layout="responsive"
+             width="1200"
+             height="630"
+             alt="{{ include.alt }}"
+             {{ include.attr }}>
+    </amp-img>
+{% else %}
+    <img src="{% include image/src.html image=include.image variant='1200' %}"
          alt="{{ include.alt }}"
          {{ include.attr }}>
-</amp-img>
+{% endif %}
 
 {% when 'twitter' %}
 <meta name="twitter:image" content="{% include image/src.html image=include.image variant='192' absolute=true %}">
@@ -30,13 +47,24 @@
     {% if include.width < max-width %}
         {% assign max-width = include.width %}
     {% endif %}
-    <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
-             sizes="(min-width: {{ max-width }}px) {{ max-width }}px, 100vw"
-             alt="{{ include.alt }}"
-             width="{{ include.width }}"
-             height="{{ include.height }}"
-             {{ include.attr }}>
-    </amp-img>
+    {% if page.amp %}
+        <amp-img src="{% include image/src.html image=include.image variant='inline' %}"
+                 sizes="(min-width: {{ max-width }}px) {{ max-width }}px, 100vw"
+                 alt="{{ include.alt }}"
+                 width="{{ include.width }}"
+                 height="{{ include.height }}"
+                 {{ include.attr }}>
+        </amp-img>
+    {% else %}
+        <div class="image-box" style="max-width: {{ max-width }}px">
+            {% assign aspect-x10k = include.height | times: 10000 | divided_by: include.width %}
+            <div style="padding-top: {{ aspect-x10k | divided_by: 100 }}.{{ aspect-x10k | slice: -2, 2 }}%"></div>
+            <img src="{% include image/src.html image=include.image variant='inline' %}"
+                 sizes="(min-width: {{ max-width }}px) {{ max-width }}px, 100vw"
+                 alt="{{ include.alt }}"
+                 {{ include.attr }}>
+        </div>
+    {% endif %}
 </figure>
 
 {% endcase %}

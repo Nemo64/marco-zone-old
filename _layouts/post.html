@@ -38,19 +38,35 @@ layout: bare
             </main>
 
             <div class="post-comments" id="comments">
-                <amp-iframe height="300"
-                            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                            resizable
-                            frameborder="0"
-                            src="{{ page.url | prepend: '/disqus' | prepend: site.alt_baseurl | prepend: site.alt_url }}">
-                    <div overflow tabindex="0" role="button" aria-label="Read more">Read more!</div>
-                </amp-iframe>
-                {% comment %}
-                <noscript>
-                    Please enable JavaScript to view the
-                    <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-                </noscript>
-                {% endcomment %}
+                {% if page.amp %}
+                    <amp-iframe height="300"
+                                sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                                resizable
+                                frameborder="0"
+                                src="{{ page.url | prepend: '/disqus' | prepend: site.alt_baseurl | prepend: site.alt_url }}">
+                        <div overflow tabindex="0" role="button" aria-label="Read more">Read more!</div>
+                    </amp-iframe>
+                {% else %}
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = "{{ url | prepend: site.baseurl | prepend: site.url }}";
+                            this.page.identifier = "{{ url }}";
+                        };
+                        (function() { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+
+                            s.src = '//marco-zone.disqus.com/embed.js';
+
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>
+                        Please enable JavaScript to view the
+                        <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+                    </noscript>
+                {% endif %}
             </div>
 
         </div>
