@@ -134,10 +134,11 @@ gulp.task('sass', function () {
         'address|hr|dfn|h4|h5|h6|abbr|mark|sub|sup|aside|details|hgroup|summary', // content description
         'audio|canvas|progress|video|template|svg', // function
         'kbd|samp|output', // code
+        'map|area', // map
         'table|tbody|thead|tfoot|tr|td|th', // table
         'dl|dt|dd', // definition list
         '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
-        '\\.nav-tabs|\\.tab-content' // tabs
+        '\\.nav-(tabs|pills|stacked|inline|link)|\\.tab-content' // navs/tabs
     ];
     var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 
