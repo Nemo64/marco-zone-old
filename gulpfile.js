@@ -97,7 +97,7 @@ gulp.task('jekyll', function (gulpCallBack) {
     });
 });
 
-gulp.task('html', build.production ? ['jekyll', 'css'] : ['jekyll'], function () {
+gulp.task('html', ['jekyll', 'css'], function () {
     var htmlmin = require('gulp-htmlmin');
 
     return gulp.src([deployPath + '/*.html', deployPath + '/**/*.html'])
