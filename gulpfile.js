@@ -68,12 +68,12 @@ gulp.task('watch', function () {
             '_resources/**/*.scss'
         ]
     };
-    if (build.production) {
+    //if (build.production) {
         gulp.watch(watchFiles.html.concat(watchFiles.css), ['html']);
-    } else {
-        gulp.watch(watchFiles.html, ['html']);
-        gulp.watch(watchFiles.css, ['css']);
-    }
+    //} else {
+    //    gulp.watch(watchFiles.html, ['html']);
+    //    gulp.watch(watchFiles.css, ['css']);
+    //}
 });
 
 gulp.task('jekyll', function (gulpCallBack) {
@@ -108,7 +108,7 @@ gulp.task('html', build.production ? ['jekyll', 'css'] : ['jekyll'], function ()
             minifyCSS: {
                 advanced: true,
                 keepSpecialComments: 0,
-                processImport: build.production,
+                processImport: true, //build.production,
                 root: deployPath
             }
         }))
