@@ -20,7 +20,9 @@ module Jekyll
 
     def generate(site)
       site.posts.each do |post|
-        site.pages << DiscussPage.new(site, site.source, post)
+        if post.data['amp']
+          site.pages << DiscussPage.new(site, site.source, post)
+        end
       end
     end
   end
