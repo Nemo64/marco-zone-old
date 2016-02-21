@@ -108,7 +108,7 @@ $shape: polygon(0 0, 100% $shape-offset, 100% 100%, 0 calc(100% - #{$shape-offse
     }
 
     .site-section {
-        margin-top: $spacer-y + $spacer-y;
+        margin-top: $shape-offset / 2;
     }
 
     .site-footer, .site-content {
