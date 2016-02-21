@@ -132,13 +132,14 @@ gulp.task('sass', function () {
         '@[\\w-]*viewport', // is currently still invalid
         'button|input|optgroup|select|textarea|label|caption|fieldset|legend', // form elements
         'address|hr|dfn|h4|h5|h6|abbr|mark|sub|sup|aside|details|hgroup|summary', // content description
-        'audio|canvas|progress|video|template|svg', // function
+        'audio|canvas|progress|video|template|svg|small|\\[hidden\\]', // function
         'kbd|samp|output', // code
         'map|area', // map
         'table|tbody|thead|tfoot|tr|td|th', // table
         'dl|dt|dd', // definition list
-        '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+)', // navbar
-        '\\.nav-(tabs|pills|stacked|inline|link)|\\.tab-content' // navs/tabs
+        '\\.navbar-(?:fixed-\\w+|sticky-\\w+|divider|light|toggl[\\w-]+|full)|.navbar-brand\\W+img', // navbar
+        '\\.nav-(tabs|pills|stacked|inline)|\\.tab-content', // navs/tabs
+        '\\.nav-(link|item)' // nav link and item (not used yet)
     ];
     var selectorRegEx = new RegExp('\\s*,?[^{},]*(?:' + removeRules.join('|') + ')(?![\\w-])[^{},]*', 'g');
 
