@@ -57,3 +57,8 @@ blockquote {
         }
     }
 }
+
+.post-content iframe {
+    // this should give enough space to scroll outside an iframe on touch
+    max-height: 60vh;
+}
