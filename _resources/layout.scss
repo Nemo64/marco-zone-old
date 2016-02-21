@@ -100,11 +100,15 @@ body,
 $shape-offset: 4vw;
 $shape: polygon(0 0, 100% $shape-offset, 100% 100%, 0 calc(100% - #{$shape-offset}));
 // $shape: polygon(0 $shape-offset, 100% 0, 100% calc(100% - #{$shape-offset}), 0 100%);
-@supports (clip-path: $shape) {
+@supports (clip-path: $shape) and (shape-outside: $shape) {
     .site-content {
         clip-path: $shape;
         margin-top: -$shape-offset;
         margin-bottom: -$shape-offset;
+    }
+
+    .site-section {
+        margin-top: $spacer-y + $spacer-y;
     }
 
     .site-footer, .site-content {
@@ -114,7 +118,7 @@ $shape: polygon(0 0, 100% $shape-offset, 100% 100%, 0 calc(100% - #{$shape-offse
             padding-top: $shape-offset;
             width: 100%;
             shape-outside: polygon(0 0, 100% 0, 100% 100%);
-            shape-margin: .2rem;
+            shape-margin: $spacer-y;
             float: right;
         }
     }
