@@ -84,7 +84,10 @@ gulp.task('jekyll', function (gulpCallBack) {
         'build',
         '--no-watch',
         build.verbose ? undefined : '--quiet',
-        '--future',
+        build.production ? undefined : '--future',
+        build.production ? undefined : '--drafts',
+        build.production ? undefined : '--limit_posts',
+        build.production ? undefined : '10',
         //'--incremental',
         '--destination', deployPath
     ], {stdio: 'inherit'});
