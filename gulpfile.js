@@ -31,7 +31,7 @@ gulp.task('serve', ['build', 'watch'], function () {
         open: false,
         https: true,
         snippetOptions: {
-            rule: build.production ? { match: /qqqqqqqqq/ } : {}
+            rule: build.production ? {match: /qqqqqqqqq/} : {}
         },
         server: {
             baseDir: deployPath,
@@ -73,7 +73,7 @@ gulp.task('watch', function () {
         ]
     };
     //if (build.production) {
-        gulp.watch(watchFiles.html.concat(watchFiles.css), ['html']);
+    gulp.watch(watchFiles.html.concat(watchFiles.css), ['html']);
     //} else {
     //    gulp.watch(watchFiles.html, ['html']);
     //    gulp.watch(watchFiles.css, ['css']);
@@ -151,12 +151,14 @@ gulp.task('sass', function () {
         }))
         .pipe(replace(/filter:[^;}]+;?/ig, '')) // remove ms filter since i don't need to fully support ie9
         .pipe(replace(/\s*!important\s*/ig, '')) // !important is prohibited by amp
-        .pipe(autoprefixer({browsers: [
-            '> 0.2% in DE',
-            'last 2 versions',
-            'Firefox ESR',
-            'not IE <= 8'
-        ]}))
+        .pipe(autoprefixer({
+            browsers: [
+                '> 0.2% in DE',
+                'last 2 versions',
+                'Firefox ESR',
+                'not IE <= 8'
+            ]
+        }))
         .pipe(gulp.dest(targetDirectories.assets))
         .pipe(browserSync.stream());
 });
@@ -168,7 +170,7 @@ gulp.task('jshint', function () {
 
     return gulp.src(sourceFiles.allJavascript)
         .pipe(jshint())
-        .pipe(jshint.reporter('default', { verbose: true }))
+        .pipe(jshint.reporter('default', {verbose: true}))
 });
 
 gulp.task('js', ['jshint'], function () {
@@ -190,23 +192,19 @@ gulp.task('images', function () {
 
     function processImages(src, variant, callback) {
         var stream = gulp.src(src)
-            .pipe(gm(callback))
+            .pipe(gm(callback, {imageMagick: true}))
             .pipe(gulp.dest(targetDirectories.images + '/' + variant));
         masterStream.add(stream);
     }
 
-    function asIs(gmfile) {
-        return gmfile.strip();
-    }
-
-    function asJpeg(quality, gmfile) {
-        return gmfile.strip().background('#6B0000').flatten().setFormat('jpeg').quality(quality);
-    }
-
     [96, 192].forEach(function (size) {
         processImages(sourceFiles.topicImages, size, function (gmfile) {
-            var q = size > 128 ? 65 : 90;
-            return asJpeg(q, gmfile.filter('Catrom').resize(size, size, '^').gravity('Center').crop(size, size));
+            var quality = size > 128 ? 65 : 90;
+            return gmfile
+                .background('#6B0000').flatten()
+                .filter('Catrom').resize(size, size, '^')
+                .gravity('Center').crop(size, size, 0, 0)
+                .strip().setFormat('jpeg').quality(quality);
         });
     });
 
@@ -215,12 +213,19 @@ gulp.task('images', function () {
         var width = 1200 * factor;
         var height = 630 * factor;
         processImages(sourceFiles.topicImages, width, function (gmfile) {
-            return asJpeg(90, gmfile.filter('Catrom').resize(width, height, '^').gravity('Center').crop(width, height));
+            console.log(width, height);
+            return gmfile
+                .background('#6B0000').flatten()
+                .filter('Catrom').resize(width, height, '^')
+                .gravity('Center').crop(width, height)
+                .strip().setFormat('jpeg').quality(90);
         });
     });
 
     processImages(sourceFiles.inlineImages, 'inline', function (gmfile) {
-        return asIs(gmfile.resize(690, null, '>'));
+        return gmfile
+            .resize(690, null, '>')
+            .strip();
     });
 
     return masterStream;
