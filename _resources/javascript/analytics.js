@@ -59,20 +59,19 @@ module.exports.prototype = {
     _trackClicks: function () {
         var self = this;
         this.document.addEventListener('click', function (e) {
+
+            // i ignore javascript clicks directly
             if (e.defaultPrevented) {
                 return;
             }
 
+            // since a link is always an <a>, search the parents until there is one.
             var link = e.target;
-            while (!/a/i.test(link.nodeName)) {
+            while (!/^a$/i.test(link.nodeName)) {
                 // iterate until there is no parent
                 if (!(link = link.parentNode)) {
                     return;
                 }
-            }
-
-            if (link.clickTracked) {
-                return;
             }
 
             var category = self._detectCategory(link);
@@ -84,27 +83,37 @@ module.exports.prototype = {
                 return;
             }
 
+            // if the link will open a new window it can just execute as normal and the tracking will run flawlessly
+            // actually delaying a target=_blank link will cause the popup blocker to prevent opening
+            // if the link has no host it is probably a mailto: link or similar
+            var affectsCurrentWindow = !link.target || /^_self$/i.test(link.target);
+            var isHandlerUrl = !link.host;
+            if (!affectsCurrentWindow || isHandlerUrl) {
+                ga('send', 'event', category, action, label);
+                return;
+            }
+
+            // the default needs to be prevented for the click ajax to run
+            // this probably won't prevent any javascript library from taking the click though
             e.preventDefault();
 
-            // functions for actual click
             var hitCallbackExecuted = false;
             var hitCallback = function () {
                 if (hitCallbackExecuted) {
                     return;
                 }
 
-                link.clickTracked = true;
-                link.click();
+                // change location to link target
+                if (!isHandlerUrl) {
+                    location.href = link.href;
+                }
+
                 hitCallbackExecuted = true;
             };
 
             setTimeout(hitCallback, 500);
             ga('send', 'event', category, action, label, {hitCallback: hitCallback});
-
-            // start prefetch of links
-            if (link.host) {
-                self._prefetchLink(link.href);
-            }
+            self._prefetchLink(link.href);
 
         }, false);
     },
