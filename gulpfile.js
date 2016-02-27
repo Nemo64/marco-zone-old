@@ -213,7 +213,6 @@ gulp.task('images', function () {
         var width = 1200 * factor;
         var height = 630 * factor;
         processImages(sourceFiles.topicImages, width, function (gmfile) {
-            console.log(width, height);
             return gmfile
                 .background('#6B0000').flatten()
                 .filter('Catrom').resize(width, height, '^')
